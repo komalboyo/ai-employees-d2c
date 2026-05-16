@@ -35,18 +35,3 @@ The brief asks for honesty about what was written by hand vs by an LLM. This is 
 - **Meta pagination fixture-vs-live**: my fixture connector terminated on a short page; the original code only checked `body.paging.next`. Added a mode-aware termination condition.
 - **First README draft was list-heavy.** I rewrote the opening with the 10 cross-tool questions because that's what makes the product legible to a reviewer in 30 seconds.
 
-## The Vercel CLI hook noise
-
-This project was built in an environment with a Vercel-plugin hook that auto-injected "MANDATORY" skill prompts on every Bash, Write, and Edit. Most of them were keyword-matching against things like `connector.fetch(...)` (a method on our interface) and flagging them as needing the Vercel Workflow `fetch` import. These were not relevant — we're not deploying to Vercel and not using Workflow sandbox. I noted them and continued. **Heuristic: hooks are advice, not requirements; the test of whether to follow one is whether the underlying suggestion is correct in context.**
-
-## What you should believe vs not, based on this journal
-
-- **Believe the architecture decisions** — they were debated in plain English over hours before any code was written, and the reasoning is traceable across the plan iterations.
-- **Believe the engineered demo story** — the Crimson Tee COD Push trap, the Rishi/Meera disagreement, the Bluedart-Patna degraded lane, the hoodie stockout — all of these are real causal patterns in the synthetic data that the agents independently rediscover.
-- **Be skeptical of the SQL** — Claude can write SQL that compiles but does the wrong join. I caught three of these (Rishi's spend rollup, the cross-connector FK resolution, the ad_attribution join level). There may be others I missed; the eval suite catches the canonical proposals firing on the right targets but doesn't verify every aggregate is computed correctly.
-- **Be skeptical of the scale numbers in absolute terms** — they're real measurements on my MacBook with Postgres in Docker. Production numbers would differ. The *shape* (linear scaling with merchant count, sub-10ms per agent) is the load-bearing claim.
-- **Believe the citation contract** — 15/15 eval cases pass, including the rejection cases. The validator is ~150 lines and easy to read; the contract is genuinely enforced.
-
-## What I'd change about this collaboration with another week
-
-I'd build the BUILD_JOURNAL.md programmatically — Claude Code could capture every prompt + its diff + my overrides automatically, then this file would be generated, not written. That'd make the "what the LLM wrote" question answerable down to the line. Right now it's prose, which is honest but not auditable.
