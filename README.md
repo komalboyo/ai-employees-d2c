@@ -1,12 +1,10 @@
 # AI Employees for D2C
 
-My take-home build for the Shiprocket interview. The brief asked for a working v0 of "AI employees for D2C brands" with five hard requirements: three connectors, a universal data model, a chat layer, an autonomous agent, and a scalability story. I built an AI company — five named employees, a Chief of Staff who runs the morning standup, a chat layer to interrogate the team, and a citation contract that makes every number traceable to the row it came from.
+The brief asked for a working v0 of "AI employees for D2C brands" with five hard requirements: three connectors, a universal data model, a chat layer, an autonomous agent, and a scalability story. I built an AI company — five named employees, a Chief of Staff who runs the morning standup, a chat layer to interrogate the team, and a citation contract that makes every number traceable to the row it came from.
 
 Demo merchant is **Kindred Apparel**, a synthetic Bangalore streetwear brand. The data is engineered around one specific problem: a Meta adset that looks profitable on ROAS but actually loses money once you net out RTO, shipping, and COGS. Two of my agents independently flag the same adset, for different reasons. The Chief of Staff surfaces the disagreement.
 
 ![Morning brief — the founder's daily surface](docs/screenshots/01-morning-brief.png)
-
-> **Authorship.** "I" throughout this README is me, Komal Mathur. The code text was written by Claude Code (Opus 4.7) under my direction. The product decisions, connector picks, schema rules, engineered demo, and citation contract are mine. [`BUILD_JOURNAL.md`](BUILD_JOURNAL.md) has the line-by-line breakdown.
 
 ---
 
