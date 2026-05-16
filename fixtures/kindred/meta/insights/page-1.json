@@ -1,0 +1,904 @@
+{
+  "data": [
+    {
+      "ad_id": "ad_0_1",
+      "adset_id": "as_cob_lkl",
+      "campaign_id": "c_streetwear",
+      "date_start": "2026-04-17",
+      "spend": "1753.93",
+      "impressions": 4385,
+      "clicks": 79
+    },
+    {
+      "ad_id": "ad_1_1",
+      "adset_id": "as_crm_cod",
+      "campaign_id": "c_streetwear",
+      "date_start": "2026-04-17",
+      "spend": "3482.58",
+      "impressions": 8706,
+      "clicks": 244
+    },
+    {
+      "ad_id": "ad_2_1",
+      "adset_id": "as_hood_rt",
+      "campaign_id": "c_hoodie",
+      "date_start": "2026-04-17",
+      "spend": "1710.06",
+      "impressions": 4275,
+      "clicks": 171
+    },
+    {
+      "ad_id": "ad_3_1",
+      "adset_id": "as_hood_cold",
+      "campaign_id": "c_hoodie",
+      "date_start": "2026-04-17",
+      "spend": "814.78",
+      "impressions": 2037,
+      "clicks": 24
+    },
+    {
+      "ad_id": "ad_0_1",
+      "adset_id": "as_cob_lkl",
+      "campaign_id": "c_streetwear",
+      "date_start": "2026-04-18",
+      "spend": "2243.46",
+      "impressions": 5609,
+      "clicks": 101
+    },
+    {
+      "ad_id": "ad_1_1",
+      "adset_id": "as_crm_cod",
+      "campaign_id": "c_streetwear",
+      "date_start": "2026-04-18",
+      "spend": "3680.84",
+      "impressions": 9202,
+      "clicks": 258
+    },
+    {
+      "ad_id": "ad_2_1",
+      "adset_id": "as_hood_rt",
+      "campaign_id": "c_hoodie",
+      "date_start": "2026-04-18",
+      "spend": "1643.74",
+      "impressions": 4109,
+      "clicks": 164
+    },
+    {
+      "ad_id": "ad_3_1",
+      "adset_id": "as_hood_cold",
+      "campaign_id": "c_hoodie",
+      "date_start": "2026-04-18",
+      "spend": "842.75",
+      "impressions": 2107,
+      "clicks": 25
+    },
+    {
+      "ad_id": "ad_0_1",
+      "adset_id": "as_cob_lkl",
+      "campaign_id": "c_streetwear",
+      "date_start": "2026-04-19",
+      "spend": "2245.12",
+      "impressions": 5613,
+      "clicks": 101
+    },
+    {
+      "ad_id": "ad_1_1",
+      "adset_id": "as_crm_cod",
+      "campaign_id": "c_streetwear",
+      "date_start": "2026-04-19",
+      "spend": "3501.48",
+      "impressions": 8754,
+      "clicks": 245
+    },
+    {
+      "ad_id": "ad_2_1",
+      "adset_id": "as_hood_rt",
+      "campaign_id": "c_hoodie",
+      "date_start": "2026-04-19",
+      "spend": "1522.04",
+      "impressions": 3805,
+      "clicks": 152
+    },
+    {
+      "ad_id": "ad_3_1",
+      "adset_id": "as_hood_cold",
+      "campaign_id": "c_hoodie",
+      "date_start": "2026-04-19",
+      "spend": "787.19",
+      "impressions": 1968,
+      "clicks": 24
+    },
+    {
+      "ad_id": "ad_0_1",
+      "adset_id": "as_cob_lkl",
+      "campaign_id": "c_streetwear",
+      "date_start": "2026-04-20",
+      "spend": "2158.03",
+      "impressions": 5395,
+      "clicks": 97
+    },
+    {
+      "ad_id": "ad_1_1",
+      "adset_id": "as_crm_cod",
+      "campaign_id": "c_streetwear",
+      "date_start": "2026-04-20",
+      "spend": "3089.49",
+      "impressions": 7724,
+      "clicks": 216
+    },
+    {
+      "ad_id": "ad_2_1",
+      "adset_id": "as_hood_rt",
+      "campaign_id": "c_hoodie",
+      "date_start": "2026-04-20",
+      "spend": "1348.29",
+      "impressions": 3371,
+      "clicks": 135
+    },
+    {
+      "ad_id": "ad_3_1",
+      "adset_id": "as_hood_cold",
+      "campaign_id": "c_hoodie",
+      "date_start": "2026-04-20",
+      "spend": "839.42",
+      "impressions": 2099,
+      "clicks": 25
+    },
+    {
+      "ad_id": "ad_0_1",
+      "adset_id": "as_cob_lkl",
+      "campaign_id": "c_streetwear",
+      "date_start": "2026-04-21",
+      "spend": "2059.97",
+      "impressions": 5150,
+      "clicks": 93
+    },
+    {
+      "ad_id": "ad_1_1",
+      "adset_id": "as_crm_cod",
+      "campaign_id": "c_streetwear",
+      "date_start": "2026-04-21",
+      "spend": "3491.38",
+      "impressions": 8728,
+      "clicks": 244
+    },
+    {
+      "ad_id": "ad_2_1",
+      "adset_id": "as_hood_rt",
+      "campaign_id": "c_hoodie",
+      "date_start": "2026-04-21",
+      "spend": "1337.91",
+      "impressions": 3345,
+      "clicks": 134
+    },
+    {
+      "ad_id": "ad_3_1",
+      "adset_id": "as_hood_cold",
+      "campaign_id": "c_hoodie",
+      "date_start": "2026-04-21",
+      "spend": "776.49",
+      "impressions": 1941,
+      "clicks": 23
+    },
+    {
+      "ad_id": "ad_0_1",
+      "adset_id": "as_cob_lkl",
+      "campaign_id": "c_streetwear",
+      "date_start": "2026-04-22",
+      "spend": "1992.08",
+      "impressions": 4980,
+      "clicks": 90
+    },
+    {
+      "ad_id": "ad_1_1",
+      "adset_id": "as_crm_cod",
+      "campaign_id": "c_streetwear",
+      "date_start": "2026-04-22",
+      "spend": "3070.95",
+      "impressions": 7677,
+      "clicks": 215
+    },
+    {
+      "ad_id": "ad_2_1",
+      "adset_id": "as_hood_rt",
+      "campaign_id": "c_hoodie",
+      "date_start": "2026-04-22",
+      "spend": "1652.23",
+      "impressions": 4131,
+      "clicks": 165
+    },
+    {
+      "ad_id": "ad_3_1",
+      "adset_id": "as_hood_cold",
+      "campaign_id": "c_hoodie",
+      "date_start": "2026-04-22",
+      "spend": "685.47",
+      "impressions": 1714,
+      "clicks": 21
+    },
+    {
+      "ad_id": "ad_0_1",
+      "adset_id": "as_cob_lkl",
+      "campaign_id": "c_streetwear",
+      "date_start": "2026-04-23",
+      "spend": "2058.92",
+      "impressions": 5147,
+      "clicks": 93
+    },
+    {
+      "ad_id": "ad_1_1",
+      "adset_id": "as_crm_cod",
+      "campaign_id": "c_streetwear",
+      "date_start": "2026-04-23",
+      "spend": "3807.96",
+      "impressions": 9520,
+      "clicks": 267
+    },
+    {
+      "ad_id": "ad_2_1",
+      "adset_id": "as_hood_rt",
+      "campaign_id": "c_hoodie",
+      "date_start": "2026-04-23",
+      "spend": "1559.82",
+      "impressions": 3900,
+      "clicks": 156
+    },
+    {
+      "ad_id": "ad_3_1",
+      "adset_id": "as_hood_cold",
+      "campaign_id": "c_hoodie",
+      "date_start": "2026-04-23",
+      "spend": "852.13",
+      "impressions": 2130,
+      "clicks": 26
+    },
+    {
+      "ad_id": "ad_0_1",
+      "adset_id": "as_cob_lkl",
+      "campaign_id": "c_streetwear",
+      "date_start": "2026-04-24",
+      "spend": "1942.27",
+      "impressions": 4856,
+      "clicks": 87
+    },
+    {
+      "ad_id": "ad_1_1",
+      "adset_id": "as_crm_cod",
+      "campaign_id": "c_streetwear",
+      "date_start": "2026-04-24",
+      "spend": "4015.02",
+      "impressions": 10038,
+      "clicks": 281
+    },
+    {
+      "ad_id": "ad_2_1",
+      "adset_id": "as_hood_rt",
+      "campaign_id": "c_hoodie",
+      "date_start": "2026-04-24",
+      "spend": "1358.68",
+      "impressions": 3397,
+      "clicks": 136
+    },
+    {
+      "ad_id": "ad_3_1",
+      "adset_id": "as_hood_cold",
+      "campaign_id": "c_hoodie",
+      "date_start": "2026-04-24",
+      "spend": "882.10",
+      "impressions": 2205,
+      "clicks": 26
+    },
+    {
+      "ad_id": "ad_0_1",
+      "adset_id": "as_cob_lkl",
+      "campaign_id": "c_streetwear",
+      "date_start": "2026-04-25",
+      "spend": "2267.41",
+      "impressions": 5669,
+      "clicks": 102
+    },
+    {
+      "ad_id": "ad_1_1",
+      "adset_id": "as_crm_cod",
+      "campaign_id": "c_streetwear",
+      "date_start": "2026-04-25",
+      "spend": "3857.38",
+      "impressions": 9643,
+      "clicks": 270
+    },
+    {
+      "ad_id": "ad_2_1",
+      "adset_id": "as_hood_rt",
+      "campaign_id": "c_hoodie",
+      "date_start": "2026-04-25",
+      "spend": "1464.99",
+      "impressions": 3662,
+      "clicks": 146
+    },
+    {
+      "ad_id": "ad_3_1",
+      "adset_id": "as_hood_cold",
+      "campaign_id": "c_hoodie",
+      "date_start": "2026-04-25",
+      "spend": "700.87",
+      "impressions": 1752,
+      "clicks": 21
+    },
+    {
+      "ad_id": "ad_0_1",
+      "adset_id": "as_cob_lkl",
+      "campaign_id": "c_streetwear",
+      "date_start": "2026-04-26",
+      "spend": "1747.96",
+      "impressions": 4370,
+      "clicks": 79
+    },
+    {
+      "ad_id": "ad_1_1",
+      "adset_id": "as_crm_cod",
+      "campaign_id": "c_streetwear",
+      "date_start": "2026-04-26",
+      "spend": "3292.22",
+      "impressions": 8231,
+      "clicks": 230
+    },
+    {
+      "ad_id": "ad_2_1",
+      "adset_id": "as_hood_rt",
+      "campaign_id": "c_hoodie",
+      "date_start": "2026-04-26",
+      "spend": "1696.98",
+      "impressions": 4242,
+      "clicks": 170
+    },
+    {
+      "ad_id": "ad_3_1",
+      "adset_id": "as_hood_cold",
+      "campaign_id": "c_hoodie",
+      "date_start": "2026-04-26",
+      "spend": "761.31",
+      "impressions": 1903,
+      "clicks": 23
+    },
+    {
+      "ad_id": "ad_0_1",
+      "adset_id": "as_cob_lkl",
+      "campaign_id": "c_streetwear",
+      "date_start": "2026-04-27",
+      "spend": "2247.23",
+      "impressions": 5618,
+      "clicks": 101
+    },
+    {
+      "ad_id": "ad_1_1",
+      "adset_id": "as_crm_cod",
+      "campaign_id": "c_streetwear",
+      "date_start": "2026-04-27",
+      "spend": "3250.92",
+      "impressions": 8127,
+      "clicks": 228
+    },
+    {
+      "ad_id": "ad_2_1",
+      "adset_id": "as_hood_rt",
+      "campaign_id": "c_hoodie",
+      "date_start": "2026-04-27",
+      "spend": "1374.70",
+      "impressions": 3437,
+      "clicks": 137
+    },
+    {
+      "ad_id": "ad_3_1",
+      "adset_id": "as_hood_cold",
+      "campaign_id": "c_hoodie",
+      "date_start": "2026-04-27",
+      "spend": "899.88",
+      "impressions": 2250,
+      "clicks": 27
+    },
+    {
+      "ad_id": "ad_0_1",
+      "adset_id": "as_cob_lkl",
+      "campaign_id": "c_streetwear",
+      "date_start": "2026-04-28",
+      "spend": "1799.83",
+      "impressions": 4500,
+      "clicks": 81
+    },
+    {
+      "ad_id": "ad_1_1",
+      "adset_id": "as_crm_cod",
+      "campaign_id": "c_streetwear",
+      "date_start": "2026-04-28",
+      "spend": "3086.36",
+      "impressions": 7716,
+      "clicks": 216
+    },
+    {
+      "ad_id": "ad_2_1",
+      "adset_id": "as_hood_rt",
+      "campaign_id": "c_hoodie",
+      "date_start": "2026-04-28",
+      "spend": "1408.64",
+      "impressions": 3522,
+      "clicks": 141
+    },
+    {
+      "ad_id": "ad_3_1",
+      "adset_id": "as_hood_cold",
+      "campaign_id": "c_hoodie",
+      "date_start": "2026-04-28",
+      "spend": "837.05",
+      "impressions": 2093,
+      "clicks": 25
+    },
+    {
+      "ad_id": "ad_0_1",
+      "adset_id": "as_cob_lkl",
+      "campaign_id": "c_streetwear",
+      "date_start": "2026-04-29",
+      "spend": "2236.65",
+      "impressions": 5592,
+      "clicks": 101
+    },
+    {
+      "ad_id": "ad_1_1",
+      "adset_id": "as_crm_cod",
+      "campaign_id": "c_streetwear",
+      "date_start": "2026-04-29",
+      "spend": "3390.97",
+      "impressions": 8477,
+      "clicks": 237
+    },
+    {
+      "ad_id": "ad_2_1",
+      "adset_id": "as_hood_rt",
+      "campaign_id": "c_hoodie",
+      "date_start": "2026-04-29",
+      "spend": "1309.24",
+      "impressions": 3273,
+      "clicks": 131
+    },
+    {
+      "ad_id": "ad_3_1",
+      "adset_id": "as_hood_cold",
+      "campaign_id": "c_hoodie",
+      "date_start": "2026-04-29",
+      "spend": "850.81",
+      "impressions": 2127,
+      "clicks": 26
+    },
+    {
+      "ad_id": "ad_0_1",
+      "adset_id": "as_cob_lkl",
+      "campaign_id": "c_streetwear",
+      "date_start": "2026-04-30",
+      "spend": "1716.42",
+      "impressions": 4291,
+      "clicks": 77
+    },
+    {
+      "ad_id": "ad_1_1",
+      "adset_id": "as_crm_cod",
+      "campaign_id": "c_streetwear",
+      "date_start": "2026-04-30",
+      "spend": "3566.35",
+      "impressions": 8916,
+      "clicks": 250
+    },
+    {
+      "ad_id": "ad_2_1",
+      "adset_id": "as_hood_rt",
+      "campaign_id": "c_hoodie",
+      "date_start": "2026-04-30",
+      "spend": "1424.45",
+      "impressions": 3561,
+      "clicks": 142
+    },
+    {
+      "ad_id": "ad_3_1",
+      "adset_id": "as_hood_cold",
+      "campaign_id": "c_hoodie",
+      "date_start": "2026-04-30",
+      "spend": "914.14",
+      "impressions": 2285,
+      "clicks": 27
+    },
+    {
+      "ad_id": "ad_0_1",
+      "adset_id": "as_cob_lkl",
+      "campaign_id": "c_streetwear",
+      "date_start": "2026-05-01",
+      "spend": "1844.42",
+      "impressions": 4611,
+      "clicks": 83
+    },
+    {
+      "ad_id": "ad_1_1",
+      "adset_id": "as_crm_cod",
+      "campaign_id": "c_streetwear",
+      "date_start": "2026-05-01",
+      "spend": "3488.32",
+      "impressions": 8721,
+      "clicks": 244
+    },
+    {
+      "ad_id": "ad_2_1",
+      "adset_id": "as_hood_rt",
+      "campaign_id": "c_hoodie",
+      "date_start": "2026-05-01",
+      "spend": "1531.87",
+      "impressions": 3830,
+      "clicks": 153
+    },
+    {
+      "ad_id": "ad_3_1",
+      "adset_id": "as_hood_cold",
+      "campaign_id": "c_hoodie",
+      "date_start": "2026-05-01",
+      "spend": "904.41",
+      "impressions": 2261,
+      "clicks": 27
+    },
+    {
+      "ad_id": "ad_0_1",
+      "adset_id": "as_cob_lkl",
+      "campaign_id": "c_streetwear",
+      "date_start": "2026-05-02",
+      "spend": "2167.53",
+      "impressions": 5419,
+      "clicks": 98
+    },
+    {
+      "ad_id": "ad_1_1",
+      "adset_id": "as_crm_cod",
+      "campaign_id": "c_streetwear",
+      "date_start": "2026-05-02",
+      "spend": "3829.45",
+      "impressions": 9574,
+      "clicks": 268
+    },
+    {
+      "ad_id": "ad_2_1",
+      "adset_id": "as_hood_rt",
+      "campaign_id": "c_hoodie",
+      "date_start": "2026-05-02",
+      "spend": "1281.82",
+      "impressions": 3205,
+      "clicks": 128
+    },
+    {
+      "ad_id": "ad_3_1",
+      "adset_id": "as_hood_cold",
+      "campaign_id": "c_hoodie",
+      "date_start": "2026-05-02",
+      "spend": "848.82",
+      "impressions": 2122,
+      "clicks": 25
+    },
+    {
+      "ad_id": "ad_0_1",
+      "adset_id": "as_cob_lkl",
+      "campaign_id": "c_streetwear",
+      "date_start": "2026-05-03",
+      "spend": "2240.27",
+      "impressions": 5601,
+      "clicks": 101
+    },
+    {
+      "ad_id": "ad_1_1",
+      "adset_id": "as_crm_cod",
+      "campaign_id": "c_streetwear",
+      "date_start": "2026-05-03",
+      "spend": "3216.22",
+      "impressions": 8041,
+      "clicks": 225
+    },
+    {
+      "ad_id": "ad_2_1",
+      "adset_id": "as_hood_rt",
+      "campaign_id": "c_hoodie",
+      "date_start": "2026-05-03",
+      "spend": "1685.45",
+      "impressions": 4214,
+      "clicks": 169
+    },
+    {
+      "ad_id": "ad_3_1",
+      "adset_id": "as_hood_cold",
+      "campaign_id": "c_hoodie",
+      "date_start": "2026-05-03",
+      "spend": "751.10",
+      "impressions": 1878,
+      "clicks": 23
+    },
+    {
+      "ad_id": "ad_0_1",
+      "adset_id": "as_cob_lkl",
+      "campaign_id": "c_streetwear",
+      "date_start": "2026-05-04",
+      "spend": "1756.76",
+      "impressions": 4392,
+      "clicks": 79
+    },
+    {
+      "ad_id": "ad_1_1",
+      "adset_id": "as_crm_cod",
+      "campaign_id": "c_streetwear",
+      "date_start": "2026-05-04",
+      "spend": "3600.41",
+      "impressions": 9001,
+      "clicks": 252
+    },
+    {
+      "ad_id": "ad_2_1",
+      "adset_id": "as_hood_rt",
+      "campaign_id": "c_hoodie",
+      "date_start": "2026-05-04",
+      "spend": "1549.53",
+      "impressions": 3874,
+      "clicks": 155
+    },
+    {
+      "ad_id": "ad_3_1",
+      "adset_id": "as_hood_cold",
+      "campaign_id": "c_hoodie",
+      "date_start": "2026-05-04",
+      "spend": "702.40",
+      "impressions": 1756,
+      "clicks": 21
+    },
+    {
+      "ad_id": "ad_0_1",
+      "adset_id": "as_cob_lkl",
+      "campaign_id": "c_streetwear",
+      "date_start": "2026-05-05",
+      "spend": "2256.58",
+      "impressions": 5641,
+      "clicks": 102
+    },
+    {
+      "ad_id": "ad_1_1",
+      "adset_id": "as_crm_cod",
+      "campaign_id": "c_streetwear",
+      "date_start": "2026-05-05",
+      "spend": "3928.23",
+      "impressions": 9821,
+      "clicks": 275
+    },
+    {
+      "ad_id": "ad_2_1",
+      "adset_id": "as_hood_rt",
+      "campaign_id": "c_hoodie",
+      "date_start": "2026-05-05",
+      "spend": "1348.16",
+      "impressions": 3370,
+      "clicks": 135
+    },
+    {
+      "ad_id": "ad_3_1",
+      "adset_id": "as_hood_cold",
+      "campaign_id": "c_hoodie",
+      "date_start": "2026-05-05",
+      "spend": "686.17",
+      "impressions": 1715,
+      "clicks": 21
+    },
+    {
+      "ad_id": "ad_0_1",
+      "adset_id": "as_cob_lkl",
+      "campaign_id": "c_streetwear",
+      "date_start": "2026-05-06",
+      "spend": "2154.40",
+      "impressions": 5386,
+      "clicks": 97
+    },
+    {
+      "ad_id": "ad_1_1",
+      "adset_id": "as_crm_cod",
+      "campaign_id": "c_streetwear",
+      "date_start": "2026-05-06",
+      "spend": "3464.35",
+      "impressions": 8661,
+      "clicks": 243
+    },
+    {
+      "ad_id": "ad_2_1",
+      "adset_id": "as_hood_rt",
+      "campaign_id": "c_hoodie",
+      "date_start": "2026-05-06",
+      "spend": "1679.76",
+      "impressions": 4199,
+      "clicks": 168
+    },
+    {
+      "ad_id": "ad_3_1",
+      "adset_id": "as_hood_cold",
+      "campaign_id": "c_hoodie",
+      "date_start": "2026-05-06",
+      "spend": "705.77",
+      "impressions": 1764,
+      "clicks": 21
+    },
+    {
+      "ad_id": "ad_0_1",
+      "adset_id": "as_cob_lkl",
+      "campaign_id": "c_streetwear",
+      "date_start": "2026-05-07",
+      "spend": "2100.82",
+      "impressions": 5252,
+      "clicks": 95
+    },
+    {
+      "ad_id": "ad_1_1",
+      "adset_id": "as_crm_cod",
+      "campaign_id": "c_streetwear",
+      "date_start": "2026-05-07",
+      "spend": "3845.20",
+      "impressions": 9613,
+      "clicks": 269
+    },
+    {
+      "ad_id": "ad_2_1",
+      "adset_id": "as_hood_rt",
+      "campaign_id": "c_hoodie",
+      "date_start": "2026-05-07",
+      "spend": "1568.38",
+      "impressions": 3921,
+      "clicks": 157
+    },
+    {
+      "ad_id": "ad_3_1",
+      "adset_id": "as_hood_cold",
+      "campaign_id": "c_hoodie",
+      "date_start": "2026-05-07",
+      "spend": "806.11",
+      "impressions": 2015,
+      "clicks": 24
+    },
+    {
+      "ad_id": "ad_0_1",
+      "adset_id": "as_cob_lkl",
+      "campaign_id": "c_streetwear",
+      "date_start": "2026-05-08",
+      "spend": "2272.54",
+      "impressions": 5681,
+      "clicks": 102
+    },
+    {
+      "ad_id": "ad_1_1",
+      "adset_id": "as_crm_cod",
+      "campaign_id": "c_streetwear",
+      "date_start": "2026-05-08",
+      "spend": "3553.61",
+      "impressions": 8884,
+      "clicks": 249
+    },
+    {
+      "ad_id": "ad_2_1",
+      "adset_id": "as_hood_rt",
+      "campaign_id": "c_hoodie",
+      "date_start": "2026-05-08",
+      "spend": "1499.38",
+      "impressions": 3748,
+      "clicks": 150
+    },
+    {
+      "ad_id": "ad_3_1",
+      "adset_id": "as_hood_cold",
+      "campaign_id": "c_hoodie",
+      "date_start": "2026-05-08",
+      "spend": "796.13",
+      "impressions": 1990,
+      "clicks": 24
+    },
+    {
+      "ad_id": "ad_0_1",
+      "adset_id": "as_cob_lkl",
+      "campaign_id": "c_streetwear",
+      "date_start": "2026-05-09",
+      "spend": "1747.09",
+      "impressions": 4368,
+      "clicks": 79
+    },
+    {
+      "ad_id": "ad_1_1",
+      "adset_id": "as_crm_cod",
+      "campaign_id": "c_streetwear",
+      "date_start": "2026-05-09",
+      "spend": "3658.64",
+      "impressions": 9147,
+      "clicks": 256
+    },
+    {
+      "ad_id": "ad_2_1",
+      "adset_id": "as_hood_rt",
+      "campaign_id": "c_hoodie",
+      "date_start": "2026-05-09",
+      "spend": "1474.41",
+      "impressions": 3686,
+      "clicks": 147
+    },
+    {
+      "ad_id": "ad_3_1",
+      "adset_id": "as_hood_cold",
+      "campaign_id": "c_hoodie",
+      "date_start": "2026-05-09",
+      "spend": "754.11",
+      "impressions": 1885,
+      "clicks": 23
+    },
+    {
+      "ad_id": "ad_0_1",
+      "adset_id": "as_cob_lkl",
+      "campaign_id": "c_streetwear",
+      "date_start": "2026-05-10",
+      "spend": "2101.82",
+      "impressions": 5255,
+      "clicks": 95
+    },
+    {
+      "ad_id": "ad_1_1",
+      "adset_id": "as_crm_cod",
+      "campaign_id": "c_streetwear",
+      "date_start": "2026-05-10",
+      "spend": "3021.41",
+      "impressions": 7554,
+      "clicks": 212
+    },
+    {
+      "ad_id": "ad_2_1",
+      "adset_id": "as_hood_rt",
+      "campaign_id": "c_hoodie",
+      "date_start": "2026-05-10",
+      "spend": "1405.85",
+      "impressions": 3515,
+      "clicks": 141
+    },
+    {
+      "ad_id": "ad_3_1",
+      "adset_id": "as_hood_cold",
+      "campaign_id": "c_hoodie",
+      "date_start": "2026-05-10",
+      "spend": "918.33",
+      "impressions": 2296,
+      "clicks": 28
+    },
+    {
+      "ad_id": "ad_0_1",
+      "adset_id": "as_cob_lkl",
+      "campaign_id": "c_streetwear",
+      "date_start": "2026-05-11",
+      "spend": "2216.07",
+      "impressions": 5540,
+      "clicks": 100
+    },
+    {
+      "ad_id": "ad_1_1",
+      "adset_id": "as_crm_cod",
+      "campaign_id": "c_streetwear",
+      "date_start": "2026-05-11",
+      "spend": "3179.74",
+      "impressions": 7949,
+      "clicks": 223
+    },
+    {
+      "ad_id": "ad_2_1",
+      "adset_id": "as_hood_rt",
+      "campaign_id": "c_hoodie",
+      "date_start": "2026-05-11",
+      "spend": "1446.48",
+      "impressions": 3616,
+      "clicks": 145
+    },
+    {
+      "ad_id": "ad_3_1",
+      "adset_id": "as_hood_cold",
+      "campaign_id": "c_hoodie",
+      "date_start": "2026-05-11",
+      "spend": "895.52",
+      "impressions": 2239,
+      "clicks": 27
+    }
+  ]
+}

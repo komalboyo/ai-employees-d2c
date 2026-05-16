@@ -1,0 +1,124 @@
+{
+  "data": [
+    {
+      "id": "c_streetwear",
+      "name": "Streetwear Awareness",
+      "level": "campaign",
+      "campaign_id": "c_streetwear",
+      "campaign_name": "Streetwear Awareness",
+      "campaign_status": "ACTIVE",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "as_cob_lkl",
+      "name": "Cobalt Tee Lookalikes",
+      "level": "adset",
+      "adset_id": "as_cob_lkl",
+      "adset_name": "Cobalt Tee Lookalikes",
+      "campaign_id": "c_streetwear",
+      "campaign_name": "Streetwear Awareness",
+      "adset_status": "ACTIVE",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "ad_0_1",
+      "name": "Cobalt Tee Lookalikes — Ad 1",
+      "level": "ad",
+      "adset_id": "as_cob_lkl",
+      "adset_name": "Cobalt Tee Lookalikes",
+      "campaign_id": "c_streetwear",
+      "campaign_name": "Streetwear Awareness",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "c_streetwear",
+      "name": "Streetwear Awareness",
+      "level": "campaign",
+      "campaign_id": "c_streetwear",
+      "campaign_name": "Streetwear Awareness",
+      "campaign_status": "ACTIVE",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "as_crm_cod",
+      "name": "Crimson Tee COD Push",
+      "level": "adset",
+      "adset_id": "as_crm_cod",
+      "adset_name": "Crimson Tee COD Push",
+      "campaign_id": "c_streetwear",
+      "campaign_name": "Streetwear Awareness",
+      "adset_status": "ACTIVE",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "ad_1_1",
+      "name": "Crimson Tee COD Push — Ad 1",
+      "level": "ad",
+      "adset_id": "as_crm_cod",
+      "adset_name": "Crimson Tee COD Push",
+      "campaign_id": "c_streetwear",
+      "campaign_name": "Streetwear Awareness",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "c_hoodie",
+      "name": "Hoodie Launch",
+      "level": "campaign",
+      "campaign_id": "c_hoodie",
+      "campaign_name": "Hoodie Launch",
+      "campaign_status": "ACTIVE",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "as_hood_rt",
+      "name": "Hoodie Retargeting",
+      "level": "adset",
+      "adset_id": "as_hood_rt",
+      "adset_name": "Hoodie Retargeting",
+      "campaign_id": "c_hoodie",
+      "campaign_name": "Hoodie Launch",
+      "adset_status": "ACTIVE",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "ad_2_1",
+      "name": "Hoodie Retargeting — Ad 1",
+      "level": "ad",
+      "adset_id": "as_hood_rt",
+      "adset_name": "Hoodie Retargeting",
+      "campaign_id": "c_hoodie",
+      "campaign_name": "Hoodie Launch",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "c_hoodie",
+      "name": "Hoodie Launch",
+      "level": "campaign",
+      "campaign_id": "c_hoodie",
+      "campaign_name": "Hoodie Launch",
+      "campaign_status": "ACTIVE",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "as_hood_cold",
+      "name": "Charcoal Hoodie Cold",
+      "level": "adset",
+      "adset_id": "as_hood_cold",
+      "adset_name": "Charcoal Hoodie Cold",
+      "campaign_id": "c_hoodie",
+      "campaign_name": "Hoodie Launch",
+      "adset_status": "ACTIVE",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "ad_3_1",
+      "name": "Charcoal Hoodie Cold — Ad 1",
+      "level": "ad",
+      "adset_id": "as_hood_cold",
+      "adset_name": "Charcoal Hoodie Cold",
+      "campaign_id": "c_hoodie",
+      "campaign_name": "Hoodie Launch",
+      "status": "ACTIVE"
+    }
+  ]
+}

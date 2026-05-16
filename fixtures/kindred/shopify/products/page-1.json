@@ -1,0 +1,144 @@
+{
+  "products": [
+    {
+      "id": 9000,
+      "title": "Cobalt Tee",
+      "product_type": "Tee",
+      "variants": [
+        {
+          "id": 9000,
+          "title": "S",
+          "sku": "TEE-COB-S",
+          "price": "1499.00",
+          "inventory_quantity": 80
+        }
+      ]
+    },
+    {
+      "id": 9001,
+      "title": "Cobalt Tee",
+      "product_type": "Tee",
+      "variants": [
+        {
+          "id": 9001,
+          "title": "M",
+          "sku": "TEE-COB-M",
+          "price": "1499.00",
+          "inventory_quantity": 95
+        }
+      ]
+    },
+    {
+      "id": 9002,
+      "title": "Cobalt Tee",
+      "product_type": "Tee",
+      "variants": [
+        {
+          "id": 9002,
+          "title": "L",
+          "sku": "TEE-COB-L",
+          "price": "1499.00",
+          "inventory_quantity": 70
+        }
+      ]
+    },
+    {
+      "id": 9003,
+      "title": "Cobalt Tee",
+      "product_type": "Tee",
+      "variants": [
+        {
+          "id": 9003,
+          "title": "XL",
+          "sku": "TEE-COB-XL",
+          "price": "1499.00",
+          "inventory_quantity": 50
+        }
+      ]
+    },
+    {
+      "id": 9004,
+      "title": "Crimson Tee",
+      "product_type": "Tee",
+      "variants": [
+        {
+          "id": 9004,
+          "title": "S",
+          "sku": "TEE-CRM-S",
+          "price": "1499.00",
+          "inventory_quantity": 60
+        }
+      ]
+    },
+    {
+      "id": 9005,
+      "title": "Crimson Tee",
+      "product_type": "Tee",
+      "variants": [
+        {
+          "id": 9005,
+          "title": "M",
+          "sku": "TEE-CRM-M",
+          "price": "1499.00",
+          "inventory_quantity": 75
+        }
+      ]
+    },
+    {
+      "id": 9006,
+      "title": "Crimson Tee",
+      "product_type": "Tee",
+      "variants": [
+        {
+          "id": 9006,
+          "title": "L",
+          "sku": "TEE-CRM-L",
+          "price": "1499.00",
+          "inventory_quantity": 65
+        }
+      ]
+    },
+    {
+      "id": 9007,
+      "title": "Crimson Tee",
+      "product_type": "Tee",
+      "variants": [
+        {
+          "id": 9007,
+          "title": "XL",
+          "sku": "TEE-CRM-XL",
+          "price": "1499.00",
+          "inventory_quantity": 45
+        }
+      ]
+    },
+    {
+      "id": 9008,
+      "title": "Charcoal Hoodie",
+      "product_type": "Hoodie",
+      "variants": [
+        {
+          "id": 9008,
+          "title": "M",
+          "sku": "HOOD-CHR-M",
+          "price": "2499.00",
+          "inventory_quantity": 40
+        }
+      ]
+    },
+    {
+      "id": 9009,
+      "title": "Charcoal Hoodie",
+      "product_type": "Hoodie",
+      "variants": [
+        {
+          "id": 9009,
+          "title": "L",
+          "sku": "HOOD-CHR-L",
+          "price": "2499.00",
+          "inventory_quantity": 28
+        }
+      ]
+    }
+  ]
+}
