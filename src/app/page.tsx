@@ -81,7 +81,7 @@ export default async function Page() {
             </h1>
           </div>
           <div className="text-xs dim">
-            A zero-human ops stack. v0. <span className="text-[color:var(--accent)]">Universal Paperclips, with humans setting the goals.</span>
+            A zero-human ops stack for D2C. <span className="text-[color:var(--accent)]">An intra-company Paperclip.</span>
           </div>
         </header>
 
