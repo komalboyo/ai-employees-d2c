@@ -98,43 +98,40 @@ Every proposal also carries a self-prediction ("if you do this, the metric will 
 
 ---
 
-## On `hire()` — founder-driven by default, autonomous as an opt-in
+## Does the company hire itself?
 
-The framing I had in mind for this project is *"a company that runs itself"* — an intra-company Paperclip. So when I say "AI employees", the question is whether the company also does its own HR, i.e. spawns new employees autonomously when it sees a gap.
+This is the one I went back and forth on the most.
 
-There's real tension here, and I want to call it out rather than oversell:
+The original design had `hire()` as a chat tool. The founder types "hire a watcher for the Patna lane", a new agent shows up. Clean, founder-controlled, easy to reason about.
 
-**Default behavior (v0 demo, what runs out of the box):** `hire()` is a chat tool. The founder asks for a watcher; one gets created. The team has five members; the company doesn't grow itself. This is *founder-managed* AI, not zero-human AI. Bounded, auditable, no surprise headcount.
+But the framing of this whole project is *a company that runs itself*. And if I'm calling it that, then the company should also be able to grow itself. When the same problem keeps showing up and no one's fixing it, the Chief of Staff should be allowed to spawn a watcher on her own, like a real manager would.
 
-**Opt-in behavior (`AUTO_HIRE=1`):** the Chief of Staff is allowed to call `hireAgent()` herself. When a single `target_entity` has been flagged across multiple recent agent runs, she spawns a dedicated monitor for it. Strictly bounded:
-
-- Max **1** autonomous hire per Chief of Staff run.
-- Target must persist across **≥ AUTO_HIRE_MIN_RUNS** (default 3) distinct runs.
-- Never re-hires on the same target — idempotent on agent name.
-- Each autonomous hire writes a `chief_of_staff_hired_watcher` proposal that lands at the top of the morning brief, with full rationale and citations to the proposals that triggered it.
-
-So on the demo data, if you run agents three times and then run once with the flag set, the Chief of Staff hires a watcher on the Crimson trap adset because that target has been flagged 3+ times in a row:
+So I did both. The default is founder-managed. Autonomous hiring is opt-in, behind an env var:
 
 ```bash
-npm run agents:run                      # × 3 runs, no auto-hire
-AUTO_HIRE=1 npm run agents:run          # Chief of Staff hires a watcher
+npm run agents:run                # default — only the founder hires via chat
+AUTO_HIRE=1 npm run agents:run    # Chief of Staff is allowed to hire too
 ```
+
+When you turn it on, the Chief of Staff stays inside hard rules. Not "the LLM decides when to spawn", actual rules in the code:
+
+- At most **one** new hire per Chief of Staff run.
+- Only on a target that's been flagged across **3+ different runs**. So a one-off Rishi pause doesn't trigger a hire; a target that's been flagged Monday, Tuesday, and Wednesday does.
+- Never on the same target twice. Once she's hired a watcher for the Crimson trap, she won't hire another one on it.
+- Every autonomous hire writes a `chief_of_staff_hired_watcher` proposal at the top of the morning brief, with the rationale and citations to the proposals that triggered it. You always know why.
+
+On the demo data, if you run the agents three times normally and then once with the flag set, the Chief of Staff sees that the Crimson Tee COD Push adset has been flagged in every run, and hires a watcher on it:
 
 ```
 Chief of Staff hired: "Watcher · ad_object:as_crm_cod"
 Rationale: ad_object:as_crm_cod flagged across 3 runs; spawning a dedicated monitor.
 ```
 
-**Why default OFF.** Autonomous spawning is one of the most-cited LLM-demo cliches, and most implementations of it are unbounded recursive theatre. I built the safety story (hard bounds, idempotency, full audit trail in `proposals`) before flipping the switch. Defaulting OFF means a reviewer can run the system in a conservative mode first, then opt in to see the autonomous version.
+Why is the default OFF? Because autonomous agent-spawning has a bad reputation, and for good reason. Most demos of it are unbounded. Agents spawning agents spawning agents, with nothing in the way. I wanted the safety story (hard limits, idempotency, audit trail) to be the thing that's *built*, with the autonomy as the thing you opt into once you trust it. A founder probably doesn't want surprise headcount on day 1. By day 30, with a visible track record, maybe they flip the switch.
 
-**What a v1 of this looks like:** the Chief of Staff doesn't just spawn watchers, she fires them when they stop producing useful signal. She tunes thresholds based on founder approve/dismiss patterns. The "AUTO_HIRE_MIN_RUNS" threshold becomes a Bayesian posterior, not a constant. This is where the *intra-company Paperclip* metaphor actually starts to bite.
+What a v1 of this looks like: the Chief of Staff doesn't just hire. She fires watchers that stop producing useful signal. The 3-runs threshold becomes a learned parameter instead of a constant. That's where the *company that runs itself* metaphor actually starts to bite.
 
-The eval suite includes a fourth suite that verifies the bounds:
-
-- The feature is env-gated (defaults off).
-- Persistent-target detection works on the existing data.
-- Agent row + proposal row are written together (no orphans).
-- Idempotency: no two autonomous hires on the same target.
+Four eval tests cover the bounds. The feature is gated, persistence detection works on real data, no orphan rows, no duplicate hires.
 
 ---
 
