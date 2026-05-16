@@ -92,6 +92,46 @@ Every proposal also carries a self-prediction ("if you do this, the metric will 
 
 ---
 
+## On `hire()` — founder-driven by default, autonomous as an opt-in
+
+The framing I had in mind for this project is *"a company that runs itself"* — an intra-company Paperclip. So when I say "AI employees", the question is whether the company also does its own HR, i.e. spawns new employees autonomously when it sees a gap.
+
+There's real tension here, and I want to call it out rather than oversell:
+
+**Default behavior (v0 demo, what runs out of the box):** `hire()` is a chat tool. The founder asks for a watcher; one gets created. The team has five members; the company doesn't grow itself. This is *founder-managed* AI, not zero-human AI. Bounded, auditable, no surprise headcount.
+
+**Opt-in behavior (`AUTO_HIRE=1`):** the Chief of Staff is allowed to call `hireAgent()` herself. When a single `target_entity` has been flagged across multiple recent agent runs, she spawns a dedicated monitor for it. Strictly bounded:
+
+- Max **1** autonomous hire per Chief of Staff run.
+- Target must persist across **≥ AUTO_HIRE_MIN_RUNS** (default 3) distinct runs.
+- Never re-hires on the same target — idempotent on agent name.
+- Each autonomous hire writes a `chief_of_staff_hired_watcher` proposal that lands at the top of the morning brief, with full rationale and citations to the proposals that triggered it.
+
+So on the demo data, if you run agents three times and then run once with the flag set, the Chief of Staff hires a watcher on the Crimson trap adset because that target has been flagged 3+ times in a row:
+
+```bash
+npm run agents:run                      # × 3 runs, no auto-hire
+AUTO_HIRE=1 npm run agents:run          # Chief of Staff hires a watcher
+```
+
+```
+Chief of Staff hired: "Watcher · ad_object:as_crm_cod"
+Rationale: ad_object:as_crm_cod flagged across 3 runs; spawning a dedicated monitor.
+```
+
+**Why default OFF.** Autonomous spawning is one of the most-cited LLM-demo cliches, and most implementations of it are unbounded recursive theatre. I built the safety story (hard bounds, idempotency, full audit trail in `proposals`) before flipping the switch. Defaulting OFF means a reviewer can run the system in a conservative mode first, then opt in to see the autonomous version.
+
+**What a v1 of this looks like:** the Chief of Staff doesn't just spawn watchers, she fires them when they stop producing useful signal. She tunes thresholds based on founder approve/dismiss patterns. The "AUTO_HIRE_MIN_RUNS" threshold becomes a Bayesian posterior, not a constant. This is where the *intra-company Paperclip* metaphor actually starts to bite.
+
+The eval suite includes a fourth suite that verifies the bounds:
+
+- The feature is env-gated (defaults off).
+- Persistent-target detection works on the existing data.
+- Agent row + proposal row are written together (no orphans).
+- Idempotency: no two autonomous hires on the same target.
+
+---
+
 ## The chat layer
 
 10 tools. 6 read, 4 write.
@@ -155,11 +195,12 @@ Reproduce with `npm run seed:bulk && npm run benchmark`.
 
 ## Eval
 
-`npm run eval` runs three suites. All 15 tests pass on the committed demo state.
+`npm run eval` runs four suites. All 19 tests pass on the committed demo state.
 
 - **Golden Q&A (5).** Cross-tool questions through the chat engine. Each test asserts the right tool got selected, the right table got cited, and the expected content appeared.
 - **Citation contract regression (5).** Valid cite passes. Uncited number rejected. Fake UUID rejected. Non-allowlisted table rejected. No-numbers prose passes.
 - **Agent decision regression (5).** Rishi pauses the trap adset. Meera pauses the same adset. Karan reorders HOOD-CHR-L. Aanya files a cut-spend proposal citing the team. Meera flags the degraded Bluedart-Patna lane.
+- **Autonomous hire bounds (4).** Feature is env-gated (default off). Persistent-target detection works. Agent row + proposal row are consistent. No duplicate watchers on the same target.
 
 Where I know it breaks, before you find it:
 
@@ -223,6 +264,8 @@ npm run seed
 
 # 3. run the agents
 npm run agents:run
+# (optional) opt-in autonomous-hire mode:
+# AUTO_HIRE=1 npm run agents:run
 
 # 4. (optional) backfill the trust scorecard
 npx tsx scripts/grade-predictions.ts

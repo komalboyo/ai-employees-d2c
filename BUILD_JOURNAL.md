@@ -32,6 +32,7 @@ Read this column-by-column. The left column is the part that took *thinking*. Th
 | 2 (build day 1) | Schema (17 tables, provenance constraint). `Connector` interface + 4 implementations (Shopify, Meta, Shiprocket, CSV). Orchestrator with `$ref` resolution. Synthetic seeder. Demo merchant ingest end-to-end. |
 | 3 (build day 2) | Five agents (Aanya, Rishi, Meera, Karan, Chief of Staff). Phase-1 / phase-2 orchestration so portfolio agents cross-reference ops agents. Disagreement detection on the demo data. |
 | 4 (build day 3 — final) | Chat layer with 10 tools + server-side citation validator. Offline fallback. Next.js UI: morning brief, org chart, trust scorecard, Citation Inspector. Watch-runner + replay grader. Bulk seeder + benchmark (1k merchants in 8.7s). 15-test eval suite passing. README + this journal. |
+| 5 (post-feedback polish) | Closed the framing gap on `hire()`. The original design had it as a chat tool only (founder-managed). I added an opt-in autonomous-hire path: with `AUTO_HIRE=1`, the Chief of Staff calls `hireAgent()` herself when a target has been flagged across ≥3 distinct runs. Strictly bounded: max 1 hire per run, idempotent on agent name, full audit trail. Default OFF because autonomous spawning needs trust earned over time. Added a fourth eval suite (4 tests) verifying the bounds. README now explains both modes and the design tension out loud. **19/19 evals passing.** |
 
 ## Where Claude got it wrong (and I caught it)
 

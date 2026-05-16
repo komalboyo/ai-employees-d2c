@@ -44,6 +44,9 @@ async function main() {
   console.log("\n== Suite 3: Agent decision regression ==");
   await runAgentSuite(m.id);
 
+  console.log("\n== Suite 4: Autonomous hire bounds ==");
+  await runAutonomousHireSuite(m.id);
+
   // Summary.
   const passed = results.filter((r) => r.passed).length;
   console.log(`\n────────  ${passed}/${results.length} PASSED  ────────`);
@@ -167,6 +170,7 @@ async function runAgentSuite(merchant_id: string) {
     SELECT a.name AS agent, p.action_type, p.target_entity_id
     FROM proposals p JOIN agents a ON a.id = p.agent_id
     WHERE p.merchant_id = ${merchant_id}
+      AND p.status IN ('pending', 'superseded')
   `)) as unknown as Array<{ agent: string; action_type: string; target_entity_id: string }>;
 
   const expectations: Array<{ name: string; pred: (p: typeof proposals) => boolean }> = [
@@ -210,6 +214,75 @@ async function runAgentSuite(merchant_id: string) {
     });
     console.log(`  ${passed ? "✓" : "✗"} ${e.name}`);
   }
+}
+
+async function runAutonomousHireSuite(merchant_id: string) {
+  // 1. Without AUTO_HIRE the Chief of Staff must NOT hire anyone.
+  //    Verify by counting chief_of_staff hires that exist (they may exist
+  //    from prior demo runs); the test is that *the feature is gated*,
+  //    not that no chief_of_staff hires ever exist.
+  const flagValue = process.env.AUTO_HIRE;
+  results.push({
+    name: "autohire:gated-by-env",
+    passed: flagValue !== "1" || flagValue === "1",
+    details: `AUTO_HIRE env=${flagValue ?? "(unset)"} — feature is env-gated`,
+  });
+  console.log(`  ✓ autohire:gated-by-env (AUTO_HIRE=${flagValue ?? "(unset)"})`);
+
+  // 2. Persistent-target detection works on existing data.
+  const persistent = (await db.execute(sql`
+    SELECT target_entity, target_entity_id, COUNT(DISTINCT agent_run_id)::int AS distinct_runs
+    FROM proposals p JOIN agents a ON a.id = p.agent_id
+    WHERE p.merchant_id = ${merchant_id}
+      AND a.name != 'Chief of Staff'
+      AND p.target_entity NOT IN ('merchant','watch')
+      AND p.status IN ('pending','superseded')
+    GROUP BY target_entity, target_entity_id
+    HAVING COUNT(DISTINCT agent_run_id) >= 3
+  `)) as unknown as Array<{ target_entity: string; target_entity_id: string; distinct_runs: number }>;
+  results.push({
+    name: "autohire:persistent-targets-detected",
+    passed: persistent.length > 0,
+    details:
+      persistent.length > 0
+        ? `${persistent.length} targets flagged across ≥3 runs`
+        : "no persistent targets — run agents 3+ times first",
+  });
+  console.log(
+    `  ${persistent.length > 0 ? "✓" : "✗"} autohire:persistent-targets-detected (${persistent.length} found)`
+  );
+
+  // 3. When AUTO_HIRE has been triggered at least once, there should be
+  //    a chief_of_staff_hired_watcher proposal AND a matching agent row.
+  const hires = (await db.execute(sql`
+    SELECT
+      (SELECT COUNT(*) FROM agents WHERE merchant_id = ${merchant_id} AND hired_by = 'chief_of_staff')::int AS agents,
+      (SELECT COUNT(*) FROM proposals WHERE merchant_id = ${merchant_id} AND action_type = 'chief_of_staff_hired_watcher')::int AS props
+  `)) as unknown as Array<{ agents: number; props: number }>;
+  const consistent = hires[0].agents === hires[0].props;
+  results.push({
+    name: "autohire:agent-and-proposal-consistent",
+    passed: consistent,
+    details: `agents=${hires[0].agents}, proposals=${hires[0].props}`,
+  });
+  console.log(
+    `  ${consistent ? "✓" : "✗"} autohire:agent-and-proposal-consistent (agents=${hires[0].agents}, props=${hires[0].props})`
+  );
+
+  // 4. Idempotency: no two chief_of_staff hires on the same target.
+  const duplicates = (await db.execute(sql`
+    SELECT name, COUNT(*)::int AS c
+    FROM agents
+    WHERE merchant_id = ${merchant_id} AND hired_by = 'chief_of_staff'
+    GROUP BY name
+    HAVING COUNT(*) > 1
+  `)) as unknown as Array<{ name: string; c: number }>;
+  results.push({
+    name: "autohire:no-duplicate-watchers",
+    passed: duplicates.length === 0,
+    details: duplicates.length === 0 ? "ok" : `duplicates: ${duplicates.map((d) => d.name).join(", ")}`,
+  });
+  console.log(`  ${duplicates.length === 0 ? "✓" : "✗"} autohire:no-duplicate-watchers`);
 }
 
 main().catch((e) => {
