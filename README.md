@@ -167,11 +167,11 @@ The chat works without an Anthropic API key too. It falls back to a deterministi
 
 ---
 
-## Scale
+## Will it hold for 10,000 merchants?
 
-1000 synthetic merchants × 7 days, seeded directly to Postgres. The seeder finished in 8.7 seconds. ~1M business rows, ~376MB of database.
+The brief asked for the scalability story, so I built the harness and ran it instead of writing a paragraph about it.
 
-Agent latency across a random 25-merchant sample:
+Seeded 1000 synthetic merchants with 7 days of data each, directly to Postgres. It finished in 8.7 seconds. End state was about 1 million business rows and a 376MB database. Then I ran each specialist agent across a random 25-merchant sample and timed them.
 
 | Agent | p50 | p95 | max |
 |---|---|---|---|
@@ -182,54 +182,74 @@ Agent latency across a random 25-merchant sample:
 
 Chat tools sit at 1–2ms p95.
 
-Running the full team against 10,000 merchants every morning is roughly `4 × 10,000 × 6ms ≈ 4 minutes of CPU per day` at single-thread concurrency. That part isn't the bottleneck.
+So running the full team against 10,000 merchants every morning is roughly `4 × 10,000 × 6ms`, which is about 4 minutes of CPU per day at single-thread concurrency. That's not where it falls over.
 
-What is:
+Here's what does fall over first, in the order I think about it:
 
-- **Meta API rate limits** (200 calls/hour/ad account). At 10k merchants this is the wall, not Postgres. Fix: per-account token rotation + queued async-insights jobs.
-- **`raw_payloads` storage**. Roughly 5GB/day, 1.8TB/year of JSON archive at sustained sync. The schema already has a `blob_url` column ready for the S3 offload. v1 keeps hot 90 days in Postgres, cold goes to object storage + DuckDB.
-- **Webhook fan-in at peak**. v0 polls. 10k merchants at peak hours spike to thousands of events per second. Right thing is Kafka or Kinesis between ingest and normalize.
-- **LLM context cost on chat**. Tools already return aggregates plus `row_ids`, not raw rows. Prompt-cache the system prompt and tools. Bigger concern is the agent narrator at 10k × 4 × daily. Fix: switch to templated copy at scale, and only use LLM narration on top-K-by-impact proposals.
-- **Cross-tenant SQL**. Currently filtered + read-only role + LIMIT 1000. v1 turns on Postgres row-level security so leaks are structurally impossible, not "shouldn't happen".
+The Meta Marketing API has a rate limit of 200 calls per hour per ad account. At 10k merchants pulling daily insights, that's the wall. Not Postgres. The fix is per-account token rotation and queued async-insights jobs.
 
-Reproduce with `npm run seed:bulk && npm run benchmark`.
+The `raw_payloads` archive grows fast. Roughly 5GB a day at sustained sync, 1.8TB a year. The schema already has a `blob_url` column ready for the S3 offload, so the path is: hot 90 days in Postgres, cold goes to object storage with DuckDB or Athena on top.
 
----
+v0 polls. At 10k merchants in peak hours, Shopify webhooks alone would spike into thousands of events per second. The right shape there is Kafka or Kinesis between ingest and normalize. I didn't build it but I sized it.
 
-## Eval
+The chat layer's LLM cost is fine because tools return aggregates and `row_ids` rather than raw rows. The bigger concern is the agent narrator. 10k merchants × 4 agents × every day is 40k LLM calls for narration alone. At scale I'd switch to templated copy and reserve LLM narration for the top-K-by-impact proposals.
 
-`npm run eval` runs four suites. All 19 tests pass on the committed demo state.
+And cross-tenant SQL safety. Today it's session-bound `merchant_id` + read-only role + `LIMIT 1000`. v1 turns on Postgres row-level security so leaks become structurally impossible, not "shouldn't happen if everyone's careful".
 
-- **Golden Q&A (5).** Cross-tool questions through the chat engine. Each test asserts the right tool got selected, the right table got cited, and the expected content appeared.
-- **Citation contract regression (5).** Valid cite passes. Uncited number rejected. Fake UUID rejected. Non-allowlisted table rejected. No-numbers prose passes.
-- **Agent decision regression (5).** Rishi pauses the trap adset. Meera pauses the same adset. Karan reorders HOOD-CHR-L. Aanya files a cut-spend proposal citing the team. Meera flags the degraded Bluedart-Patna lane.
-- **Autonomous hire bounds (4).** Feature is env-gated (default off). Persistent-target detection works. Agent row + proposal row are consistent. No duplicate watchers on the same target.
-
-Where I know it breaks, before you find it:
-
-1. **Currency.** INR only. Multi-currency merchants silently misaggregate.
-2. **Refunds.** RTO is netted; partial refunds outside the Shopify flow aren't modeled.
-3. **Attribution.** Last-click UTM only. No multi-touch.
-4. **COGS.** 40% proxy unless the founder uploads the CSV.
-5. **Time zones.** IST hardcoded.
-6. **Citation escape hatch.** "Approximately" can slip an uncited number past the validator.
-7. **Cross-tenant SQL.** Filtered, not RLS-enforced.
-8. **Grading.** Replay-on-synthetic, not real causal grading.
-9. **`hire()` is parameterized, not free-form.**
-10. **No real OAuth.** Long-lived tokens for one account per source.
+Reproduce any of this with `npm run seed:bulk && npm run benchmark`.
 
 ---
 
-## Hours
+## Eval — what I tested and where it still breaks
+
+The brief explicitly said the eval honesty matters, so this section is two things: what I actually tested, and the things I know are wrong that a reviewer is going to find anyway.
+
+`npm run eval` runs four suites. **19/19 pass on the committed state.**
+
+- **Golden Q&A (5 tests).** Cross-tool questions through the chat engine. Each one asserts the right tool got picked, the right table got cited, and the expected content showed up.
+- **Citation contract regression (5 tests).** Valid citation passes. Uncited number rejected. Fake UUID rejected. Non-allowlisted table rejected. Prose with no numbers passes (so I'm not producing false positives on regular sentences).
+- **Agent decision regression (5 tests).** Rishi pauses the trap adset. Meera pauses the same adset for the ops reason. Karan reorders HOOD-CHR-L. Aanya files a cut-spend proposal citing the team. Meera flags the Bluedart-Patna lane.
+- **Autonomous hire bounds (4 tests).** Feature is env-gated and defaults off. Persistence detection works. Agent and proposal rows stay consistent. No duplicates on the same target.
+
+Where I know it breaks, in roughly the order it matters:
+
+Currency is INR only. Multi-currency merchants would silently misaggregate.
+
+Refunds aren't fully modeled. RTO is netted into revenue, but partial refunds that happen outside the Shopify order flow get missed. So Aanya's "net margin" is closer to "net margin minus the refund channel I can't see".
+
+Attribution is last-click UTM only. No multi-touch, no view-through, no iOS-14 dark social. Rishi is honest about this in every proposal, but it still undercounts how much of the delivered revenue actually came from a given adset.
+
+COGS is a 40% proxy unless the founder uploads the CSV. Every agent declares which mode it's in on the proposal.
+
+Time zones are hardcoded to IST. Anything outside India breaks the `day` group_by.
+
+The citation contract has an escape hatch. If the model says "approximately" or "roughly", the validator doesn't catch the hedge. v1 closes this.
+
+Cross-tenant SQL is filtered, not RLS-enforced. Same point as the scale section.
+
+Self-prediction grading is replay on synthetic data, not real causal grading. The infrastructure is there; the methodology that makes it real is "another week" work.
+
+`hire()` is parameterized, not free-form. You can't yet say "hire a creative analyst who reads our ad images". v1 territory.
+
+No real OAuth. Live mode uses long-lived tokens for one account per source.
+
+---
+
+## How long this took
 
 About 2.5 days across 4 sessions.
 
-- **Session 1 (no code).** 8+ revisions of the plan. Pivoted from "morning-analyst chatbot" to "AI org chart with hires". Locked the engineered-disagreement story.
-- **Session 2.** Schema with the provenance constraint. Connector interface. Four implementations. Orchestrator. Synthetic seeder. Demo merchant end-to-end.
-- **Session 3.** Five agents. Phase-1 / phase-2 ordering so portfolio agents reference ops agents. Disagreement detection on the demo data.
-- **Session 4 (the long one).** Chat layer with 10 tools + the citation validator. Offline fallback. Next.js UI. Watch-runner. Replay grader. Bulk seeder + benchmark. 15-test eval suite. README and journal.
+Session 1 was planning with no code. 8+ revisions of the plan. The biggest pivot in there was moving from "Tara, a single morning-analyst chatbot" to "an AI org chart with hires and a Chief of Staff who runs the standup". That session is what made everything else easy.
 
-The build journal has the more detailed breakdown, including the specific moments I caught the LLM doing the wrong thing.
+Session 2 was the schema, the connector interface, all four implementations, the orchestrator, and the synthetic seeder. By end of day, the Kindred merchant was flowing through the connector path end-to-end.
+
+Session 3 was the five agents. The phase-1/phase-2 ordering (where Aanya and Karan run after Rishi and Meera so they can reference the team's proposals) came out of this session. The engineered disagreement also fired for the first time here.
+
+Session 4 was the long one. Chat layer with all 10 tools and the citation validator. Offline fallback for reviewers without an API key. The Next.js UI. The watch-runner. The replay grader. Bulk seeder and benchmark. 15-test eval suite. README and journal.
+
+There was a fifth session after I got feedback, where I closed the framing gap on `hire()` and added the autonomous-hire path with its bounds and the four new eval tests. That's the 19/19 number.
+
+The build journal has the line-by-line on what I owned versus what Claude wrote, including the specific places I caught the LLM doing the wrong thing.
 
 ---
 
