@@ -20,6 +20,7 @@ import {
   watches,
 } from "@/db/schema";
 import type { Source } from "@/connectors/source";
+import { hireAgent } from "@/agents/hire";
 
 // ────────────────────────── tool registry ──────────────────────────
 
@@ -728,62 +729,18 @@ const hireTool: ToolDef<z.infer<typeof hireInput>, unknown> = {
     required: ["name", "role", "template", "params"],
   },
   async handler(merchant_id, input) {
-    // Register agent row.
-    const [a] = await db
-      .insert(agents)
-      .values({
-        merchant_id,
-        name: input.name,
-        role: input.role,
-        trigger: input.template === "watch" ? "event" : "cron",
-        schedule: input.schedule,
-        decision_template: input.template,
-        decision_params: input.params as never,
-        tools: ["metrics", "rows"] as never,
-        system_prompt: `You are ${input.name}, the ${input.role}. You were hired by the founder through chat.`,
-        hired_by: "founder",
-        declared_failure_modes: [
-          "Founder-defined agents inherit the watch/monitor/daily_report template — no custom decision logic in v0",
-        ] as never,
-      })
-      .onConflictDoUpdate({
-        target: [agents.merchant_id, agents.name],
-        set: {
-          role: input.role,
-          decision_template: input.template,
-          decision_params: input.params as never,
-          schedule: input.schedule,
-          status: "active",
-        },
-      })
-      .returning();
-
-    // For watch templates, also persist a row in `watches` so the agent
-    // runner picks it up.
-    if (input.template === "watch") {
-      const p = input.params as Record<string, string>;
-      await db
-        .insert(watches)
-        .values({
-          merchant_id,
-          agent_id: a.id,
-          name: input.name,
-          condition_sql: p.sql ?? "SELECT 1",
-          frequency: input.schedule,
-          action_template: p.action_template ?? "alert",
-        })
-        .onConflictDoNothing();
-    }
-
+    const result = await hireAgent({
+      merchant_id,
+      name: input.name,
+      role: input.role,
+      template: input.template,
+      params: input.params,
+      schedule: input.schedule,
+      hired_by: "founder",
+    });
     return {
-      data: {
-        agent_id: a.id,
-        name: a.name,
-        role: a.role,
-        template: a.decision_template,
-        status: a.status,
-      },
-      citations: [{ table: "agents", id: a.id }],
+      data: result,
+      citations: [{ table: "agents", id: result.agent_id }],
     };
   },
 };

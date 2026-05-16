@@ -15,6 +15,26 @@ import { sql, eq, desc } from "drizzle-orm";
 import { db } from "@/db/client";
 import { agents, agentRuns, proposals } from "@/db/schema";
 import type { AgentSpec, ProposalInput } from "./contract";
+import { hireAgent } from "./hire";
+
+/**
+ * Autonomous-hire feature flag.
+ *
+ * Default OFF. Set AUTO_HIRE=1 to enable.
+ *
+ * When ON, the Chief of Staff is allowed to call hireAgent() herself
+ * if a single target_entity has been flagged across N or more *runs* in
+ * the recent window. Bounded by:
+ *   - max 1 autonomous hire per Chief of Staff run
+ *   - never re-hire on the same target (idempotent on agent name)
+ *   - target must persist for AUTO_HIRE_MIN_RUNS runs (default 3)
+ *
+ * This is the zero-human-business path. The default is OFF because
+ * autonomous spawning needs trust earned over time. See README §
+ * "On `hire()` — founder-driven by default, autonomous as an opt-in".
+ */
+const AUTO_HIRE_ENABLED = process.env.AUTO_HIRE === "1";
+const AUTO_HIRE_MIN_RUNS = Number(process.env.AUTO_HIRE_MIN_RUNS ?? 3);
 
 export interface MorningBrief {
   date: string;
@@ -162,6 +182,70 @@ export const chiefOfStaff: AgentSpec = {
       })
       .sort((a, b) => b.priority_score - a.priority_score);
 
+    // Autonomous hire — feature-flagged. When enabled, the Chief of
+    // Staff identifies persistently-flagged targets and spawns a
+    // dedicated watcher. Strictly bounded: 1 hire per run, on a target
+    // that has appeared in ≥ AUTO_HIRE_MIN_RUNS distinct runs.
+    let autoHireProposal: ProposalInput | null = null;
+    let autoHireReasoning: Record<string, unknown> | null = null;
+    if (AUTO_HIRE_ENABLED) {
+      const persistent = await findPersistentTargets(ctx.merchant_id, AUTO_HIRE_MIN_RUNS);
+      autoHireReasoning = {
+        enabled: true,
+        threshold_runs: AUTO_HIRE_MIN_RUNS,
+        candidate_targets: persistent.length,
+        candidates: persistent.slice(0, 5).map((p) => ({
+          target_entity: p.target_entity,
+          target_entity_id: p.target_entity_id,
+          distinct_runs: p.distinct_runs,
+        })),
+      };
+      const candidate = await pickFirstUnwatched(ctx.merchant_id, persistent);
+      if (candidate) {
+        const hireName = `Watcher · ${candidate.target_entity}:${candidate.target_entity_id}`;
+        const result = await hireAgent({
+          merchant_id: ctx.merchant_id,
+          name: hireName,
+          role: `Persistent ${candidate.target_entity} monitor`,
+          template: "monitor",
+          params: watcherParamsFor(candidate),
+          schedule: "0 */6 * * *",
+          hired_by: "chief_of_staff",
+          declared_failure_modes: [
+            "Auto-hired watcher inherits the monitor template — no custom decision logic",
+            "Spawn rule is deterministic; not based on incremental value, only on flagging persistence",
+          ],
+        });
+        Object.assign(autoHireReasoning, { hired_agent_id: result.agent_id, hire_name: hireName });
+        autoHireProposal = {
+          action_type: "chief_of_staff_hired_watcher",
+          target_entity: candidate.target_entity,
+          target_entity_id: candidate.target_entity_id,
+          payload: {
+            hire_name: hireName,
+            distinct_runs_flagged: candidate.distinct_runs,
+            sample_proposal_ids: candidate.sample_proposal_ids,
+            rationale: `${candidate.target_entity}:${candidate.target_entity_id} flagged across ${candidate.distinct_runs} runs; spawning a dedicated monitor.`,
+          },
+          expected_savings_inr: 0,
+          prediction: {
+            metric: "time_to_resolution",
+            expected_change: 0,
+            window_days: 7,
+            direction: "decrease",
+          },
+          confidence: 0.55,
+          caveats: [
+            "AUTO_HIRE=1 mode — Chief of Staff acted without founder approval",
+            "v0 bounds: 1 autonomous hire/run, threshold = " + AUTO_HIRE_MIN_RUNS + " runs",
+          ],
+          citation_row_ids: candidate.sample_proposal_ids.map((id) => ({ table: "proposals", id })),
+        };
+      }
+    } else {
+      autoHireReasoning = { enabled: false, note: "AUTO_HIRE=1 to allow Chief of Staff to spawn watchers herself" };
+    }
+
     const brief: MorningBrief = {
       date: ctx.now.toISOString().slice(0, 10),
       merchant_id: ctx.merchant_id,
@@ -170,25 +254,25 @@ export const chiefOfStaff: AgentSpec = {
       disagreements,
     };
 
-    // The Chief writes its own proposal: a meta-proposal whose payload IS the brief.
-    const proposals_out: ProposalInput[] = [
-      {
-        action_type: "publish_morning_brief",
-        target_entity: "merchant",
-        target_entity_id: ctx.merchant_id,
-        payload: { brief: brief as unknown as Record<string, unknown> },
-        expected_savings_inr: ranked.reduce((s, p) => s + p.expected_savings_inr, 0),
-        prediction: {
-          metric: "founder_attention_seconds_to_decision",
-          expected_change: 0,
-          window_days: 1,
-          direction: "decrease",
-        },
-        confidence: 1.0,
-        caveats: ["Brief is a synthesis, not analysis — citations live in upstream proposals"],
-        citation_row_ids: [],
+    // The Chief writes its own proposal(s): the brief + any autonomous hire.
+    const proposals_out: ProposalInput[] = [];
+    if (autoHireProposal) proposals_out.push(autoHireProposal);
+    proposals_out.push({
+      action_type: "publish_morning_brief",
+      target_entity: "merchant",
+      target_entity_id: ctx.merchant_id,
+      payload: { brief: brief as unknown as Record<string, unknown> },
+      expected_savings_inr: ranked.reduce((s, p) => s + p.expected_savings_inr, 0),
+      prediction: {
+        metric: "founder_attention_seconds_to_decision",
+        expected_change: 0,
+        window_days: 1,
+        direction: "decrease",
       },
-    ];
+      confidence: 1.0,
+      caveats: ["Brief is a synthesis, not analysis — citations live in upstream proposals"],
+      citation_row_ids: [],
+    });
 
     return {
       proposals: proposals_out,
@@ -196,10 +280,96 @@ export const chiefOfStaff: AgentSpec = {
         proposals_in_batch: batch.length,
         disagreements: disagreements.length,
         top_priority_score: ranked[0]?.priority_score ?? 0,
+        autonomous_hire: autoHireReasoning,
       },
     };
   },
 };
+
+/**
+ * Find targets flagged across the most recent N agent runs.
+ * "Distinct runs" is counted by the `agent_run_id` on proposals.
+ */
+async function findPersistentTargets(merchant_id: string, minRuns: number) {
+  // Counts BOTH pending and superseded proposals — superseded is how
+  // run-agents.ts marks the previous run's proposals (instead of
+  // deleting them), so persistence history is preserved across runs.
+  const rows = (await db.execute(sql`
+    SELECT
+      p.target_entity,
+      p.target_entity_id,
+      COUNT(DISTINCT p.agent_run_id)::int AS distinct_runs,
+      ARRAY_AGG(p.id::text ORDER BY p.created_at DESC) AS sample_proposal_ids
+    FROM proposals p
+    JOIN agents a ON a.id = p.agent_id
+    WHERE p.merchant_id = ${merchant_id}
+      AND a.name != 'Chief of Staff'
+      AND p.target_entity NOT IN ('merchant', 'watch')
+      AND p.status IN ('pending', 'superseded')
+    GROUP BY p.target_entity, p.target_entity_id
+    HAVING COUNT(DISTINCT p.agent_run_id) >= ${minRuns}
+    ORDER BY COUNT(DISTINCT p.agent_run_id) DESC
+  `)) as unknown as Array<{
+    target_entity: string;
+    target_entity_id: string;
+    distinct_runs: number;
+    sample_proposal_ids: string[];
+  }>;
+  return rows;
+}
+
+/**
+ * Skip targets that already have a Chief-of-Staff-hired watcher.
+ */
+async function pickFirstUnwatched(
+  merchant_id: string,
+  candidates: Awaited<ReturnType<typeof findPersistentTargets>>
+) {
+  if (candidates.length === 0) return null;
+  const existing = (await db.execute(sql`
+    SELECT name FROM agents
+    WHERE merchant_id = ${merchant_id} AND hired_by = 'chief_of_staff'
+  `)) as unknown as Array<{ name: string }>;
+  const existingNames = new Set(existing.map((e) => e.name));
+  for (const c of candidates) {
+    const watcherName = `Watcher · ${c.target_entity}:${c.target_entity_id}`;
+    if (!existingNames.has(watcherName)) return c;
+  }
+  return null;
+}
+
+/**
+ * Map a target type to the watcher's monitor-template params.
+ */
+function watcherParamsFor(c: { target_entity: string; target_entity_id: string }) {
+  if (c.target_entity === "ad_object") {
+    return {
+      metric: "true_margin",
+      adset_source_id: c.target_entity_id,
+      threshold: 0,
+      window_days: 7,
+    };
+  }
+  if (c.target_entity === "pincode_courier") {
+    const [courier, pincode] = c.target_entity_id.split("::");
+    return {
+      metric: "rto_rate",
+      courier,
+      pincode,
+      threshold: 0.35,
+      window_days: 7,
+    };
+  }
+  if (c.target_entity === "sku") {
+    return {
+      metric: "days_to_stockout",
+      sku: c.target_entity_id,
+      threshold: 14,
+      window_days: 7,
+    };
+  }
+  return { metric: "generic", target: c.target_entity_id, threshold: 0, window_days: 7 };
+}
 
 /**
  * Convenience: read the most recent morning brief from the DB.

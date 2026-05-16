@@ -27,8 +27,14 @@ async function main() {
   if (!m) throw new Error("Seed first: npm run seed");
   const merchant_id = m.id;
 
-  // Clear pending proposals from previous runs (replayable demo).
-  await db.execute(sql`DELETE FROM proposals WHERE merchant_id = ${merchant_id} AND status = 'pending'`);
+  // Mark prior pending proposals as 'superseded' rather than deleting.
+  // Deleting would erase the persistence history that the Chief of Staff's
+  // autonomous-hire feature relies on (a target flagged across N runs).
+  await db.execute(sql`
+    UPDATE proposals
+    SET status = 'superseded', decided_at = now(), decided_by = 'auto-superseded'
+    WHERE merchant_id = ${merchant_id} AND status = 'pending'
+  `);
 
   // Phase 1: ops-side specialists (Rishi + Meera) run first — they
   // surface adset-level concerns. Phase 2: portfolio-level specialists
