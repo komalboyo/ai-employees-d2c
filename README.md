@@ -32,7 +32,7 @@ What I rejected:
 
 - *Razorpay* — for v0 it duplicates the order data already in Shopify. Would matter for COD reconciliation, which is out of scope.
 - *Klaviyo* — retention story. Wrong layer for an ops-first build.
-- *GA4* — overlaps with Meta UTMs on attribution. Marginal value at high integration cost.
+- *GA4* — overlaps with Meta UTMs on attribution.
 
 Then I added a fourth: **CSV**. Not counted as one of the three SaaS picks. It's a stress test of the abstraction. If my `Connector` interface only handles REST APIs, the abstraction is shallow. A CSV upload going through the same `auth → fetch → normalize` pipeline proves it's actually source-agnostic. It also fills a real gap: SKU-level COGS doesn't live in any of the three SaaS sources, it lives in the founder's spreadsheet. So Aanya and Rishi's margin math goes from a 40% proxy to a real number once the founder uploads the file.
 
