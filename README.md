@@ -28,13 +28,19 @@ I picked Shopify, Meta Ads, and Shiprocket. The three tools an Indian D2C founde
 
 Why these three? Because for the cross-tool questions I had in mind (true margin per SKU, which adsets drive high-RTO orders, which pincodes are eating margin), I need all three. Drop any one and the question collapses to a single-source view that the founder can already see in their existing dashboard.
 
-What I rejected:
+What I rejected for v0:
 
 - *Razorpay* — for v0 it duplicates the order data already in Shopify. Would matter for COD reconciliation, which is out of scope.
 - *Klaviyo* — retention story. Wrong layer for an ops-first build.
 - *GA4* — overlaps with Meta UTMs on attribution.
 
-Then I added a fourth: **CSV**. Not counted as one of the three SaaS picks. It's a stress test of the abstraction. If my `Connector` interface only handles REST APIs, the abstraction is shallow. A CSV upload going through the same `auth → fetch → normalize` pipeline proves it's actually source-agnostic. It also fills a real gap: SKU-level COGS doesn't live in any of the three SaaS sources, it lives in the founder's spreadsheet. So Aanya and Rishi's margin math goes from a 40% proxy to a real number once the founder uploads the file.
+What I'd reach for in v1 (researched, deliberately deferred):
+
+- *WhatsApp Business (via Wati or Interakt)* — Indian D2C runs on WhatsApp for COD reconfirmation, NDR resolution, and order updates. This is the most India-D2C-shaped connector after Shiprocket. Would feed Meera a "did we reach the customer pre-dispatch?" signal that historically halves RTO. Deferred because it's write-heavy (two-way integration, not just polling) and the data model needs message-state, which is its own design problem.
+- *Google Ads* — same attribution category as Meta but a separate channel. Adding it properly means a unified multi-touch model across both platforms, not just appending another spend table. That's a real eng investment, not a quick connector.
+- *A support tool (Gorgias or Freshdesk)* — opens up a Customer Success agent that watches ticket volume, return-reason text, and CSAT drops. Deferred because the agent itself doesn't exist yet and signal density for actionable proposals isn't there in a fresh v0 build.
+
+Then I added a fourth in v0: **CSV**. Not counted as one of the three SaaS picks. It's a stress test of the abstraction. If my `Connector` interface only handles REST APIs, the abstraction is shallow. A CSV upload going through the same `auth → fetch → normalize` pipeline proves it's actually source-agnostic. It also fills a real gap: SKU-level COGS doesn't live in any of the three SaaS sources, it lives in the founder's spreadsheet. So Aanya and Rishi's margin math goes from a 40% proxy to a real number once the founder uploads the file.
 
 The interface is in [`src/connectors/types.ts`](src/connectors/types.ts):
 
