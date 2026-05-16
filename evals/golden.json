@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "merchant": "Kindred Apparel",
+  "questions": [
+    {
+      "id": "rto-worst-courier",
+      "question": "Which courier has the highest RTO rate?",
+      "expected_top_bucket": "Bluedart",
+      "expected_min_rto_rate": 0.30,
+      "expected_tool": "metrics",
+      "must_cite_table": "shipments"
+    },
+    {
+      "id": "trap-adset-margin",
+      "question": "Show me adsets by true margin worst to best.",
+      "expected_worst_adset": "Crimson Tee COD Push",
+      "expected_min_negative_margin_inr": 0,
+      "expected_tool": "metrics",
+      "must_cite_table": "orders"
+    },
+    {
+      "id": "stockout-hoodies",
+      "question": "Which SKUs am I about to stock out of?",
+      "expected_contains_sku": "HOOD-CHR-L",
+      "expected_tool": "proposals_list",
+      "must_cite_table": "proposals"
+    },
+    {
+      "id": "rto-by-pincode",
+      "question": "What's RTO like on Patna pincodes?",
+      "expected_contains_bucket": "800001",
+      "expected_min_rto_rate": 0.30,
+      "expected_tool": "metrics",
+      "must_cite_table": "shipments"
+    },
+    {
+      "id": "disagreement-existence",
+      "question": "Are any of my agents disagreeing on something?",
+      "expected_contains_text": "as_crm_cod",
+      "expected_tool": "proposals_list"
+    }
+  ]
+}
