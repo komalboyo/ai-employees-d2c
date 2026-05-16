@@ -3,7 +3,9 @@
 
 > An agentic business with an org hierarchy that can hire.
 
-The brief asked for "AI employees for D2C brands." We took it literally and built a **company** — four hired specialists, a Chief of Staff who runs the morning standup, a `hire()` tool the founder uses in chat, a trust scorecard, and a citation contract that makes every number traceable to the row it came from.
+The brief asked for "AI employees for D2C brands." I took it literally and built a **company** — four hired specialists, a Chief of Staff who runs the morning standup, a `hire()` tool the founder uses in chat, a trust scorecard, and a citation contract that makes every number traceable to the row it came from.
+
+> **Authorship note.** Throughout this README, "I" = Komal Mathur (the submitter); the code text was written by Claude Code (Opus 4.7) under my direction. The product decisions, the connector picks, the schema rules, the engineered demo story, the citation contract, and the org-chart framing are mine. [`BUILD_JOURNAL.md`](BUILD_JOURNAL.md) is the line-by-line honesty about that.
 
 Demo merchant: **Kindred Apparel**, a Bangalore streetwear brand. The data is engineered to surface a real cross-tool problem — one Meta adset with great ROAS-on-paper that the team flips into a "pause" recommendation once Rishi (Growth) and Meera (Ops) both look at it from different angles. **Same target entity. Different reasoning. The Chief of Staff flags the disagreement.**
 
@@ -240,7 +242,7 @@ The harness is reproducible. The numbers above came from `npm run benchmark` on 
 - **Citation regression (5/5)**: valid cite passes; uncited number rejected; fake UUID rejected; unallowed table rejected; no-numbers needs no cite.
 - **Agent regression (5/5)**: Rishi pauses the trap adset; Meera pauses the same adset; Karan reorders HOOD-CHR-L; Aanya files a cut-spend proposal citing the team; Meera flags a degraded Bluedart-Patna lane.
 
-### Where it breaks (we tell you before you find it):
+### Where it breaks (I'm telling you before you find it):
 
 1. **Currency.** INR only. Multi-currency merchants would silently misaggregate.
 2. **Refunds/RTO.** RTO is netted into revenue; partial refunds outside the Shopify order flow are missed. Aanya's "net margin" is therefore an approximation.
@@ -265,7 +267,7 @@ The harness is reproducible. The numbers above came from `npm run benchmark` on 
 
 ## 9 · What you'd do with another week
 
-Most of what we deferred is **buildable in this codebase in a day with Claude Code**. We didn't ship it because we ran out of deadline, not because we ran out of architecture. Listing those as "another week" items would be padding.
+Most of what I deferred is **buildable in this codebase in a day with Claude Code**. I didn't ship it because I ran out of deadline, not because I ran out of architecture. Listing those as "another week" items would be padding.
 
 The list below is what's **genuinely** bottlenecked on something other than typing speed — research, real users, accumulated data, or external review processes:
 
