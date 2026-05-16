@@ -2,7 +2,7 @@
 
 > The 10 cross-tool questions a D2C founder can't answer in <30 min today, answered by the system in milliseconds.
 
-Merchant: `cd3e3508-63cc-4200-a7f2-42b02315e28d`
+Merchant: `398091b2-ede8-4556-b73f-8fd95005ede3`
 
 ## How this file was generated — honest version
 
@@ -21,82 +21,82 @@ Total time across all 10 questions: <500ms.
 ### 1. What's my true margin per SKU after ad spend and shipping?
 *Shopify × Meta × Shiprocket*
 
-Worst adset by true margin: **Crimson Tee COD Push** at ₹-34,046 (revenue after RTO ₹4,82,678 on ₹1,03,963 spend). Best: **Hoodie Retargeting** at ₹6,57,625.
+Worst adset by true margin: **Crimson Tee COD Push** at ₹-2,60,282 (revenue after RTO ₹10,38,807 on ₹3,59,814 spend). Best: **Hoodie Retargeting** at ₹6,43,991.
 
-<details><summary>tool · `metrics` · 18ms · 200 citations</summary>
+<details><summary>tool · `metrics` · 24ms · 200 citations</summary>
 
 ```json
 input: {"entity":"true_margin_per_adset"}
 ```
 
-Sample citations: `orders:007f3af9`, `orders:00ccce77`, `orders:020c53ed` + 197 more
+Sample citations: `orders:0006d862`, `orders:003a1a53`, `orders:00449816` + 197 more
 
 </details>
 
 ### 2. Which Meta campaigns drive orders that mostly RTO?
 *Meta × Shopify × Shiprocket*
 
-**Crimson Tee COD Push** is the worst — 47.8% RTO (215 of 450 orders).
+**Crimson Tee COD Push** is the worst — 49.8% RTO (508 of 1020 orders).
 
-<details><summary>tool · `metrics` · 7ms · 200 citations</summary>
+<details><summary>tool · `metrics` · 12ms · 200 citations</summary>
 
 ```json
 input: {"entity":"true_margin_per_adset"}
 ```
 
-Sample citations: `orders:007f3af9`, `orders:00ccce77`, `orders:020c53ed` + 197 more
+Sample citations: `orders:0006d862`, `orders:003a1a53`, `orders:00449816` + 197 more
 
 </details>
 
 ### 3. Which pincodes lose me money after attributing ad spend?
 *Shopify × Meta × Shiprocket*
 
-Top 3 lossy pincodes by RTO: **800020** (72%, 87/121), **800001** (70%, 107/153), **110001** (19%, 25/130).
+Top 3 lossy pincodes by RTO: **800001** (73%, 248/342), **800020** (67%, 210/314), **700001** (25%, 75/306).
 
-<details><summary>tool · `metrics` · 1ms · 43 citations</summary>
+<details><summary>tool · `metrics` · 3ms · 55 citations</summary>
 
 ```json
 input: {"entity":"rto","group_by":"pincode"}
 ```
 
-Sample citations: `shipments:7bc94cbc`, `shipments:78a9c49b`, `shipments:c21b01a3` + 40 more
+Sample citations: `shipments:e6afe49e`, `shipments:d8c7736b`, `shipments:15854a1e` + 52 more
 
 </details>
 
 ### 4. What's my CAC payback period net of returns?
 *Meta × Shopify × Shiprocket*
 
-Blended CAC ≈ ₹230 on 1020 orders. AOV-after-RTO ≈ ₹2,064. Implied payback ≈ **0.3 repeat orders** at a 40% take-rate proxy.
+Blended CAC ≈ ₹243 on 2280 orders. AOV-after-RTO ≈ ₹1,765. Implied payback ≈ **0.3 repeat orders** at a 40% take-rate proxy.
 
-<details><summary>tool · `metrics` · 5ms · 200 citations</summary>
+<details><summary>tool · `metrics` · 12ms · 200 citations</summary>
 
 ```json
 input: {"entity":"true_margin_per_adset"}
 ```
 
-Sample citations: `orders:007f3af9`, `orders:00ccce77`, `orders:020c53ed` + 197 more
+Sample citations: `orders:0006d862`, `orders:003a1a53`, `orders:00449816` + 197 more
 
 </details>
 
 ### 5. Are my highest-revenue customers in high-RTO pincodes?
 *Shopify × Shiprocket*
 
-2 pincode(s) cross 30% RTO. The worst is **800020** at 72%. Cross-reference against your top customers via the `rows` tool on `orders` filtered by pincode.
+2 pincode(s) cross 30% RTO. The worst is **800001** at 73%. Cross-reference against your top customers via the `rows` tool on `orders` filtered by pincode.
 
-<details><summary>tool · `metrics` · 2ms · 43 citations</summary>
+<details><summary>tool · `metrics` · 2ms · 55 citations</summary>
 
 ```json
 input: {"entity":"rto","group_by":"pincode"}
 ```
 
-Sample citations: `shipments:7bc94cbc`, `shipments:78a9c49b`, `shipments:c21b01a3` + 40 more
+Sample citations: `shipments:e6afe49e`, `shipments:d8c7736b`, `shipments:15854a1e` + 52 more
 
 </details>
 
 ### 6. Which courier-pincode lanes are eating margin I'm not seeing?
 *Shopify × Shiprocket*
 
-**Bluedart** is the worst courier — 39.2% RTO across 587 shipments. Drill into lanes via the `rows` tool filtered by courier.
+**Bluedart** is the worst courier — 41.6% RTO across 1336 shipments. Drill into lanes via the `rows` tool filtered by courier.
 
 <details><summary>tool · `metrics` · 1ms · 20 citations</summary>
 
@@ -104,14 +104,14 @@ Sample citations: `shipments:7bc94cbc`, `shipments:78a9c49b`, `shipments:c21b01a
 input: {"entity":"rto","group_by":"courier"}
 ```
 
-Sample citations: `shipments:9a6a0ed8`, `shipments:7bc94cbc`, `shipments:64d070d9` + 17 more
+Sample citations: `shipments:49a79572`, `shipments:7a112f7e`, `shipments:67a3219d` + 17 more
 
 </details>
 
 ### 7. If I cut Meta spend by ₹X, what's the runway impact net of RTO savings?
 *Shopify × Meta × Shiprocket*
 
-Aanya's current proposal: cut Meta spend by ₹1,28,207, primarily on adsets the team flagged. Predicted monthly burn reduction: ₹1,28,207 over 30 days.
+Aanya's current proposal: cut Meta spend by ₹3,59,814, primarily on adsets the team flagged. Predicted monthly burn reduction: ₹3,59,814 over 30 days.
 
 <details><summary>tool · `proposals_list` · 1ms · 1 citations</summary>
 
@@ -119,55 +119,55 @@ Aanya's current proposal: cut Meta spend by ₹1,28,207, primarily on adsets the
 input: {"agent":"Aanya","limit":5}
 ```
 
-Sample citations: `proposals:dc098500`
+Sample citations: `proposals:03a5dd05`
 
 </details>
 
 ### 8. Which adsets pass ROAS but fail true-margin after RTO?
 *Meta × Shopify × Shiprocket*
 
-**Crimson Tee COD Push** — apparent ROAS 4.6× but true margin ₹-34,046 once RTO + COGS + shipping are netted.
+**Crimson Tee COD Push** — apparent ROAS 2.9× but true margin ₹-2,60,282 once RTO + COGS + shipping are netted.
 
-<details><summary>tool · `metrics` · 7ms · 200 citations</summary>
+<details><summary>tool · `metrics` · 11ms · 200 citations</summary>
 
 ```json
 input: {"entity":"true_margin_per_adset"}
 ```
 
-Sample citations: `orders:007f3af9`, `orders:00ccce77`, `orders:020c53ed` + 197 more
+Sample citations: `orders:0006d862`, `orders:003a1a53`, `orders:00449816` + 197 more
 
 </details>
 
 ### 9. Which SKUs am I about to stock out of, and how does that change if a flagged adset is paused?
 *Shopify × Meta × inventory*
 
-Karan flags 7 SKU(s):
-- **TEE-CRM-XL**: reorder 274; stocks out in 4.6d
-- **TEE-CRM-S**: reorder 328; stocks out in 5.1d
-- **TEE-CRM-M**: reorder 298; stocks out in 7d
+Karan flags 9 SKU(s):
+- **TEE-CRM-XL**: reorder 636; stocks out in 2d
+- **TEE-CRM-S**: reorder 720; stocks out in 2.3d
+- **TEE-CRM-M**: reorder 682; stocks out in 3.1d
 
-<details><summary>tool · `proposals_list` · 2ms · 7 citations</summary>
+<details><summary>tool · `proposals_list` · 1ms · 9 citations</summary>
 
 ```json
 input: {"agent":"Karan","limit":10}
 ```
 
-Sample citations: `proposals:33590328`, `proposals:b2e3140d`, `proposals:9be0c480` + 4 more
+Sample citations: `proposals:e2b8bb3c`, `proposals:76b69d84`, `proposals:edddc8b4` + 6 more
 
 </details>
 
 ### 10. Which COD orders should auto-convert to prepaid before dispatch?
 *Shopify × Shiprocket × historical RTO*
 
-Pincodes where COD orders should be auto-converted to prepaid (>40% historical RTO): 800020 (72%), 800001 (70%).
+Pincodes where COD orders should be auto-converted to prepaid (>40% historical RTO): 800001 (73%), 800020 (67%).
 
-<details><summary>tool · `metrics` · 1ms · 43 citations</summary>
+<details><summary>tool · `metrics` · 2ms · 55 citations</summary>
 
 ```json
 input: {"entity":"rto","group_by":"pincode"}
 ```
 
-Sample citations: `shipments:7bc94cbc`, `shipments:78a9c49b`, `shipments:c21b01a3` + 40 more
+Sample citations: `shipments:e6afe49e`, `shipments:d8c7736b`, `shipments:15854a1e` + 52 more
 
 </details>
 

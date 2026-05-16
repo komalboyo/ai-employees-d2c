@@ -1,8 +1,19 @@
 # AI Employees for D2C
 
-The idea: an AI company that runs the ops side of a D2C brand. Five named employees, a Chief of Staff who writes a morning brief, a chat layer to interrogate the team, and a citation system that makes every number clickable back to its source row.
+My take-home build for the Shiprocket interview. Let me walk you through what it is, because the shape of it isn't obvious from the title.
 
-The demo merchant is Kindred Apparel, a synthetic Bangalore streetwear brand. The data is engineered around one specific problem: a Meta adset that looks profitable on ROAS but loses money once you net out RTO, shipping, and COGS. Two of my agents independently flag the same adset, for different reasons. The Chief of Staff catches the disagreement and puts it at the top of the brief.
+**The pitch in one sentence:** I built an AI company that does the ops work for a D2C brand. Not a chatbot, not a dashboard — an actual company structure, with named employees, a manager who runs the morning standup, a way to hire new employees by typing in chat, and the option (off by default) to let the company hire itself when it notices the same problem keeps showing up.
+
+**Why "a company"?** The brief says "AI employees for D2C brands". Plural. Even though the spec only required one autonomous agent, I took the plural seriously. Once you have more than one agent, you immediately need the things a real team needs: someone to run the standup, a way to detect when two people disagree about the same thing, an inbox of proposals the founder can actually act on, and a hiring process for when the team needs to grow. So instead of one analytical agent, the product is:
+
+- **Four specialists** with distinct jobs and decision rules — Aanya (CFO), Rishi (Growth), Meera (Ops), Karan (Supply).
+- **A Chief of Staff** who reads everyone's proposals, ranks them by impact, catches disagreements, and writes the morning brief the founder reads first.
+- **A `hire()` chat tool** so the founder can spawn a new specialist by typing in plain English ("hire a watcher for the Patna lane and alert if RTO crosses 60%"). New hires join the same `agents` table, run on whatever schedule the founder set, and produce proposals just like the pre-built ones.
+- **An opt-in autonomous mode** where the Chief of Staff is allowed to hire watchers herself, but only inside hard rules (one new hire per run, only on targets flagged across 3+ runs, never on the same target twice). Default off — the section "Does the company hire itself?" walks through why.
+
+**What it actually does for the founder.** Every morning at 7am, the team has already run. The founder opens the app and sees a ranked brief: which adset is bleeding money, which SKU is about to stock out, which pincode-courier lane is degrading, which Meta-vs-Google channel is winning. Every number on screen is clickable: tap it and the Citation Inspector shows the exact row in the universal schema, plus the raw API payload it came from. No "trust me". If the founder wants to dig further they can chat with the team and ask follow-ups, and the citation contract holds in chat too — every numeric claim is verified server-side before it reaches them.
+
+**The demo merchant is Kindred Apparel**, a synthetic Bangalore streetwear brand. The data is engineered around one specific problem: a Meta adset (Crimson Tee COD Push) that looks profitable on ROAS but loses money once you net out RTO, shipping, and COGS. Two of my agents — Rishi (Growth) and Meera (Ops) — independently flag the same adset, for different reasons. The Chief of Staff catches the disagreement and surfaces it at the top of the brief. That's the moment the system stops feeling like a chatbot and starts feeling like a team.
 
 ![Morning brief — the founder's daily surface](docs/screenshots/01-morning-brief.png)
 
@@ -24,7 +35,7 @@ The third line that mattered: *"two things matter equally: how well you build, a
 
 ## The connectors
 
-I picked Shopify, Meta Ads, and Shiprocket. The three tools an Indian D2C founder actually has open at 11pm wondering why their bank balance isn't growing. Each covers a different category: revenue, acquisition cost, fulfillment. Together they answer the question no single one can. Which SKUs are actually profitable, after everything.
+I picked Shopify, Meta Ads, and Shiprocket as the three required SaaS sources. Those are the three tools an Indian D2C founder actually has open at 11pm wondering why their bank balance isn't growing. Each one covers a different category: revenue, acquisition cost, fulfillment. Together they answer the question no single one can. Which SKUs are actually profitable, after everything.
 
 Why these three? Because for the cross-tool questions I had in mind (true margin per SKU, which adsets drive high-RTO orders, which pincodes are eating margin), I need all three. Drop any one and the question collapses to a single-source view that the founder can already see in their existing dashboard.
 
@@ -32,15 +43,23 @@ What I rejected for v0:
 
 - *Razorpay* — for v0 it duplicates the order data already in Shopify. Would matter for COD reconciliation, which is out of scope.
 - *Klaviyo* — retention story. Wrong layer for an ops-first build.
-- *GA4* — overlaps with Meta UTMs on attribution.
 
-Then I added a fourth in v0: **CSV**. Not counted as one of the three SaaS picks. It's a stress test of the abstraction. If my `Connector` interface only handles REST APIs, the abstraction is shallow. A CSV upload going through the same `auth → fetch → normalize` pipeline proves it's actually source-agnostic. It also fills a real gap: SKU-level COGS doesn't live in any of the three SaaS sources, it lives in the founder's spreadsheet. So Aanya and Rishi's margin math goes from a 40% proxy to a real number once the founder uploads the file.
+Then I added two more on top of the three required, each with a specific job:
+
+**CSV (the abstraction stress-test).** Not a SaaS source by design. If my `Connector` interface only handles REST APIs, the abstraction is shallow. A CSV upload going through the same `auth → fetch → normalize` pipeline proves it's actually source-agnostic. It also fills a real gap — SKU-level COGS doesn't live in any of the three SaaS sources, it lives in the founder's spreadsheet. So Aanya and Rishi's margin math goes from a 40% proxy to a real number once the founder uploads the file.
+
+**Google Ads (the cross-channel hook).** Mirrors Meta in shape (campaign / ad_group → adset / ad), reuses the same `ad_objects` and `ad_spend_daily` tables under `source = 'google'`. It's not just "another spend table" — it unlocks a question the system couldn't answer before: *for a given SKU driven by ads on both channels, where is each rupee working harder?* Rishi gets a new proposal type, `shift_budget_cross_channel`, that compares margin-per-rupee on the same SKU across Meta vs Google and proposes a budget shift when one channel is materially more efficient. On the demo data, Google's "Cobalt Brand Keywords" search ads outperform Meta's "Cobalt Tee Lookalikes" by enough that Rishi recommends shifting budget.
+
+What I'd reach for in v1 (researched, deliberately deferred):
+
+- *WhatsApp Business (via Wati or Interakt)* — Indian D2C runs on WhatsApp for COD reconfirmation, NDR resolution, and order updates. This is the most India-D2C-shaped connector after Shiprocket. Would feed Meera a "did we reach the customer pre-dispatch?" signal that historically halves RTO. Deferred because it's write-heavy (two-way integration, not just polling) and the data model needs message-state, which is its own design problem.
+- *A support tool (Gorgias or Freshdesk)* — opens up a Customer Success agent that watches ticket volume, return-reason text, and CSAT drops. Deferred because the agent itself doesn't exist yet, and the connector without the agent is dead code.
 
 The interface is in [`src/connectors/types.ts`](src/connectors/types.ts):
 
 ```ts
 interface Connector<TResource> {
-  source: 'shopify' | 'meta' | 'shiprocket' | 'csv'
+  source: 'shopify' | 'meta' | 'shiprocket' | 'csv' | 'google'
   resources: readonly TResource[]
   auth(creds): Promise<AuthContext>
   fetch(ctx, resource, cursor?): AsyncIterable<RawPage>
