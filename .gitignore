@@ -10,3 +10,4 @@ coverage
 drizzle/meta
 .claude/
 the-build.docx
+tsconfig.tsbuildinfo
