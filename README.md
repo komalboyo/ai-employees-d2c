@@ -1,6 +1,6 @@
 # AI Employees for D2C
 
-This is what I built for the Shiprocket take-home. The idea: an AI company that runs the ops side of a D2C brand. Five named employees, a Chief of Staff who writes a morning brief, a chat layer to interrogate the team, and a citation system that makes every number clickable back to its source row.
+The idea: an AI company that runs the ops side of a D2C brand. Five named employees, a Chief of Staff who writes a morning brief, a chat layer to interrogate the team, and a citation system that makes every number clickable back to its source row.
 
 The demo merchant is Kindred Apparel, a synthetic Bangalore streetwear brand. The data is engineered around one specific problem: a Meta adset that looks profitable on ROAS but loses money once you net out RTO, shipping, and COGS. Two of my agents independently flag the same adset, for different reasons. The Chief of Staff catches the disagreement and puts it at the top of the brief.
 
