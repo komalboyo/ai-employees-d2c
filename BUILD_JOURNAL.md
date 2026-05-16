@@ -6,7 +6,7 @@ The brief asks for honesty about what was written by hand vs by an LLM. This is 
 
 | Layer | What I owned | What the LLM produced under direction |
 |---|---|---|
-| **Product framing** — "AI company" metaphor, the org-chart vs chatbot pivot, the disagreement-detection feature, the `hire()` standout, the "Universal Paperclips with humans setting goals" north star | 100% mine — these came out of the planning conversation before any code | — |
+| **Product framing** — "AI company" metaphor, the org-chart vs chatbot pivot, the disagreement-detection feature, the `hire()` standout, the "intra-company Paperclip" north star | 100% mine — these came out of the planning conversation before any code | — |
 | **Connector decision** (Shopify + Meta + Shiprocket + CSV; rejecting Razorpay/Klaviyo/GA4) | mine, with the reasoning surfaced in the plan iterations | — |
 | **The engineered disagreement** (Crimson Tee COD Push → Patna pincodes → Bluedart trap) | mine | — |
 | **Schema** | I specified the rules: multi-tenant root, provenance as DB constraint, source-agnostic entities, `$ref` placeholder convention for cross-row FKs | Claude wrote the Drizzle schema text |

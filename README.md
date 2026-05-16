@@ -1,11 +1,15 @@
 # AI Employees for D2C
-**A zero-human ops stack. v0.**
+**A zero-human ops stack for D2C — an intra-company [Paperclip](https://github.com/paperclipai/paperclip).**
 
-> Universal Paperclips, with humans setting the goals.
+> An agentic business with an org hierarchy that can hire.
 
 The brief asked for "AI employees for D2C brands." We took it literally and built a **company** — four hired specialists, a Chief of Staff who runs the morning standup, a `hire()` tool the founder uses in chat, a trust scorecard, and a citation contract that makes every number traceable to the row it came from.
 
 Demo merchant: **Kindred Apparel**, a Bangalore streetwear brand. The data is engineered to surface a real cross-tool problem — one Meta adset with great ROAS-on-paper that the team flips into a "pause" recommendation once Rishi (Growth) and Meera (Ops) both look at it from different angles. **Same target entity. Different reasoning. The Chief of Staff flags the disagreement.**
+
+![Morning brief — the founder's daily surface](docs/screenshots/01-morning-brief.png)
+
+*Org chart on the left (with the agents the founder hired), the morning brief at center (ranked proposals + the disagreement banner at the top), chat with the team on the right. Every number is a clickable citation.*
 
 ---
 
@@ -24,6 +28,8 @@ Demo merchant: **Kindred Apparel**, a Bangalore streetwear brand. The data is en
 10. **Which COD orders should I auto-convert to prepaid before dispatch?** (Shopify × Shiprocket × historical RTO)
 
 Every one needs at least two sources joined. Every one is vibes-only today.
+
+**All 10 answered — see [`demo/answers.md`](demo/answers.md).** Re-run with `npm run demo:answer-10`. Total time across all 10 questions: ~50ms.
 
 ---
 
@@ -83,7 +89,11 @@ Three rules enforced **as DB constraints, not conventions**:
 
 **Why this beats source-shaped tables (`shopify_orders`, `meta_campaigns`, …):** adding a fourth connector means new rows in existing tables, not a new table per source. The chat layer's tool surface stays small (7 entities, not 20+).
 
-**Provenance is unforgeable.** Try to insert a row without `raw_payload_id` → Postgres rejects it. Try to insert with a fake one → FK violation. The chat layer's `[cite:table:id]` always resolves to a real row that always points to a real payload. The Citation Inspector ([`src/app/components/CitationProvider.tsx`](src/app/components/CitationProvider.tsx)) renders this — click any number in any UI surface, see the row + the original JSON.
+**Provenance is unforgeable.** Try to insert a row without `raw_payload_id` → Postgres rejects it. Try to insert with a fake one → FK violation. The chat layer's `[cite:table:id]` always resolves to a real row that always points to a real payload. The Citation Inspector ([`src/app/components/CitationProvider.tsx`](src/app/components/CitationProvider.tsx)) renders this — click any number in any UI surface, see the row + the original JSON:
+
+![Citation Inspector — normalized row + raw Shopify payload](docs/screenshots/03-citation-inspector.png)
+
+*A founder clicks a citation on an order from the Crimson trap adset. They see the normalized row (UTM = `crimson_tee_cod_push`) and the raw Shopify Admin API payload it came from. No "trust me" — the data trail is open.*
 
 ---
 
@@ -150,6 +160,10 @@ Rishi's reason: the Crimson Tee COD Push adset has a negative 7-day true margin 
 Meera's reason: the *same adset* drives 85% of its orders as COD into Patna pincodes via Bluedart, which has a 67% historical RTO. She'd pause it for ops, not financial, reasons.
 
 Same target, different angle. The Chief of Staff surfaces this so the founder decides — that's how an AI company should fight, not how an LLM agent should hallucinate.
+
+![The disagreement banner + both proposals on the same target](docs/screenshots/02-disagreement.png)
+
+*Top: Chief of Staff's disagreement banner. Bottom: Meera's pause (ops reason, 72% confidence) and Karan's reorder that references Rishi's pending pause via the conditional reorder qty. This is the AI team acting as a team.*
 
 ### `hire()` — the standout
 
@@ -243,7 +257,7 @@ The harness is reproducible. The numbers above came from `npm run benchmark` on 
 
 ## 8 · Hours spent
 
-**~16 hours across 4 sessions** over the build window (Tue → Sat). The commit history is honest — schema landed first, connectors and orchestrator on day 1, agents on day 2, chat layer + UI + scale benchmark on the final stretch.
+**~2.5 days across 4 sessions** over the build window. The commit history tells the order — schema and provenance landed first, connectors and orchestrator on day 1, agents on day 2, chat layer + UI + scale benchmark on the final stretch.
 
 [`BUILD_JOURNAL.md`](BUILD_JOURNAL.md) tracks what I wrote vs what Claude Code wrote, with the prompts that produced each major chunk and the overrides I made. The brief said to be honest about AI assistance — the journal is the honest artifact.
 
@@ -263,7 +277,7 @@ The list below is what's **genuinely** bottlenecked on something other than typi
 
 **4. Trust scorecard with real numbers, not replayed.** The infrastructure is built; the dashboard renders today. The numbers are only *meaningful* after months of production usage with real founders approving / dismissing real proposals. That's the founder relationship being earned, not engineered.
 
-> **North star, since the brief invites a strong stance:** software that doesn't make founders more productive — it absorbs whole roles. v0 is the first quarter of that arc. Humans still act; AI proposes, explains, and earns trust. Two quarters out: agents executing within bounded authority. Four out: founder writes the goals, the company runs itself. **Universal Paperclips, with humans setting the goals.**
+> **North star, since the brief invites a strong stance:** software that doesn't make founders more productive — it absorbs whole roles. v0 is the first quarter of that arc. Humans still act; AI proposes, explains, and earns trust. Two quarters out: agents executing within bounded authority. Four out: founder writes the goals, the company runs itself. Call it an **intra-company [Paperclip](https://github.com/paperclipai/paperclip)** — an agentic business with an org hierarchy that can hire, fire, and earn its keep.
 
 ---
 
