@@ -1,8 +1,6 @@
 # AI Employees for D2C
 
-My take-home build for the Shiprocket interview. Let me walk you through what it is, because the shape of it isn't obvious from the title.
-
-**The pitch in one sentence:** I built an AI company that does the ops work for a D2C brand. Not a chatbot, not a dashboard — an actual company structure, with named employees, a manager who runs the morning standup, a way to hire new employees by typing in chat, and the option (off by default) to let the company hire itself when it notices the same problem keeps showing up.
+I built an AI company that does the ops work for a D2C brand. Not a chatbot, not a dashboard — an actual company structure, with named employees, a manager who runs the morning standup, a way to hire new employees by typing in chat, and the option (off by default) to let the company hire itself when it notices the same problem keeps showing up.
 
 **Why "a company"?** The brief says "AI employees for D2C brands". Plural. Even though the spec only required one autonomous agent, I took the plural seriously. Once you have more than one agent, you immediately need the things a real team needs: someone to run the standup, a way to detect when two people disagree about the same thing, an inbox of proposals the founder can actually act on, and a hiring process for when the team needs to grow. So instead of one analytical agent, the product is:
 
