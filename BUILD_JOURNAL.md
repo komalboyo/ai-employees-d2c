@@ -1,8 +1,6 @@
 # BUILD_JOURNAL
 
-The brief asks for honesty about what was written by hand vs by an LLM. This is that honesty.
-
-> Throughout this file, **"I" = Komal Mathur** (the submitter). **"Claude" = Claude Code (Opus 4.7)**, the LLM tool I used to write the code. Everywhere it matters, I'm explicit about which side of that line a given decision or artifact came from.
+The brief asks for honesty about what was written by hand vs by an LLM.
 
 **Short version:** I read the brief, designed the product, picked the connectors, designed the schema, structured the agent team, engineered the demo's disagreement, defined the citation contract, picked the Paperclip framing, and overrode Claude's mistakes throughout. Claude wrote the code text under my direction.
 
