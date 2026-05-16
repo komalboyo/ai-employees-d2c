@@ -64,6 +64,19 @@ async function main() {
     }
   }
 
+  // Google Ads
+  {
+    const conn = makeConnector("google");
+    const ctx = await conn.auth({
+      merchant_id,
+      raw: { mode: "fixture", fixture_slug },
+    });
+    for (const res of conn.resources) {
+      const rep = await syncOne(conn, ctx, res);
+      console.log(`[google:${res}] pages=${rep.pages} rows=${rep.rows_written} ${rep.duration_ms}ms`);
+    }
+  }
+
   // Shiprocket
   {
     const conn = makeConnector("shiprocket");

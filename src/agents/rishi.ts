@@ -45,6 +45,7 @@ export const rishi: AgentSpec = {
       WITH adset_orders AS (
         SELECT
           a.id          AS adset_id,
+          a.source      AS channel,
           a.source_id   AS adset_source_id,
           a.name        AS adset_name,
           o.id          AS order_id,
@@ -88,6 +89,7 @@ export const rishi: AgentSpec = {
       )
       SELECT
         ao.adset_id,
+        ao.channel,
         ao.adset_source_id,
         ao.adset_name,
         COUNT(DISTINCT ao.order_id)::int AS orders,
@@ -101,12 +103,14 @@ export const rishi: AgentSpec = {
         ), 0)::numeric AS cogs,
         COALESCE(SUM(ao.ship_cost), 0)::numeric AS shipping,
         COALESCE(sp.spend, 0)::numeric AS spend,
-        ARRAY_AGG(DISTINCT ao.order_id::text) AS order_ids
+        ARRAY_AGG(DISTINCT ao.order_id::text) AS order_ids,
+        ARRAY_AGG(DISTINCT ao.sku) AS skus
       FROM adset_orders ao
       LEFT JOIN adset_spend sp ON sp.adset_id = ao.adset_id
-      GROUP BY ao.adset_id, ao.adset_source_id, ao.adset_name, sp.spend
+      GROUP BY ao.adset_id, ao.channel, ao.adset_source_id, ao.adset_name, sp.spend
     `)) as unknown as Array<{
       adset_id: string;
+      channel: "meta" | "google";
       adset_source_id: string;
       adset_name: string;
       orders: number;
@@ -116,10 +120,24 @@ export const rishi: AgentSpec = {
       shipping: string;
       spend: string;
       order_ids: string[];
+      skus: string[];
     }>;
 
     const proposals: ProposalInput[] = [];
     const reasoning_log: Array<Record<string, unknown>> = [];
+
+    // Bookkeeping for the cross-channel reallocation check below.
+    interface AdsetRow {
+      channel: "meta" | "google";
+      adset_name: string;
+      adset_source_id: string;
+      orders: number;
+      spend: number;
+      true_margin: number;
+      skus: string[];
+      order_ids: string[];
+    }
+    const adsetsByChannel: AdsetRow[] = [];
 
     for (const r of rows) {
       const revenue_after_rto = Number(r.revenue_after_rto);
@@ -132,7 +150,19 @@ export const rishi: AgentSpec = {
       const true_margin = revenue_after_rto - cogs - shipping - spend;
       const attribution_coverage = 1.0; // we don't model lossy attribution in v0
 
+      adsetsByChannel.push({
+        channel: r.channel,
+        adset_name: r.adset_name,
+        adset_source_id: r.adset_source_id,
+        orders,
+        spend,
+        true_margin,
+        skus: r.skus ?? [],
+        order_ids: r.order_ids ?? [],
+      });
+
       reasoning_log.push({
+        channel: r.channel,
         adset: r.adset_name,
         orders,
         rto_orders,
@@ -153,6 +183,7 @@ export const rishi: AgentSpec = {
           target_entity: "ad_object",
           target_entity_id: r.adset_source_id,
           payload: {
+            channel: r.channel,
             adset_name: r.adset_name,
             orders_7d: orders,
             rto_orders_7d: rto_orders,
@@ -163,7 +194,7 @@ export const rishi: AgentSpec = {
             ad_spend: Math.round(spend),
             true_margin: Math.round(true_margin),
           },
-          expected_savings_inr: Math.round(-true_margin * (30 / 7)), // projected over next 30d
+          expected_savings_inr: Math.round(-true_margin * (30 / 7)),
           prediction: {
             metric: "burn_inr_per_30d",
             expected_change: Math.round(-true_margin * (30 / 7)),
@@ -180,19 +211,19 @@ export const rishi: AgentSpec = {
           citation_row_ids: r.order_ids.slice(0, 50).map((id) => ({ table: "orders", id })),
         });
       } else if (true_margin > spend * 0.5 && orders >= 20) {
-        // Healthy: propose scale.
         proposals.push({
           action_type: "scale_ad_set",
           target_entity: "ad_object",
           target_entity_id: r.adset_source_id,
           payload: {
+            channel: r.channel,
             adset_name: r.adset_name,
             orders_7d: orders,
             true_margin: Math.round(true_margin),
             ad_spend: Math.round(spend),
             suggested_daily_uplift_pct: 25,
           },
-          expected_savings_inr: Math.round(true_margin * 0.25 * (30 / 7)), // +25% capacity → 25% more margin
+          expected_savings_inr: Math.round(true_margin * 0.25 * (30 / 7)),
           prediction: {
             metric: "incremental_margin_inr_per_30d",
             expected_change: Math.round(true_margin * 0.25 * (30 / 7)),
@@ -206,6 +237,110 @@ export const rishi: AgentSpec = {
       }
     }
 
-    return { proposals, reasoning: { per_adset: reasoning_log } };
+    // Cross-channel reallocation. For every SKU that's driven by adsets
+    // across BOTH Meta and Google, compare margin-per-rupee. If one channel
+    // is materially more efficient (≥2×) and the laggard's spend is non-trivial,
+    // propose shifting budget toward the leader.
+    const crossChannelProposals = detectCrossChannelShifts(adsetsByChannel);
+    proposals.push(...crossChannelProposals);
+
+    return {
+      proposals,
+      reasoning: {
+        per_adset: reasoning_log,
+        cross_channel_shifts: crossChannelProposals.length,
+      },
+    };
   },
 };
+
+interface AdsetRow {
+  channel: "meta" | "google";
+  adset_name: string;
+  adset_source_id: string;
+  orders: number;
+  spend: number;
+  true_margin: number;
+  skus: string[];
+  order_ids: string[];
+}
+
+function detectCrossChannelShifts(adsets: AdsetRow[]): ProposalInput[] {
+  const out: ProposalInput[] = [];
+  // Map SKU → which adsets drive it, grouped by channel.
+  const skuToAdsets = new Map<string, Map<"meta" | "google", AdsetRow[]>>();
+  for (const a of adsets) {
+    for (const sku of a.skus) {
+      if (!skuToAdsets.has(sku)) skuToAdsets.set(sku, new Map());
+      const byCh = skuToAdsets.get(sku)!;
+      if (!byCh.has(a.channel)) byCh.set(a.channel, []);
+      byCh.get(a.channel)!.push(a);
+    }
+  }
+
+  const proposed = new Set<string>(); // dedupe per (leader, laggard) pair
+  for (const [sku, byCh] of skuToAdsets) {
+    const metaAdsets = byCh.get("meta") ?? [];
+    const googleAdsets = byCh.get("google") ?? [];
+    if (metaAdsets.length === 0 || googleAdsets.length === 0) continue;
+
+    const metaMpr = marginPerRupee(metaAdsets);
+    const googleMpr = marginPerRupee(googleAdsets);
+    if (metaMpr.spend < SPEND_FLOOR_INR && googleMpr.spend < SPEND_FLOOR_INR) continue;
+
+    const leader = metaMpr.mpr >= googleMpr.mpr ? { ch: "meta", ...metaMpr, adsets: metaAdsets } : { ch: "google", ...googleMpr, adsets: googleAdsets };
+    const laggard = leader.ch === "meta" ? { ch: "google", ...googleMpr, adsets: googleAdsets } : { ch: "meta", ...metaMpr, adsets: metaAdsets };
+
+    // Only propose if the leader is meaningfully better AND the laggard's spend is non-trivial.
+    if (leader.mpr < 2 * laggard.mpr) continue;
+    if (laggard.spend < SPEND_FLOOR_INR) continue;
+
+    const key = `${leader.ch}::${laggard.ch}::${leader.adsets[0].adset_source_id}`;
+    if (proposed.has(key)) continue;
+    proposed.add(key);
+
+    const shift_inr = Math.round(laggard.spend * 0.5);
+    // Project: shifting ₹X from laggard to leader → +X × (leader.mpr - laggard.mpr) margin uplift.
+    const projected_uplift = Math.round(shift_inr * (leader.mpr - laggard.mpr));
+
+    out.push({
+      action_type: "shift_budget_cross_channel",
+      target_entity: "ad_object",
+      target_entity_id: leader.adsets[0].adset_source_id,
+      payload: {
+        sku,
+        leader_channel: leader.ch,
+        leader_adset: leader.adsets[0].adset_name,
+        leader_margin_per_rupee: Number(leader.mpr.toFixed(2)),
+        laggard_channel: laggard.ch,
+        laggard_adset: laggard.adsets[0].adset_name,
+        laggard_margin_per_rupee: Number(laggard.mpr.toFixed(2)),
+        suggested_shift_inr: shift_inr,
+        rationale: `${leader.ch} drives ${leader.mpr.toFixed(2)}× margin per ₹ on ${sku} vs ${laggard.ch} at ${laggard.mpr.toFixed(2)}×. Shift ₹${shift_inr.toLocaleString("en-IN")} from ${laggard.adsets[0].adset_name} to ${leader.adsets[0].adset_name}.`,
+      },
+      expected_savings_inr: Math.max(0, projected_uplift) * (30 / 7),
+      prediction: {
+        metric: "incremental_margin_inr_per_30d",
+        expected_change: Math.max(0, projected_uplift) * (30 / 7),
+        window_days: 30,
+        direction: "increase",
+      },
+      confidence: 0.55,
+      caveats: [
+        "Assumes constant per-channel margin at the new spend levels (no diminishing returns modeled)",
+        "Two-channel comparison; doesn't yet account for incrementality vs cannibalization",
+      ],
+      citation_row_ids: [
+        ...leader.adsets[0].order_ids.slice(0, 10),
+        ...laggard.adsets[0].order_ids.slice(0, 10),
+      ].map((id) => ({ table: "orders", id })),
+    });
+  }
+  return out;
+}
+
+function marginPerRupee(adsets: AdsetRow[]): { mpr: number; spend: number; margin: number } {
+  const spend = adsets.reduce((s, a) => s + a.spend, 0);
+  const margin = adsets.reduce((s, a) => s + a.true_margin, 0);
+  return { mpr: spend > 0 ? margin / spend : 0, spend, margin };
+}

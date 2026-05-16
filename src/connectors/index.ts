@@ -9,17 +9,19 @@ import { ShopifyConnector } from "./shopify";
 import { MetaConnector } from "./meta";
 import { ShiprocketConnector } from "./shiprocket";
 import { CsvConnector } from "./csv";
+import { GoogleConnector } from "./google";
 
 const registry: Record<Source, () => Connector> = {
   shopify: () => new ShopifyConnector(),
   meta: () => new MetaConnector(),
   shiprocket: () => new ShiprocketConnector(),
   csv: () => new CsvConnector(),
+  google: () => new GoogleConnector(),
 };
 
 export function makeConnector(source: Source): Connector {
   return registry[source]();
 }
 
-export { ShopifyConnector, MetaConnector, ShiprocketConnector, CsvConnector };
+export { ShopifyConnector, MetaConnector, ShiprocketConnector, CsvConnector, GoogleConnector };
 export type { Connector };

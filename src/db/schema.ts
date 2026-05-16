@@ -26,7 +26,7 @@ import {
 
 // ---------- Enums ----------
 
-export const sourceEnum = pgEnum("source", ["shopify", "meta", "shiprocket", "csv"]);
+export const sourceEnum = pgEnum("source", ["shopify", "meta", "shiprocket", "csv", "google"]);
 export const paymentMethodEnum = pgEnum("payment_method", ["cod", "prepaid", "unknown"]);
 export const shipmentStatusEnum = pgEnum("shipment_status", [
   "pending",

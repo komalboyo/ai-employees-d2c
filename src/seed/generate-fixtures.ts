@@ -118,8 +118,8 @@ export async function generateFixtures(opts: GenOptions): Promise<void> {
           total_discounts: "0.00",
           total_price: total.toFixed(2),
           note_attributes: [
-            { name: "utm_source", value: "meta" },
-            { name: "utm_medium", value: "paid_social" },
+            { name: "utm_source", value: adset.channel ?? "meta" },
+            { name: "utm_medium", value: adset.channel === "google" ? "cpc" : "paid_social" },
             { name: "utm_campaign", value: utm_campaign },
             { name: "utm_content", value: utm_content },
           ],
@@ -148,8 +148,9 @@ export async function generateFixtures(opts: GenOptions): Promise<void> {
     await writeJson(root, `shopify/orders/page-${i + 1}.json`, { orders: cleaned });
   }
 
-  // ---- Meta ad_objects (campaigns + adsets + ads, denormalized) ----
-  const metaAdObjects = ADSETS.flatMap((a, idx) => [
+  // ---- Meta ad_objects (campaigns + adsets + ads) ----
+  const metaAdsets = ADSETS.filter((a) => (a.channel ?? "meta") === "meta");
+  const metaAdObjects = metaAdsets.flatMap((a, idx) => [
     {
       id: a.campaign.id,
       name: a.campaign.name,
@@ -171,7 +172,7 @@ export async function generateFixtures(opts: GenOptions): Promise<void> {
       status: "ACTIVE",
     },
     {
-      id: `ad_${idx}_1`,
+      id: `ad_meta_${idx}_1`,
       name: `${a.adset.name} — Ad 1`,
       level: "ad",
       adset_id: a.adset.id,
@@ -184,18 +185,18 @@ export async function generateFixtures(opts: GenOptions): Promise<void> {
   await writeJson(root, "meta/ad_objects/page-1.json", { data: metaAdObjects });
 
   // ---- Meta insights (daily spend per ad object) ----
-  const insights: any[] = [];
+  const metaInsights: any[] = [];
   for (let d = opts.days - 1; d >= 0; d--) {
     const day = new Date(NOW.getTime() - d * 24 * 60 * 60 * 1000);
     const dayStr = day.toISOString().slice(0, 10);
-    for (let idx = 0; idx < ADSETS.length; idx++) {
-      const a = ADSETS[idx];
+    for (let idx = 0; idx < metaAdsets.length; idx++) {
+      const a = metaAdsets[idx];
       const noise = 0.85 + r.next() * 0.3;
       const spend = a.daily_spend * noise;
       const impressions = Math.round(spend / 0.4);
       const clicks = Math.round(impressions * a.click_through_rate);
-      insights.push({
-        ad_id: `ad_${idx}_1`,
+      metaInsights.push({
+        ad_id: `ad_meta_${idx}_1`,
         adset_id: a.adset.id,
         campaign_id: a.campaign.id,
         date_start: dayStr,
@@ -205,9 +206,72 @@ export async function generateFixtures(opts: GenOptions): Promise<void> {
       });
     }
   }
-  const insightPages = paginate(insights, 100);
-  for (let i = 0; i < insightPages.length; i++) {
-    await writeJson(root, `meta/insights/page-${i + 1}.json`, { data: insightPages[i] });
+  const metaInsightPages = paginate(metaInsights, 100);
+  for (let i = 0; i < metaInsightPages.length; i++) {
+    await writeJson(root, `meta/insights/page-${i + 1}.json`, { data: metaInsightPages[i] });
+  }
+
+  // ---- Google ad_objects (campaigns + ad_groups [adsets] + ads) ----
+  const googleAdsets = ADSETS.filter((a) => a.channel === "google");
+  const googleAdObjects = googleAdsets.flatMap((a, idx) => [
+    {
+      id: a.campaign.id,
+      name: a.campaign.name,
+      level: "campaign",
+      campaign_id: a.campaign.id,
+      campaign_name: a.campaign.name,
+      campaign_status: "ENABLED",
+      status: "ENABLED",
+    },
+    // Google calls this an `ad_group` but we map to universal `adset` level.
+    {
+      id: a.adset.id,
+      name: a.adset.name,
+      level: "ad_group",
+      ad_group_id: a.adset.id,
+      ad_group_name: a.adset.name,
+      campaign_id: a.campaign.id,
+      campaign_name: a.campaign.name,
+      ad_group_status: "ENABLED",
+      status: "ENABLED",
+    },
+    {
+      id: `ad_google_${idx}_1`,
+      name: `${a.adset.name} — Ad 1`,
+      level: "ad",
+      ad_group_id: a.adset.id,
+      ad_group_name: a.adset.name,
+      campaign_id: a.campaign.id,
+      campaign_name: a.campaign.name,
+      status: "ENABLED",
+    },
+  ]);
+  await writeJson(root, "google/ad_objects/page-1.json", { data: googleAdObjects });
+
+  const googleInsights: any[] = [];
+  for (let d = opts.days - 1; d >= 0; d--) {
+    const day = new Date(NOW.getTime() - d * 24 * 60 * 60 * 1000);
+    const dayStr = day.toISOString().slice(0, 10);
+    for (let idx = 0; idx < googleAdsets.length; idx++) {
+      const a = googleAdsets[idx];
+      const noise = 0.85 + r.next() * 0.3;
+      const spend = a.daily_spend * noise;
+      const impressions = Math.round(spend / 0.4);
+      const clicks = Math.round(impressions * a.click_through_rate);
+      googleInsights.push({
+        ad_id: `ad_google_${idx}_1`,
+        ad_group_id: a.adset.id,
+        campaign_id: a.campaign.id,
+        date_start: dayStr,
+        spend: spend.toFixed(2),
+        impressions,
+        clicks,
+      });
+    }
+  }
+  const googleInsightPages = paginate(googleInsights, 100);
+  for (let i = 0; i < googleInsightPages.length; i++) {
+    await writeJson(root, `google/insights/page-${i + 1}.json`, { data: googleInsightPages[i] });
   }
 
   // ---- Shiprocket shipments (linked to orders by _meta_adset_id / pincode) ----

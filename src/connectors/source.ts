@@ -1,1 +1,1 @@
-export type Source = "shopify" | "meta" | "shiprocket" | "csv";
+export type Source = "shopify" | "meta" | "shiprocket" | "csv" | "google";

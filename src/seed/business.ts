@@ -73,6 +73,8 @@ export const PRODUCTS: ProductDef[] = [
 ];
 
 export interface AdSetDef {
+  /** Which channel this adset belongs to. Defaults to Meta for backward compat. */
+  channel?: "meta" | "google";
   campaign: { id: string; name: string };
   adset: { id: string; name: string };
   daily_spend: number;          // ₹/day
@@ -97,7 +99,7 @@ export const ADSETS: AdSetDef[] = [
   {
     campaign: { id: "c_streetwear",  name: "Streetwear Awareness" },
     adset:    { id: "as_crm_cod",    name: "Crimson Tee COD Push" },
-    daily_spend: 3500, click_through_rate: 0.028, conversion_rate: 0.06,
+    daily_spend: 12000, click_through_rate: 0.028, conversion_rate: 0.040,
     payment_cod_share: 0.85,             // mostly COD by design (the trap)
     preferred_skus: ["TEE-CRM-S","TEE-CRM-M","TEE-CRM-L","TEE-CRM-XL"],
     preferred_pincodes: ["800001","800020","700001","110001","110020"],
@@ -117,6 +119,28 @@ export const ADSETS: AdSetDef[] = [
     adset:    { id: "as_hood_cold", name: "Charcoal Hoodie Cold" },
     daily_spend: 800, click_through_rate: 0.012, conversion_rate: 0.025,
     payment_cod_share: 0.35,
+    preferred_skus: ["HOOD-CHR-M","HOOD-CHR-L"],
+  },
+  // Google Search on Cobalt Tee — high-intent traffic, low CTR but very
+  // high conversion. Designed to OUTPERFORM the Meta Cobalt Lookalikes
+  // adset on the same SKUs, so Rishi can propose a cross-channel shift.
+  {
+    channel: "google",
+    campaign: { id: "g_cob_search",  name: "Cobalt Tee Search" },
+    adset:    { id: "g_cob_kw_brand", name: "Cobalt Brand Keywords" },
+    daily_spend: 1200, click_through_rate: 0.052, conversion_rate: 0.14,
+    payment_cod_share: 0.18,
+    preferred_skus: ["TEE-COB-M","TEE-COB-L","TEE-COB-XL"],
+  },
+  // Google Display retargeting on Hoodies — underperforms Meta retargeting
+  // on the same SKUs (intentional, to give Rishi a "shift away from Google
+  // for this SKU" counterpoint).
+  {
+    channel: "google",
+    campaign: { id: "g_display",     name: "Display Retargeting" },
+    adset:    { id: "g_hood_display", name: "Hoodie Display Retargeting" },
+    daily_spend: 900, click_through_rate: 0.011, conversion_rate: 0.028,
+    payment_cod_share: 0.30,
     preferred_skus: ["HOOD-CHR-M","HOOD-CHR-L"],
   },
 ];
