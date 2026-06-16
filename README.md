@@ -282,6 +282,40 @@ The north star: software that doesn't make founders more productive, it absorbs 
 
 ---
 
+## Tech stack
+
+| Layer | Choice |
+|---|---|
+| Language | TypeScript (run with `tsx`) |
+| Web / UI | Next.js 15 (App Router, Turbopack), React 19, Tailwind CSS 3 |
+| Database | PostgreSQL 16 (via Docker Compose), accessed through the `postgres` driver |
+| ORM / migrations | Drizzle ORM + drizzle-kit |
+| LLM | Anthropic SDK (`@anthropic-ai/sdk`) — model defaults to `claude-sonnet-4-6`, optional |
+| Validation | Zod |
+| Browser automation | Playwright (README screenshots only) |
+
+Everything runs locally. The only external dependency that matters for the full experience is Postgres (booted via Docker Compose); the LLM is optional because of the deterministic offline fallback.
+
+### Environment variables
+
+Copy `.env.example` to `.env` and fill in what you need. **Names only** — see `.env.example` for the template; the real `.env` is gitignored.
+
+| Variable | Purpose | Required? |
+|---|---|---|
+| `DATABASE_URL` | Postgres connection string | Yes (defaults to the docker-compose Postgres) |
+| `ANTHROPIC_API_KEY` | Enables Claude for chat + agent narration | Optional — offline fallback otherwise |
+| `ANTHROPIC_MODEL` | Override the default chat model | Optional |
+| `AUTO_HIRE` | Set `=1` to allow the Chief of Staff to hire watchers | Optional (default off) |
+| `AUTO_HIRE_MIN_RUNS` | Runs a target must be flagged across before an autonomous hire | Optional (default 3) |
+| `SEED_MERCHANTS` | Merchant count for the bulk scale seeder | Optional |
+| `SEED_DAYS` | Days of synthetic history to generate | Optional |
+| `SEED_RNG` | Seed for deterministic synthetic data | Optional |
+| `AGENT_SAMPLE` | Merchant sample size for the benchmark harness | Optional |
+
+Optional live-connector credentials (left blank in v0, which ships with fixture replayers): `SHOPIFY_STORE_DOMAIN`, `SHOPIFY_ACCESS_TOKEN`, `META_AD_ACCOUNT_ID`, `META_ACCESS_TOKEN`, `SHIPROCKET_EMAIL`, `SHIPROCKET_PASSWORD`.
+
+---
+
 ## Running it
 
 ```bash
@@ -330,7 +364,7 @@ npm run eval
 ```
 src/
 ├── db/schema.ts           # 17 tables, provenance as DB constraint
-├── connectors/            # types.ts + orchestrator.ts + 4 implementations
+├── connectors/            # types.ts + orchestrator.ts + 5 implementations
 ├── seed/                  # synthetic data, engineered to surface disagreements
 ├── agents/
 │   ├── contract.ts        # AgentSpec — config not code
@@ -339,6 +373,7 @@ src/
 │   ├── aanya/rishi/meera/karan.ts
 │   ├── chief-of-staff.ts  # synthesizer + disagreement detection
 │   ├── watch-runner.ts    # runs founder-hired agents
+│   ├── hire.ts            # hire() template resolution
 │   └── replay-grader.ts   # self-prediction backtest
 ├── chat/
 │   ├── tools.ts           # 10-tool surface
@@ -357,7 +392,27 @@ scripts/
 └── screenshots.ts         # README screenshot capture
 evals/
 ├── golden.json            # cross-tool Q&A spec
-└── run.ts                 # 15-test eval suite
+└── run.ts                 # eval suite (19/19 on committed state)
 ```
+
+---
+
+## Status
+
+**Last activity:** May 16, 2026 (most recent commit). The repo has been quiet since — this is a finished take-home, not an actively developed product.
+
+**State: complete (POC / take-home).** This is a self-contained interview submission, not a production service. It runs end-to-end on a local machine and is designed to be reproducible by a reviewer in minutes.
+
+**What works today, fully:**
+- Five-connector ingest (Shopify, Meta, Shiprocket, CSV, Google Ads) through one source-agnostic interface, with provenance enforced as a DB constraint.
+- The five-member agent team, deterministic SQL decisions, the engineered Rishi/Meera disagreement, and the Chief of Staff morning brief.
+- The 10-tool chat layer with server-side citation enforcement, plus a deterministic offline fallback so the demo runs with no API key.
+- Founder `hire()` via chat and the opt-in autonomous-hire path (`AUTO_HIRE=1`) with hard bounds.
+- The Next.js UI (morning brief + Citation Inspector + chat), the replay grader, the bulk seeder, the scale benchmark.
+- `npm run eval` → 19/19 on the committed state.
+
+**Honest limits (POC by design, detailed in the Eval section):** fixture-replay connectors rather than real OAuth; INR-only currency; IST-hardcoded time zones; COGS a 40% proxy until the CSV is uploaded; last-click attribution; cross-tenant isolation is query-filtered, not RLS-enforced; and self-prediction accuracy is replay-on-synthetic, not real causal grading.
+
+**Known rough edge:** `package.json` defines a `sync` script (`tsx scripts/sync-all.ts`) but `scripts/sync-all.ts` is not present in the repo, so `npm run sync` will fail. None of the documented commands above depend on it.
 
 MIT.

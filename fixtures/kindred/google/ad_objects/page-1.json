@@ -1,0 +1,64 @@
+{
+  "data": [
+    {
+      "id": "g_cob_search",
+      "name": "Cobalt Tee Search",
+      "level": "campaign",
+      "campaign_id": "g_cob_search",
+      "campaign_name": "Cobalt Tee Search",
+      "campaign_status": "ENABLED",
+      "status": "ENABLED"
+    },
+    {
+      "id": "g_cob_kw_brand",
+      "name": "Cobalt Brand Keywords",
+      "level": "ad_group",
+      "ad_group_id": "g_cob_kw_brand",
+      "ad_group_name": "Cobalt Brand Keywords",
+      "campaign_id": "g_cob_search",
+      "campaign_name": "Cobalt Tee Search",
+      "ad_group_status": "ENABLED",
+      "status": "ENABLED"
+    },
+    {
+      "id": "ad_google_0_1",
+      "name": "Cobalt Brand Keywords — Ad 1",
+      "level": "ad",
+      "ad_group_id": "g_cob_kw_brand",
+      "ad_group_name": "Cobalt Brand Keywords",
+      "campaign_id": "g_cob_search",
+      "campaign_name": "Cobalt Tee Search",
+      "status": "ENABLED"
+    },
+    {
+      "id": "g_display",
+      "name": "Display Retargeting",
+      "level": "campaign",
+      "campaign_id": "g_display",
+      "campaign_name": "Display Retargeting",
+      "campaign_status": "ENABLED",
+      "status": "ENABLED"
+    },
+    {
+      "id": "g_hood_display",
+      "name": "Hoodie Display Retargeting",
+      "level": "ad_group",
+      "ad_group_id": "g_hood_display",
+      "ad_group_name": "Hoodie Display Retargeting",
+      "campaign_id": "g_display",
+      "campaign_name": "Display Retargeting",
+      "ad_group_status": "ENABLED",
+      "status": "ENABLED"
+    },
+    {
+      "id": "ad_google_1_1",
+      "name": "Hoodie Display Retargeting — Ad 1",
+      "level": "ad",
+      "ad_group_id": "g_hood_display",
+      "ad_group_name": "Hoodie Display Retargeting",
+      "campaign_id": "g_display",
+      "campaign_name": "Display Retargeting",
+      "status": "ENABLED"
+    }
+  ]
+}

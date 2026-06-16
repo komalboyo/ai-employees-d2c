@@ -1,0 +1,1524 @@
+{
+  "orders": [
+    {
+      "id": 102251,
+      "order_number": 2251,
+      "name": "#2251",
+      "created_at": "2026-05-16T17:20:03.374Z",
+      "customer": {
+        "id": 5092,
+        "email": "customer5303@example.com"
+      },
+      "payment_gateway_names": [
+        "Razorpay"
+      ],
+      "subtotal_price": "7497.00",
+      "shipping_lines": [],
+      "total_discounts": "0.00",
+      "total_price": "7497.00",
+      "note_attributes": [
+        {
+          "name": "utm_source",
+          "value": "meta"
+        },
+        {
+          "name": "utm_medium",
+          "value": "paid_social"
+        },
+        {
+          "name": "utm_campaign",
+          "value": "c_hoodie"
+        },
+        {
+          "name": "utm_content",
+          "value": "hoodie_retargeting"
+        }
+      ],
+      "shipping_address": {
+        "zip": "400050",
+        "city": "Mumbai",
+        "province": "Maharashtra"
+      },
+      "line_items": [
+        {
+          "id": 202251,
+          "variant_id": 9008,
+          "sku": "HOOD-CHR-M",
+          "title": "Charcoal Hoodie — M",
+          "quantity": 3,
+          "price": "2499.00"
+        }
+      ]
+    },
+    {
+      "id": 102252,
+      "order_number": 2252,
+      "name": "#2252",
+      "created_at": "2026-05-17T08:59:44.091Z",
+      "customer": {
+        "id": 5162,
+        "email": "customer9804@example.com"
+      },
+      "payment_gateway_names": [
+        "Cash on Delivery (COD)"
+      ],
+      "subtotal_price": "4998.00",
+      "shipping_lines": [
+        {
+          "price": "80.00"
+        }
+      ],
+      "total_discounts": "0.00",
+      "total_price": "5078.00",
+      "note_attributes": [
+        {
+          "name": "utm_source",
+          "value": "meta"
+        },
+        {
+          "name": "utm_medium",
+          "value": "paid_social"
+        },
+        {
+          "name": "utm_campaign",
+          "value": "c_hoodie"
+        },
+        {
+          "name": "utm_content",
+          "value": "hoodie_retargeting"
+        }
+      ],
+      "shipping_address": {
+        "zip": "400050",
+        "city": "Mumbai",
+        "province": "Maharashtra"
+      },
+      "line_items": [
+        {
+          "id": 202252,
+          "variant_id": 9009,
+          "sku": "HOOD-CHR-L",
+          "title": "Charcoal Hoodie — L",
+          "quantity": 2,
+          "price": "2499.00"
+        }
+      ]
+    },
+    {
+      "id": 102253,
+      "order_number": 2253,
+      "name": "#2253",
+      "created_at": "2026-05-16T14:43:56.760Z",
+      "customer": {
+        "id": 5131,
+        "email": "customer1027@example.com"
+      },
+      "payment_gateway_names": [
+        "Cash on Delivery (COD)"
+      ],
+      "subtotal_price": "4998.00",
+      "shipping_lines": [
+        {
+          "price": "80.00"
+        }
+      ],
+      "total_discounts": "0.00",
+      "total_price": "5078.00",
+      "note_attributes": [
+        {
+          "name": "utm_source",
+          "value": "meta"
+        },
+        {
+          "name": "utm_medium",
+          "value": "paid_social"
+        },
+        {
+          "name": "utm_campaign",
+          "value": "c_hoodie"
+        },
+        {
+          "name": "utm_content",
+          "value": "hoodie_retargeting"
+        }
+      ],
+      "shipping_address": {
+        "zip": "400001",
+        "city": "Mumbai",
+        "province": "Maharashtra"
+      },
+      "line_items": [
+        {
+          "id": 202253,
+          "variant_id": 9009,
+          "sku": "HOOD-CHR-L",
+          "title": "Charcoal Hoodie — L",
+          "quantity": 2,
+          "price": "2499.00"
+        }
+      ]
+    },
+    {
+      "id": 102254,
+      "order_number": 2254,
+      "name": "#2254",
+      "created_at": "2026-05-17T11:05:09.415Z",
+      "customer": {
+        "id": 5022,
+        "email": "customer1427@example.com"
+      },
+      "payment_gateway_names": [
+        "Razorpay"
+      ],
+      "subtotal_price": "7497.00",
+      "shipping_lines": [],
+      "total_discounts": "0.00",
+      "total_price": "7497.00",
+      "note_attributes": [
+        {
+          "name": "utm_source",
+          "value": "meta"
+        },
+        {
+          "name": "utm_medium",
+          "value": "paid_social"
+        },
+        {
+          "name": "utm_campaign",
+          "value": "c_hoodie"
+        },
+        {
+          "name": "utm_content",
+          "value": "hoodie_retargeting"
+        }
+      ],
+      "shipping_address": {
+        "zip": "400001",
+        "city": "Mumbai",
+        "province": "Maharashtra"
+      },
+      "line_items": [
+        {
+          "id": 202254,
+          "variant_id": 9009,
+          "sku": "HOOD-CHR-L",
+          "title": "Charcoal Hoodie — L",
+          "quantity": 3,
+          "price": "2499.00"
+        }
+      ]
+    },
+    {
+      "id": 102255,
+      "order_number": 2255,
+      "name": "#2255",
+      "created_at": "2026-05-16T18:12:08.818Z",
+      "customer": {
+        "id": 5407,
+        "email": "customer2830@example.com"
+      },
+      "payment_gateway_names": [
+        "Razorpay"
+      ],
+      "subtotal_price": "2499.00",
+      "shipping_lines": [],
+      "total_discounts": "0.00",
+      "total_price": "2499.00",
+      "note_attributes": [
+        {
+          "name": "utm_source",
+          "value": "meta"
+        },
+        {
+          "name": "utm_medium",
+          "value": "paid_social"
+        },
+        {
+          "name": "utm_campaign",
+          "value": "c_hoodie"
+        },
+        {
+          "name": "utm_content",
+          "value": "hoodie_retargeting"
+        }
+      ],
+      "shipping_address": {
+        "zip": "110020",
+        "city": "New Delhi",
+        "province": "Delhi"
+      },
+      "line_items": [
+        {
+          "id": 202255,
+          "variant_id": 9008,
+          "sku": "HOOD-CHR-M",
+          "title": "Charcoal Hoodie — M",
+          "quantity": 1,
+          "price": "2499.00"
+        }
+      ]
+    },
+    {
+      "id": 102256,
+      "order_number": 2256,
+      "name": "#2256",
+      "created_at": "2026-05-17T06:55:51.992Z",
+      "customer": {
+        "id": 5203,
+        "email": "customer1684@example.com"
+      },
+      "payment_gateway_names": [
+        "Razorpay"
+      ],
+      "subtotal_price": "7497.00",
+      "shipping_lines": [],
+      "total_discounts": "0.00",
+      "total_price": "7497.00",
+      "note_attributes": [
+        {
+          "name": "utm_source",
+          "value": "meta"
+        },
+        {
+          "name": "utm_medium",
+          "value": "paid_social"
+        },
+        {
+          "name": "utm_campaign",
+          "value": "c_hoodie"
+        },
+        {
+          "name": "utm_content",
+          "value": "hoodie_retargeting"
+        }
+      ],
+      "shipping_address": {
+        "zip": "110020",
+        "city": "New Delhi",
+        "province": "Delhi"
+      },
+      "line_items": [
+        {
+          "id": 202256,
+          "variant_id": 9008,
+          "sku": "HOOD-CHR-M",
+          "title": "Charcoal Hoodie — M",
+          "quantity": 3,
+          "price": "2499.00"
+        }
+      ]
+    },
+    {
+      "id": 102257,
+      "order_number": 2257,
+      "name": "#2257",
+      "created_at": "2026-05-17T11:43:59.245Z",
+      "customer": {
+        "id": 5152,
+        "email": "customer8137@example.com"
+      },
+      "payment_gateway_names": [
+        "Cash on Delivery (COD)"
+      ],
+      "subtotal_price": "2499.00",
+      "shipping_lines": [
+        {
+          "price": "80.00"
+        }
+      ],
+      "total_discounts": "0.00",
+      "total_price": "2579.00",
+      "note_attributes": [
+        {
+          "name": "utm_source",
+          "value": "meta"
+        },
+        {
+          "name": "utm_medium",
+          "value": "paid_social"
+        },
+        {
+          "name": "utm_campaign",
+          "value": "c_hoodie"
+        },
+        {
+          "name": "utm_content",
+          "value": "charcoal_hoodie_cold"
+        }
+      ],
+      "shipping_address": {
+        "zip": "560034",
+        "city": "Bangalore",
+        "province": "Karnataka"
+      },
+      "line_items": [
+        {
+          "id": 202257,
+          "variant_id": 9008,
+          "sku": "HOOD-CHR-M",
+          "title": "Charcoal Hoodie — M",
+          "quantity": 1,
+          "price": "2499.00"
+        }
+      ]
+    },
+    {
+      "id": 102258,
+      "order_number": 2258,
+      "name": "#2258",
+      "created_at": "2026-05-17T03:42:39.882Z",
+      "customer": {
+        "id": 5188,
+        "email": "customer3872@example.com"
+      },
+      "payment_gateway_names": [
+        "Razorpay"
+      ],
+      "subtotal_price": "1499.00",
+      "shipping_lines": [],
+      "total_discounts": "0.00",
+      "total_price": "1499.00",
+      "note_attributes": [
+        {
+          "name": "utm_source",
+          "value": "google"
+        },
+        {
+          "name": "utm_medium",
+          "value": "cpc"
+        },
+        {
+          "name": "utm_campaign",
+          "value": "g_cob_search"
+        },
+        {
+          "name": "utm_content",
+          "value": "cobalt_brand_keywords"
+        }
+      ],
+      "shipping_address": {
+        "zip": "110001",
+        "city": "New Delhi",
+        "province": "Delhi"
+      },
+      "line_items": [
+        {
+          "id": 202258,
+          "variant_id": 9002,
+          "sku": "TEE-COB-L",
+          "title": "Cobalt Tee — L",
+          "quantity": 1,
+          "price": "1499.00"
+        }
+      ]
+    },
+    {
+      "id": 102259,
+      "order_number": 2259,
+      "name": "#2259",
+      "created_at": "2026-05-16T13:40:37.069Z",
+      "customer": {
+        "id": 5407,
+        "email": "customer4013@example.com"
+      },
+      "payment_gateway_names": [
+        "Razorpay"
+      ],
+      "subtotal_price": "1499.00",
+      "shipping_lines": [],
+      "total_discounts": "0.00",
+      "total_price": "1499.00",
+      "note_attributes": [
+        {
+          "name": "utm_source",
+          "value": "google"
+        },
+        {
+          "name": "utm_medium",
+          "value": "cpc"
+        },
+        {
+          "name": "utm_campaign",
+          "value": "g_cob_search"
+        },
+        {
+          "name": "utm_content",
+          "value": "cobalt_brand_keywords"
+        }
+      ],
+      "shipping_address": {
+        "zip": "500001",
+        "city": "Hyderabad",
+        "province": "Telangana"
+      },
+      "line_items": [
+        {
+          "id": 202259,
+          "variant_id": 9003,
+          "sku": "TEE-COB-XL",
+          "title": "Cobalt Tee — XL",
+          "quantity": 1,
+          "price": "1499.00"
+        }
+      ]
+    },
+    {
+      "id": 102260,
+      "order_number": 2260,
+      "name": "#2260",
+      "created_at": "2026-05-17T04:31:26.345Z",
+      "customer": {
+        "id": 5175,
+        "email": "customer4691@example.com"
+      },
+      "payment_gateway_names": [
+        "Razorpay"
+      ],
+      "subtotal_price": "1499.00",
+      "shipping_lines": [],
+      "total_discounts": "0.00",
+      "total_price": "1499.00",
+      "note_attributes": [
+        {
+          "name": "utm_source",
+          "value": "google"
+        },
+        {
+          "name": "utm_medium",
+          "value": "cpc"
+        },
+        {
+          "name": "utm_campaign",
+          "value": "g_cob_search"
+        },
+        {
+          "name": "utm_content",
+          "value": "cobalt_brand_keywords"
+        }
+      ],
+      "shipping_address": {
+        "zip": "400001",
+        "city": "Mumbai",
+        "province": "Maharashtra"
+      },
+      "line_items": [
+        {
+          "id": 202260,
+          "variant_id": 9003,
+          "sku": "TEE-COB-XL",
+          "title": "Cobalt Tee — XL",
+          "quantity": 1,
+          "price": "1499.00"
+        }
+      ]
+    },
+    {
+      "id": 102261,
+      "order_number": 2261,
+      "name": "#2261",
+      "created_at": "2026-05-16T17:28:19.893Z",
+      "customer": {
+        "id": 5295,
+        "email": "customer7191@example.com"
+      },
+      "payment_gateway_names": [
+        "Razorpay"
+      ],
+      "subtotal_price": "1499.00",
+      "shipping_lines": [],
+      "total_discounts": "0.00",
+      "total_price": "1499.00",
+      "note_attributes": [
+        {
+          "name": "utm_source",
+          "value": "google"
+        },
+        {
+          "name": "utm_medium",
+          "value": "cpc"
+        },
+        {
+          "name": "utm_campaign",
+          "value": "g_cob_search"
+        },
+        {
+          "name": "utm_content",
+          "value": "cobalt_brand_keywords"
+        }
+      ],
+      "shipping_address": {
+        "zip": "500001",
+        "city": "Hyderabad",
+        "province": "Telangana"
+      },
+      "line_items": [
+        {
+          "id": 202261,
+          "variant_id": 9001,
+          "sku": "TEE-COB-M",
+          "title": "Cobalt Tee — M",
+          "quantity": 1,
+          "price": "1499.00"
+        }
+      ]
+    },
+    {
+      "id": 102262,
+      "order_number": 2262,
+      "name": "#2262",
+      "created_at": "2026-05-17T10:47:28.444Z",
+      "customer": {
+        "id": 5341,
+        "email": "customer3679@example.com"
+      },
+      "payment_gateway_names": [
+        "Razorpay"
+      ],
+      "subtotal_price": "1499.00",
+      "shipping_lines": [],
+      "total_discounts": "0.00",
+      "total_price": "1499.00",
+      "note_attributes": [
+        {
+          "name": "utm_source",
+          "value": "google"
+        },
+        {
+          "name": "utm_medium",
+          "value": "cpc"
+        },
+        {
+          "name": "utm_campaign",
+          "value": "g_cob_search"
+        },
+        {
+          "name": "utm_content",
+          "value": "cobalt_brand_keywords"
+        }
+      ],
+      "shipping_address": {
+        "zip": "110020",
+        "city": "New Delhi",
+        "province": "Delhi"
+      },
+      "line_items": [
+        {
+          "id": 202262,
+          "variant_id": 9001,
+          "sku": "TEE-COB-M",
+          "title": "Cobalt Tee — M",
+          "quantity": 1,
+          "price": "1499.00"
+        }
+      ]
+    },
+    {
+      "id": 102263,
+      "order_number": 2263,
+      "name": "#2263",
+      "created_at": "2026-05-16T17:34:51.546Z",
+      "customer": {
+        "id": 5036,
+        "email": "customer6810@example.com"
+      },
+      "payment_gateway_names": [
+        "Cash on Delivery (COD)"
+      ],
+      "subtotal_price": "1499.00",
+      "shipping_lines": [
+        {
+          "price": "80.00"
+        }
+      ],
+      "total_discounts": "0.00",
+      "total_price": "1579.00",
+      "note_attributes": [
+        {
+          "name": "utm_source",
+          "value": "google"
+        },
+        {
+          "name": "utm_medium",
+          "value": "cpc"
+        },
+        {
+          "name": "utm_campaign",
+          "value": "g_cob_search"
+        },
+        {
+          "name": "utm_content",
+          "value": "cobalt_brand_keywords"
+        }
+      ],
+      "shipping_address": {
+        "zip": "600001",
+        "city": "Chennai",
+        "province": "Tamil Nadu"
+      },
+      "line_items": [
+        {
+          "id": 202263,
+          "variant_id": 9002,
+          "sku": "TEE-COB-L",
+          "title": "Cobalt Tee — L",
+          "quantity": 1,
+          "price": "1499.00"
+        }
+      ]
+    },
+    {
+      "id": 102264,
+      "order_number": 2264,
+      "name": "#2264",
+      "created_at": "2026-05-16T18:42:14.369Z",
+      "customer": {
+        "id": 5268,
+        "email": "customer2134@example.com"
+      },
+      "payment_gateway_names": [
+        "Razorpay"
+      ],
+      "subtotal_price": "4497.00",
+      "shipping_lines": [],
+      "total_discounts": "0.00",
+      "total_price": "4497.00",
+      "note_attributes": [
+        {
+          "name": "utm_source",
+          "value": "google"
+        },
+        {
+          "name": "utm_medium",
+          "value": "cpc"
+        },
+        {
+          "name": "utm_campaign",
+          "value": "g_cob_search"
+        },
+        {
+          "name": "utm_content",
+          "value": "cobalt_brand_keywords"
+        }
+      ],
+      "shipping_address": {
+        "zip": "110020",
+        "city": "New Delhi",
+        "province": "Delhi"
+      },
+      "line_items": [
+        {
+          "id": 202264,
+          "variant_id": 9003,
+          "sku": "TEE-COB-XL",
+          "title": "Cobalt Tee — XL",
+          "quantity": 3,
+          "price": "1499.00"
+        }
+      ]
+    },
+    {
+      "id": 102265,
+      "order_number": 2265,
+      "name": "#2265",
+      "created_at": "2026-05-16T21:28:01.789Z",
+      "customer": {
+        "id": 5411,
+        "email": "customer8727@example.com"
+      },
+      "payment_gateway_names": [
+        "Razorpay"
+      ],
+      "subtotal_price": "1499.00",
+      "shipping_lines": [],
+      "total_discounts": "0.00",
+      "total_price": "1499.00",
+      "note_attributes": [
+        {
+          "name": "utm_source",
+          "value": "google"
+        },
+        {
+          "name": "utm_medium",
+          "value": "cpc"
+        },
+        {
+          "name": "utm_campaign",
+          "value": "g_cob_search"
+        },
+        {
+          "name": "utm_content",
+          "value": "cobalt_brand_keywords"
+        }
+      ],
+      "shipping_address": {
+        "zip": "400001",
+        "city": "Mumbai",
+        "province": "Maharashtra"
+      },
+      "line_items": [
+        {
+          "id": 202265,
+          "variant_id": 9002,
+          "sku": "TEE-COB-L",
+          "title": "Cobalt Tee — L",
+          "quantity": 1,
+          "price": "1499.00"
+        }
+      ]
+    },
+    {
+      "id": 102266,
+      "order_number": 2266,
+      "name": "#2266",
+      "created_at": "2026-05-16T14:26:57.987Z",
+      "customer": {
+        "id": 5383,
+        "email": "customer1417@example.com"
+      },
+      "payment_gateway_names": [
+        "Razorpay"
+      ],
+      "subtotal_price": "1499.00",
+      "shipping_lines": [],
+      "total_discounts": "0.00",
+      "total_price": "1499.00",
+      "note_attributes": [
+        {
+          "name": "utm_source",
+          "value": "google"
+        },
+        {
+          "name": "utm_medium",
+          "value": "cpc"
+        },
+        {
+          "name": "utm_campaign",
+          "value": "g_cob_search"
+        },
+        {
+          "name": "utm_content",
+          "value": "cobalt_brand_keywords"
+        }
+      ],
+      "shipping_address": {
+        "zip": "560034",
+        "city": "Bangalore",
+        "province": "Karnataka"
+      },
+      "line_items": [
+        {
+          "id": 202266,
+          "variant_id": 9001,
+          "sku": "TEE-COB-M",
+          "title": "Cobalt Tee — M",
+          "quantity": 1,
+          "price": "1499.00"
+        }
+      ]
+    },
+    {
+      "id": 102267,
+      "order_number": 2267,
+      "name": "#2267",
+      "created_at": "2026-05-17T07:39:35.434Z",
+      "customer": {
+        "id": 5096,
+        "email": "customer1385@example.com"
+      },
+      "payment_gateway_names": [
+        "Razorpay"
+      ],
+      "subtotal_price": "1499.00",
+      "shipping_lines": [],
+      "total_discounts": "0.00",
+      "total_price": "1499.00",
+      "note_attributes": [
+        {
+          "name": "utm_source",
+          "value": "google"
+        },
+        {
+          "name": "utm_medium",
+          "value": "cpc"
+        },
+        {
+          "name": "utm_campaign",
+          "value": "g_cob_search"
+        },
+        {
+          "name": "utm_content",
+          "value": "cobalt_brand_keywords"
+        }
+      ],
+      "shipping_address": {
+        "zip": "500001",
+        "city": "Hyderabad",
+        "province": "Telangana"
+      },
+      "line_items": [
+        {
+          "id": 202267,
+          "variant_id": 9003,
+          "sku": "TEE-COB-XL",
+          "title": "Cobalt Tee — XL",
+          "quantity": 1,
+          "price": "1499.00"
+        }
+      ]
+    },
+    {
+      "id": 102268,
+      "order_number": 2268,
+      "name": "#2268",
+      "created_at": "2026-05-16T19:01:47.028Z",
+      "customer": {
+        "id": 5248,
+        "email": "customer1143@example.com"
+      },
+      "payment_gateway_names": [
+        "Razorpay"
+      ],
+      "subtotal_price": "1499.00",
+      "shipping_lines": [],
+      "total_discounts": "0.00",
+      "total_price": "1499.00",
+      "note_attributes": [
+        {
+          "name": "utm_source",
+          "value": "google"
+        },
+        {
+          "name": "utm_medium",
+          "value": "cpc"
+        },
+        {
+          "name": "utm_campaign",
+          "value": "g_cob_search"
+        },
+        {
+          "name": "utm_content",
+          "value": "cobalt_brand_keywords"
+        }
+      ],
+      "shipping_address": {
+        "zip": "400001",
+        "city": "Mumbai",
+        "province": "Maharashtra"
+      },
+      "line_items": [
+        {
+          "id": 202268,
+          "variant_id": 9003,
+          "sku": "TEE-COB-XL",
+          "title": "Cobalt Tee — XL",
+          "quantity": 1,
+          "price": "1499.00"
+        }
+      ]
+    },
+    {
+      "id": 102269,
+      "order_number": 2269,
+      "name": "#2269",
+      "created_at": "2026-05-17T09:21:41.568Z",
+      "customer": {
+        "id": 5188,
+        "email": "customer5815@example.com"
+      },
+      "payment_gateway_names": [
+        "Razorpay"
+      ],
+      "subtotal_price": "1499.00",
+      "shipping_lines": [],
+      "total_discounts": "0.00",
+      "total_price": "1499.00",
+      "note_attributes": [
+        {
+          "name": "utm_source",
+          "value": "google"
+        },
+        {
+          "name": "utm_medium",
+          "value": "cpc"
+        },
+        {
+          "name": "utm_campaign",
+          "value": "g_cob_search"
+        },
+        {
+          "name": "utm_content",
+          "value": "cobalt_brand_keywords"
+        }
+      ],
+      "shipping_address": {
+        "zip": "400001",
+        "city": "Mumbai",
+        "province": "Maharashtra"
+      },
+      "line_items": [
+        {
+          "id": 202269,
+          "variant_id": 9001,
+          "sku": "TEE-COB-M",
+          "title": "Cobalt Tee — M",
+          "quantity": 1,
+          "price": "1499.00"
+        }
+      ]
+    },
+    {
+      "id": 102270,
+      "order_number": 2270,
+      "name": "#2270",
+      "created_at": "2026-05-16T16:33:49.467Z",
+      "customer": {
+        "id": 5260,
+        "email": "customer2544@example.com"
+      },
+      "payment_gateway_names": [
+        "Razorpay"
+      ],
+      "subtotal_price": "1499.00",
+      "shipping_lines": [],
+      "total_discounts": "0.00",
+      "total_price": "1499.00",
+      "note_attributes": [
+        {
+          "name": "utm_source",
+          "value": "google"
+        },
+        {
+          "name": "utm_medium",
+          "value": "cpc"
+        },
+        {
+          "name": "utm_campaign",
+          "value": "g_cob_search"
+        },
+        {
+          "name": "utm_content",
+          "value": "cobalt_brand_keywords"
+        }
+      ],
+      "shipping_address": {
+        "zip": "600001",
+        "city": "Chennai",
+        "province": "Tamil Nadu"
+      },
+      "line_items": [
+        {
+          "id": 202270,
+          "variant_id": 9003,
+          "sku": "TEE-COB-XL",
+          "title": "Cobalt Tee — XL",
+          "quantity": 1,
+          "price": "1499.00"
+        }
+      ]
+    },
+    {
+      "id": 102271,
+      "order_number": 2271,
+      "name": "#2271",
+      "created_at": "2026-05-17T09:38:06.715Z",
+      "customer": {
+        "id": 5263,
+        "email": "customer5599@example.com"
+      },
+      "payment_gateway_names": [
+        "Razorpay"
+      ],
+      "subtotal_price": "1499.00",
+      "shipping_lines": [],
+      "total_discounts": "0.00",
+      "total_price": "1499.00",
+      "note_attributes": [
+        {
+          "name": "utm_source",
+          "value": "google"
+        },
+        {
+          "name": "utm_medium",
+          "value": "cpc"
+        },
+        {
+          "name": "utm_campaign",
+          "value": "g_cob_search"
+        },
+        {
+          "name": "utm_content",
+          "value": "cobalt_brand_keywords"
+        }
+      ],
+      "shipping_address": {
+        "zip": "600001",
+        "city": "Chennai",
+        "province": "Tamil Nadu"
+      },
+      "line_items": [
+        {
+          "id": 202271,
+          "variant_id": 9002,
+          "sku": "TEE-COB-L",
+          "title": "Cobalt Tee — L",
+          "quantity": 1,
+          "price": "1499.00"
+        }
+      ]
+    },
+    {
+      "id": 102272,
+      "order_number": 2272,
+      "name": "#2272",
+      "created_at": "2026-05-16T22:04:34.569Z",
+      "customer": {
+        "id": 5414,
+        "email": "customer1551@example.com"
+      },
+      "payment_gateway_names": [
+        "Razorpay"
+      ],
+      "subtotal_price": "1499.00",
+      "shipping_lines": [],
+      "total_discounts": "0.00",
+      "total_price": "1499.00",
+      "note_attributes": [
+        {
+          "name": "utm_source",
+          "value": "google"
+        },
+        {
+          "name": "utm_medium",
+          "value": "cpc"
+        },
+        {
+          "name": "utm_campaign",
+          "value": "g_cob_search"
+        },
+        {
+          "name": "utm_content",
+          "value": "cobalt_brand_keywords"
+        }
+      ],
+      "shipping_address": {
+        "zip": "560034",
+        "city": "Bangalore",
+        "province": "Karnataka"
+      },
+      "line_items": [
+        {
+          "id": 202272,
+          "variant_id": 9001,
+          "sku": "TEE-COB-M",
+          "title": "Cobalt Tee — M",
+          "quantity": 1,
+          "price": "1499.00"
+        }
+      ]
+    },
+    {
+      "id": 102273,
+      "order_number": 2273,
+      "name": "#2273",
+      "created_at": "2026-05-17T00:35:04.936Z",
+      "customer": {
+        "id": 5346,
+        "email": "customer2696@example.com"
+      },
+      "payment_gateway_names": [
+        "Razorpay"
+      ],
+      "subtotal_price": "2998.00",
+      "shipping_lines": [],
+      "total_discounts": "0.00",
+      "total_price": "2998.00",
+      "note_attributes": [
+        {
+          "name": "utm_source",
+          "value": "google"
+        },
+        {
+          "name": "utm_medium",
+          "value": "cpc"
+        },
+        {
+          "name": "utm_campaign",
+          "value": "g_cob_search"
+        },
+        {
+          "name": "utm_content",
+          "value": "cobalt_brand_keywords"
+        }
+      ],
+      "shipping_address": {
+        "zip": "400050",
+        "city": "Mumbai",
+        "province": "Maharashtra"
+      },
+      "line_items": [
+        {
+          "id": 202273,
+          "variant_id": 9002,
+          "sku": "TEE-COB-L",
+          "title": "Cobalt Tee — L",
+          "quantity": 2,
+          "price": "1499.00"
+        }
+      ]
+    },
+    {
+      "id": 102274,
+      "order_number": 2274,
+      "name": "#2274",
+      "created_at": "2026-05-16T19:02:05.742Z",
+      "customer": {
+        "id": 5236,
+        "email": "customer9353@example.com"
+      },
+      "payment_gateway_names": [
+        "Razorpay"
+      ],
+      "subtotal_price": "1499.00",
+      "shipping_lines": [],
+      "total_discounts": "0.00",
+      "total_price": "1499.00",
+      "note_attributes": [
+        {
+          "name": "utm_source",
+          "value": "google"
+        },
+        {
+          "name": "utm_medium",
+          "value": "cpc"
+        },
+        {
+          "name": "utm_campaign",
+          "value": "g_cob_search"
+        },
+        {
+          "name": "utm_content",
+          "value": "cobalt_brand_keywords"
+        }
+      ],
+      "shipping_address": {
+        "zip": "600001",
+        "city": "Chennai",
+        "province": "Tamil Nadu"
+      },
+      "line_items": [
+        {
+          "id": 202274,
+          "variant_id": 9003,
+          "sku": "TEE-COB-XL",
+          "title": "Cobalt Tee — XL",
+          "quantity": 1,
+          "price": "1499.00"
+        }
+      ]
+    },
+    {
+      "id": 102275,
+      "order_number": 2275,
+      "name": "#2275",
+      "created_at": "2026-05-17T01:25:24.199Z",
+      "customer": {
+        "id": 5273,
+        "email": "customer3651@example.com"
+      },
+      "payment_gateway_names": [
+        "Razorpay"
+      ],
+      "subtotal_price": "1499.00",
+      "shipping_lines": [],
+      "total_discounts": "0.00",
+      "total_price": "1499.00",
+      "note_attributes": [
+        {
+          "name": "utm_source",
+          "value": "google"
+        },
+        {
+          "name": "utm_medium",
+          "value": "cpc"
+        },
+        {
+          "name": "utm_campaign",
+          "value": "g_cob_search"
+        },
+        {
+          "name": "utm_content",
+          "value": "cobalt_brand_keywords"
+        }
+      ],
+      "shipping_address": {
+        "zip": "800020",
+        "city": "Patna",
+        "province": "Bihar"
+      },
+      "line_items": [
+        {
+          "id": 202275,
+          "variant_id": 9001,
+          "sku": "TEE-COB-M",
+          "title": "Cobalt Tee — M",
+          "quantity": 1,
+          "price": "1499.00"
+        }
+      ]
+    },
+    {
+      "id": 102276,
+      "order_number": 2276,
+      "name": "#2276",
+      "created_at": "2026-05-17T11:06:50.793Z",
+      "customer": {
+        "id": 5103,
+        "email": "customer5423@example.com"
+      },
+      "payment_gateway_names": [
+        "Razorpay"
+      ],
+      "subtotal_price": "1499.00",
+      "shipping_lines": [],
+      "total_discounts": "0.00",
+      "total_price": "1499.00",
+      "note_attributes": [
+        {
+          "name": "utm_source",
+          "value": "google"
+        },
+        {
+          "name": "utm_medium",
+          "value": "cpc"
+        },
+        {
+          "name": "utm_campaign",
+          "value": "g_cob_search"
+        },
+        {
+          "name": "utm_content",
+          "value": "cobalt_brand_keywords"
+        }
+      ],
+      "shipping_address": {
+        "zip": "560001",
+        "city": "Bangalore",
+        "province": "Karnataka"
+      },
+      "line_items": [
+        {
+          "id": 202276,
+          "variant_id": 9003,
+          "sku": "TEE-COB-XL",
+          "title": "Cobalt Tee — XL",
+          "quantity": 1,
+          "price": "1499.00"
+        }
+      ]
+    },
+    {
+      "id": 102277,
+      "order_number": 2277,
+      "name": "#2277",
+      "created_at": "2026-05-16T12:41:32.527Z",
+      "customer": {
+        "id": 5057,
+        "email": "customer3789@example.com"
+      },
+      "payment_gateway_names": [
+        "Razorpay"
+      ],
+      "subtotal_price": "2998.00",
+      "shipping_lines": [],
+      "total_discounts": "0.00",
+      "total_price": "2998.00",
+      "note_attributes": [
+        {
+          "name": "utm_source",
+          "value": "google"
+        },
+        {
+          "name": "utm_medium",
+          "value": "cpc"
+        },
+        {
+          "name": "utm_campaign",
+          "value": "g_cob_search"
+        },
+        {
+          "name": "utm_content",
+          "value": "cobalt_brand_keywords"
+        }
+      ],
+      "shipping_address": {
+        "zip": "560001",
+        "city": "Bangalore",
+        "province": "Karnataka"
+      },
+      "line_items": [
+        {
+          "id": 202277,
+          "variant_id": 9003,
+          "sku": "TEE-COB-XL",
+          "title": "Cobalt Tee — XL",
+          "quantity": 2,
+          "price": "1499.00"
+        }
+      ]
+    },
+    {
+      "id": 102278,
+      "order_number": 2278,
+      "name": "#2278",
+      "created_at": "2026-05-17T05:24:45.484Z",
+      "customer": {
+        "id": 5444,
+        "email": "customer5622@example.com"
+      },
+      "payment_gateway_names": [
+        "Razorpay"
+      ],
+      "subtotal_price": "1499.00",
+      "shipping_lines": [],
+      "total_discounts": "0.00",
+      "total_price": "1499.00",
+      "note_attributes": [
+        {
+          "name": "utm_source",
+          "value": "google"
+        },
+        {
+          "name": "utm_medium",
+          "value": "cpc"
+        },
+        {
+          "name": "utm_campaign",
+          "value": "g_cob_search"
+        },
+        {
+          "name": "utm_content",
+          "value": "cobalt_brand_keywords"
+        }
+      ],
+      "shipping_address": {
+        "zip": "700001",
+        "city": "Kolkata",
+        "province": "West Bengal"
+      },
+      "line_items": [
+        {
+          "id": 202278,
+          "variant_id": 9002,
+          "sku": "TEE-COB-L",
+          "title": "Cobalt Tee — L",
+          "quantity": 1,
+          "price": "1499.00"
+        }
+      ]
+    },
+    {
+      "id": 102279,
+      "order_number": 2279,
+      "name": "#2279",
+      "created_at": "2026-05-16T23:16:09.742Z",
+      "customer": {
+        "id": 5296,
+        "email": "customer2415@example.com"
+      },
+      "payment_gateway_names": [
+        "Cash on Delivery (COD)"
+      ],
+      "subtotal_price": "2998.00",
+      "shipping_lines": [
+        {
+          "price": "80.00"
+        }
+      ],
+      "total_discounts": "0.00",
+      "total_price": "3078.00",
+      "note_attributes": [
+        {
+          "name": "utm_source",
+          "value": "google"
+        },
+        {
+          "name": "utm_medium",
+          "value": "cpc"
+        },
+        {
+          "name": "utm_campaign",
+          "value": "g_cob_search"
+        },
+        {
+          "name": "utm_content",
+          "value": "cobalt_brand_keywords"
+        }
+      ],
+      "shipping_address": {
+        "zip": "500001",
+        "city": "Hyderabad",
+        "province": "Telangana"
+      },
+      "line_items": [
+        {
+          "id": 202279,
+          "variant_id": 9001,
+          "sku": "TEE-COB-M",
+          "title": "Cobalt Tee — M",
+          "quantity": 2,
+          "price": "1499.00"
+        }
+      ]
+    },
+    {
+      "id": 102280,
+      "order_number": 2280,
+      "name": "#2280",
+      "created_at": "2026-05-17T02:00:10.790Z",
+      "customer": {
+        "id": 5099,
+        "email": "customer8695@example.com"
+      },
+      "payment_gateway_names": [
+        "Razorpay"
+      ],
+      "subtotal_price": "2499.00",
+      "shipping_lines": [],
+      "total_discounts": "0.00",
+      "total_price": "2499.00",
+      "note_attributes": [
+        {
+          "name": "utm_source",
+          "value": "google"
+        },
+        {
+          "name": "utm_medium",
+          "value": "cpc"
+        },
+        {
+          "name": "utm_campaign",
+          "value": "g_display"
+        },
+        {
+          "name": "utm_content",
+          "value": "hoodie_display_retargeting"
+        }
+      ],
+      "shipping_address": {
+        "zip": "700001",
+        "city": "Kolkata",
+        "province": "West Bengal"
+      },
+      "line_items": [
+        {
+          "id": 202280,
+          "variant_id": 9008,
+          "sku": "HOOD-CHR-M",
+          "title": "Charcoal Hoodie — M",
+          "quantity": 1,
+          "price": "2499.00"
+        }
+      ]
+    }
+  ]
+}

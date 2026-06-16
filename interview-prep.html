@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Shiprocket Interview Prep · Komal Mathur</title>
+<style>
+  :root {
+    --bg: #faf8f3;
+    --ink: #1a1a1a;
+    --ink-soft: #3d3d3d;
+    --ink-mute: #6b6b6b;
+    --ink-faint: #9a9a9a;
+    --rule: #d8d4c8;
+    --rule-soft: #ebe7db;
+    --paper: #fdfcf8;
+    --accent: #9a3412;
+    --accent-soft: #fef3e6;
+    --yellow-mark: #fdf0a1;
+    --green-mark: #d1fae5;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Iowan Old Style", "Charter", "Georgia", "Times New Roman", serif;
+    font-size: 18px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Layout ── */
+  .layout {
+    display: grid;
+    grid-template-columns: 210px minmax(0, 700px) 1fr;
+    max-width: 1160px;
+    margin: 0 auto;
+  }
+
+  nav.toc {
+    position: sticky;
+    top: 0;
+    align-self: start;
+    max-height: 100vh;
+    overflow-y: auto;
+    padding: 50px 20px 40px 32px;
+    font-family: -apple-system, "Helvetica Neue", sans-serif;
+    font-size: 12.5px;
+  }
+  nav.toc .toc-head {
+    font-size: 10px; text-transform: uppercase; letter-spacing: 2px;
+    color: var(--ink-faint); margin-bottom: 12px; font-weight: 600;
+  }
+  nav.toc a {
+    display: block; color: var(--ink-mute); text-decoration: none;
+    padding: 4px 0 4px 10px; margin-left: -10px;
+    border-left: 2px solid transparent; line-height: 1.35;
+  }
+  nav.toc a:hover { color: var(--ink); }
+  nav.toc a.active { color: var(--accent); border-left-color: var(--accent); font-weight: 500; }
+
+  main { padding: 50px 40px 120px; min-width: 0; }
+
+  /* ── Masthead ── */
+  .masthead { border-bottom: 1px solid var(--ink); padding-bottom: 18px; margin-bottom: 40px; }
+  .masthead .eyebrow {
+    font-family: -apple-system, "Helvetica Neue", sans-serif;
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--ink-mute); margin-bottom: 8px;
+  }
+  .masthead h1 { font-size: 38px; line-height: 1.15; margin: 0 0 8px; font-weight: 700; letter-spacing: -0.5px; }
+  .masthead .byline {
+    font-family: -apple-system, "Helvetica Neue", sans-serif;
+    color: var(--ink-mute); font-size: 13px; font-style: italic;
+  }
+
+  /* ── Section labels ── */
+  h2 {
+    font-family: -apple-system, "Helvetica Neue", sans-serif;
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--ink-mute); font-weight: 600;
+    margin: 60px 0 4px; padding-bottom: 6px; border-bottom: 1px solid var(--rule);
+  }
+  h2 .no { color: var(--accent); font-weight: 700; margin-right: 10px; }
+
+  h3 {
+    font-family: "Iowan Old Style", "Charter", Georgia, serif;
+    font-size: 23px; line-height: 1.25; margin: 28px 0 8px;
+    font-weight: 600; letter-spacing: -0.3px;
+  }
+
+  h4 {
+    font-family: -apple-system, "Helvetica Neue", sans-serif;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px;
+    color: var(--ink-mute); margin: 20px 0 6px; font-weight: 600;
+  }
+
+  p { margin: 10px 0 16px; }
+  strong, b { font-weight: 700; color: var(--ink); }
+  mark { background: var(--yellow-mark); color: var(--ink); padding: 0 2px; }
+  .key { color: var(--accent); font-weight: 600; }
+  .green { background: var(--green-mark); color: var(--ink); padding: 0 2px; }
+
+  .lead {
+    font-size: 21px; line-height: 1.45; color: var(--ink-soft);
+    margin: 0 0 28px; font-style: italic;
+  }
+
+  /* ── Stats ── */
+  .stat-row { margin: 24px 0; }
+  .stat-inline {
+    display: inline-block; margin-right: 28px; padding-right: 28px;
+    border-right: 1px solid var(--rule); vertical-align: top;
+  }
+  .stat-inline:last-child { border-right: none; }
+  .stat-inline .v {
+    font-family: "Iowan Old Style", Charter, serif;
+    font-size: 34px; font-weight: 700; color: var(--ink);
+    line-height: 1; letter-spacing: -1px;
+  }
+  .stat-inline .v.red { color: var(--accent); }
+  .stat-inline .l {
+    font-family: -apple-system, sans-serif; font-size: 11px;
+    text-transform: uppercase; letter-spacing: 1px; color: var(--ink-mute); margin-top: 6px;
+  }
+
+  /* ── Agent grid ── */
+  .agent-grid {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 0;
+    border: 1px solid var(--rule); border-radius: 2px; margin: 20px 0 28px;
+    overflow: hidden;
+  }
+  .agent-cell {
+    padding: 14px 16px; border-right: 1px solid var(--rule);
+  }
+  .agent-cell:last-child { border-right: none; }
+  .agent-name {
+    font-family: "Iowan Old Style", Charter, serif;
+    font-size: 18px; font-weight: 700; color: var(--ink); margin-bottom: 2px;
+  }
+  .agent-title {
+    font-family: -apple-system, sans-serif; font-size: 10px;
+    text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent);
+    font-weight: 600; margin-bottom: 8px;
+  }
+  .agent-does { font-size: 14px; color: var(--ink-mute); line-height: 1.45; }
+
+  /* ── Connector table ── */
+  table {
+    width: 100%; border-collapse: collapse; margin: 16px 0 24px;
+    font-size: 16px; font-family: -apple-system, "Helvetica Neue", sans-serif;
+  }
+  th, td { padding: 10px 14px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--rule-soft); }
+  th {
+    font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px;
+    color: var(--ink-mute); font-weight: 600; border-bottom: 1.5px solid var(--ink);
+  }
+  tr:last-child td { border-bottom: none; }
+  tr.hi td { background: var(--accent-soft); }
+  tr.hi td:first-child { font-weight: 700; }
+
+  /* ── Pull quotes / aside ── */
+  blockquote {
+    margin: 24px 0; padding: 4px 0 4px 20px;
+    border-left: 3px solid var(--accent);
+    font-size: 17px; color: var(--ink-soft);
+  }
+  blockquote p { margin: 4px 0; }
+  blockquote.big {
+    font-size: 22px; line-height: 1.4; font-style: italic; padding: 6px 0 6px 24px;
+  }
+
+  .aside {
+    background: var(--paper); border: 1px solid var(--rule);
+    padding: 14px 20px; margin: 20px 0; border-radius: 2px; font-size: 16px;
+  }
+  .aside-label {
+    font-family: -apple-system, "Helvetica Neue", sans-serif;
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--accent); font-weight: 700; margin-bottom: 6px;
+  }
+
+  /* ── Principles list ── */
+  .principles { counter-reset: p; list-style: none; padding-left: 0; margin: 16px 0; }
+  .principles li { counter-increment: p; position: relative; padding-left: 44px; margin: 22px 0; }
+  .principles li::before {
+    content: counter(p);
+    position: absolute; left: 0; top: 2px;
+    font-family: -apple-system, sans-serif; font-size: 12px;
+    color: var(--ink-mute); font-weight: 600; letter-spacing: 0.5px;
+    border: 1px solid var(--rule); padding: 3px 8px; border-radius: 2px;
+    background: var(--paper); min-width: 28px; text-align: center;
+  }
+  .principles li h4 {
+    margin: 0 0 4px; color: var(--ink); text-transform: none; letter-spacing: 0;
+    font-size: 17px; font-family: "Iowan Old Style", Charter, serif; font-weight: 700;
+  }
+  .principles li .rationale { font-size: 16px; color: var(--ink-soft); margin: 4px 0; }
+  .principles li .rationale .hdr {
+    color: var(--ink-mute); font-family: -apple-system, sans-serif;
+    font-size: 10px; letter-spacing: 1px; text-transform: uppercase;
+    font-weight: 600; margin-right: 6px;
+  }
+
+  /* ── Q&A ── */
+  .qa-block { margin: 18px 0; }
+  .qa-block .q {
+    font-weight: 700; font-size: 18px; margin: 24px 0 6px; color: var(--ink);
+  }
+  .qa-block .q::before { content: "Q."; color: var(--accent); font-weight: 700; margin-right: 8px; }
+  .qa-block .a {
+    font-size: 16px; color: var(--ink-soft);
+    padding-left: 24px; border-left: 1px solid var(--rule); margin: 0 0 12px;
+  }
+  .qa-block .a .punchline {
+    display: block; margin-top: 8px;
+    font-family: -apple-system, sans-serif; font-size: 13px;
+    font-weight: 700; color: var(--accent); font-style: normal;
+  }
+
+  /* ── Ask them ── */
+  .ask-list { counter-reset: aq; list-style: none; padding-left: 0; }
+  .ask-list li { counter-increment: aq; position: relative; padding-left: 44px; margin: 18px 0; }
+  .ask-list li::before {
+    content: counter(aq, decimal-leading-zero);
+    position: absolute; left: 0; top: 3px;
+    font-family: -apple-system, sans-serif; font-size: 11px;
+    color: var(--accent); font-weight: 700; letter-spacing: 0.5px;
+    border: 1px solid var(--accent-soft); padding: 2px 7px; border-radius: 2px;
+    background: var(--accent-soft);
+  }
+  .ask-list li .aq { font-size: 17px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
+  .ask-list li .why { font-size: 15px; color: var(--ink-mute); }
+
+  /* ── Limits ── */
+  ul.limits { padding-left: 0; list-style: none; }
+  ul.limits li { padding: 10px 0; border-bottom: 1px solid var(--rule-soft); font-size: 16px; }
+  ul.limits li:last-child { border-bottom: none; }
+  ul.limits li strong { color: var(--ink); }
+  ul.limits li .sub { color: var(--ink-mute); font-size: 15px; margin-top: 2px; }
+
+  ul { padding-left: 24px; margin: 10px 0 18px; }
+  li { margin: 6px 0; }
+  li::marker { color: var(--ink-faint); }
+
+  hr { border: none; border-top: 1px solid var(--rule); margin: 40px 0; }
+
+  .footer {
+    font-family: -apple-system, sans-serif; font-size: 12px;
+    color: var(--ink-faint); margin-top: 60px; padding-top: 20px;
+    border-top: 1px solid var(--rule);
+  }
+  h2 .no.sym { font-size: 14px; }
+
+  /* ── Glossary ── */
+  .gloss-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 8px; margin: 16px 0 28px;
+  }
+  .gloss-item {
+    background: var(--paper); border: 1px solid var(--rule);
+    border-radius: 2px; padding: 9px 14px;
+    font-family: -apple-system, "Helvetica Neue", sans-serif;
+  }
+  .gloss {
+    font-size: 15px; font-weight: 700; color: var(--accent);
+    cursor: help; border-bottom: 1px dotted var(--accent);
+    text-decoration: none; display: inline-block;
+  }
+
+  /* tooltip */
+  .tip-box {
+    position: fixed;
+    background: #1a1a1a; color: #f0ece4;
+    font-family: -apple-system, "Helvetica Neue", sans-serif;
+    font-size: 13px; line-height: 1.5;
+    padding: 10px 14px; border-radius: 4px;
+    max-width: 280px; pointer-events: none;
+    opacity: 0; transition: opacity 0.12s;
+    z-index: 9999; box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+  }
+  .tip-box.visible { opacity: 1; }
+</style>
+</head>
+<body>
+<div class="layout">
+
+<!-- ── TOC ── -->
+<nav class="toc">
+  <div class="toc-head">Contents</div>
+  <a href="#top">Opening</a>
+  <a href="#challenge">The challenge</a>
+  <a href="#glossary">Glossary</a>
+  <a href="#team">1. The team</a>
+  <a href="#connectors">2. Connectors</a>
+  <a href="#trap">3. The demo trap</a>
+  <a href="#choices">4. Why each choice</a>
+  <a href="#limits">5. Limitations</a>
+  <a href="#qa">6. Their questions</a>
+  <a href="#evals">7. The 19 evals</a>
+  <a href="#structure">8. Agent structure</a>
+  <a href="#formulas">9. Agent formulas</a>
+  <a href="#scale-tools">10. Scale tools</a>
+  <a href="#ask">11. Ask them</a>
+</nav>
+
+<main>
+
+<!-- ── Masthead ── -->
+<div class="masthead" id="top">
+  <div class="eyebrow">Shiprocket Take-Home · Interview Prep</div>
+  <h1>AI Employees for D2C</h1>
+  <div class="byline">Komal Mathur · 2.5 days · komal.mathur@stage.in</div>
+</div>
+
+<p class="lead">
+  Five named AI employees who show up every morning with proposals already written — so the founder never has to ask.
+</p>
+
+<div class="stat-row">
+  <div class="stat-inline"><div class="v">19/19</div><div class="l">Evals passing</div></div>
+  <div class="stat-inline"><div class="v">5</div><div class="l">Connectors</div></div>
+  <div class="stat-inline"><div class="v">5</div><div class="l">Agents</div></div>
+  <div class="stat-inline"><div class="v red">8.7s</div><div class="l">1,000 merchants</div></div>
+</div>
+
+<blockquote class="big">
+  An AI company, not a chatbot. Push beats pull — the brief is there every morning without the founder doing anything.
+</blockquote>
+
+<!-- ── THE CHALLENGE ── -->
+<h2 id="challenge"><span class="no">↩</span>What they asked for</h2>
+
+<p>Five hard requirements — you beat all of them:</p>
+
+<table>
+  <thead><tr><th>Requirement</th><th>What you built</th><th>Status</th></tr></thead>
+  <tbody>
+    <tr class="hi"><td><strong>≥ 3 connectors, one shared abstraction</strong></td><td>5 connectors (Shopify, Meta, Google, Shiprocket, CSV) behind one <code>auth → fetch → normalize</code> interface</td><td>✓ exceeded</td></tr>
+    <tr class="hi"><td><strong>Universal data model, provenance on every row</strong></td><td>Source-agnostic schema, NOT NULL FK to raw_payloads enforced at DB level</td><td>✓ exceeded</td></tr>
+    <tr class="hi"><td><strong>Chat layer with citations</strong></td><td>Tool-use loop + server-side validator that rejects uncited numbers</td><td>✓</td></tr>
+    <tr class="hi"><td><strong>≥ 1 autonomous agent</strong></td><td>5 agents + Chief of Staff who can autonomously spawn new ones</td><td>✓ exceeded</td></tr>
+    <tr class="hi"><td><strong>Scalability layer</strong></td><td>Written in README: Meta rate limits → token rotation; raw_payloads → S3+DuckDB; polling → Kafka. 8.7s for 1,000 merchants.</td><td>✓</td></tr>
+  </tbody>
+</table>
+
+<div class="aside">
+  <div class="aside-label">What they score on</div>
+  <p style="margin:0"><em>"Two things matter equally: how well you build, and what you choose to build. The first is craft. The second is judgment."</em><br><br>
+  The "why" matters as much as the "what" — why these connectors, why this schema, why this agent. That's the whole README structure and what the interview will probe.</p>
+</div>
+
+<!-- ── GLOSSARY ── -->
+<h2 id="glossary"><span class="no">↗</span>Acronyms &amp; terms</h2>
+
+<p>Hover any term for the full form and meaning.</p>
+
+<div class="gloss-grid">
+  <div class="gloss-item"><span class="gloss" data-tip="Return to Origin — when a shipment is rejected or undeliverable and sent back. A 25–30% RTO rate on COD orders can wipe out a 30% gross margin.">RTO</span></div>
+  <div class="gloss-item"><span class="gloss" data-tip="Cash on Delivery — customer pays on arrival. Higher RTO risk than prepaid because there's no upfront commitment.">COD</span></div>
+  <div class="gloss-item"><span class="gloss" data-tip="Cost of Goods Sold — what it costs to make/source one unit. Without this, margin calculations use a 40% proxy.">COGS</span></div>
+  <div class="gloss-item"><span class="gloss" data-tip="Return on Ad Spend — revenue ÷ ad spend. Looks good on paper but misses RTO, shipping, and COGS. That's the whole trap.">ROAS</span></div>
+  <div class="gloss-item"><span class="gloss" data-tip="Urchin Tracking Module — query params appended to URLs (utm_source, utm_medium, utm_campaign, utm_content) to attribute orders to the ad that drove them.">UTM</span></div>
+  <div class="gloss-item"><span class="gloss" data-tip="Non-Delivery Report — raised when a delivery attempt fails. Multiple NDRs before RTO is common on COD orders in high-RTO pincodes.">NDR</span></div>
+  <div class="gloss-item"><span class="gloss" data-tip="Stock Keeping Unit — unique identifier for a product variant (e.g. HOOD-CHR-L = Charcoal Hoodie Large).">SKU</span></div>
+  <div class="gloss-item"><span class="gloss" data-tip="Direct to Consumer — brand sells directly to shoppers, skipping distributors and retail. The whole context: Shopify + ads + Shiprocket.">D2C</span></div>
+  <div class="gloss-item"><span class="gloss" data-tip="Cost Per Mille — cost per 1,000 impressions. Used as a proxy in the fixture generator: impressions = spend ÷ ₹0.40 CPM.">CPM</span></div>
+  <div class="gloss-item"><span class="gloss" data-tip="Click-Through Rate — clicks ÷ impressions. Varies by adset: Google Search brand keywords get ~5%, Meta display gets ~1-2%.">CTR</span></div>
+  <div class="gloss-item"><span class="gloss" data-tip="Conversion Rate — orders ÷ clicks. The Google brand keywords adset has ~14% CVR vs Meta lookalikes at ~4%.">CVR</span></div>
+  <div class="gloss-item"><span class="gloss" data-tip="Air Waybill — the unique tracking number assigned to a shipment by the courier.">AWB</span></div>
+  <div class="gloss-item"><span class="gloss" data-tip="Google Ads Query Language — SQL-like syntax used to query the Google Ads API. The live connector would POST a GAQL query to the searchStream endpoint.">GAQL</span></div>
+  <div class="gloss-item"><span class="gloss" data-tip="Lifetime Value — total revenue a customer generates over time. Not modeled in v0 but relevant to any cohort-level analysis Aanya might run.">LTV</span></div>
+  <div class="gloss-item"><span class="gloss" data-tip="Row-Level Security — a Postgres feature that restricts which rows a user can see within a table. v0 uses session-bound merchant_id instead; RLS is the v1 hardening step.">RLS</span></div>
+  <div class="gloss-item"><span class="gloss" data-tip="Foreign Key — a database constraint that links one table's column to a primary key in another. Every business row has a NOT NULL FK to raw_payloads.">FK</span></div>
+  <div class="gloss-item"><span class="gloss" data-tip="Ad Group — Google Ads' name for what Meta calls an 'adset'. Mapped to the universal 'adset' level in the connector so existing SQL rollups work across both channels.">Ad Group</span></div>
+  <div class="gloss-item"><span class="gloss" data-tip="Value of Information — decision-theory concept: is what this tool tells me worth what it costs? Used metaphorically here: if the decision is already known, don't re-run the query.">VOI</span></div>
+</div>
+
+<!-- ── TEAM ── -->
+<h2 id="team"><span class="no">1</span>The team</h2>
+
+<div class="agent-grid">
+  <div class="agent-cell">
+    <div class="agent-name">Aanya</div>
+    <div class="agent-title">CFO</div>
+    <div class="agent-does">Burn rate. Flags spend going to adsets that are already flagged as losers.</div>
+  </div>
+  <div class="agent-cell">
+    <div class="agent-name">Rishi</div>
+    <div class="agent-title">Growth</div>
+    <div class="agent-does">True margin per adset — revenue minus RTO, shipping, COGS, ad spend. Catches high-ROAS but negative-net ads.</div>
+  </div>
+  <div class="agent-cell">
+    <div class="agent-name">Meera</div>
+    <div class="agent-title">Ops</div>
+    <div class="agent-does">RTO by courier + pincode. Flags adsets that route orders to degraded lanes.</div>
+  </div>
+  <div class="agent-cell">
+    <div class="agent-name">Karan</div>
+    <div class="agent-title">Supply</div>
+    <div class="agent-does">Stockouts. Adjusts reorder math if Rishi's about to pause an adset that's driving a SKU's velocity.</div>
+  </div>
+  <div class="agent-cell">
+    <div class="agent-name">CoS</div>
+    <div class="agent-title">Chief of Staff</div>
+    <div class="agent-does">Ranks proposals, surfaces disagreements, writes the morning brief. Can autonomously hire new agents.</div>
+  </div>
+</div>
+
+<p>
+  The Chief of Staff can also run <strong>hire()</strong> — a chat tool that spawns new specialist agents (e.g. "hire a watcher for Patna pincodes"). Autonomous mode (<code>AUTO_HIRE=1</code>) lets her do this herself when the same target gets flagged across 3+ consecutive runs. Default off — bounded, audited, never recursive.
+</p>
+
+<!-- ── CONNECTORS ── -->
+<h2 id="connectors"><span class="no">2</span>Five connectors, one interface</h2>
+
+<p>
+  All five go through the same <code>auth → fetch → normalize</code> pipeline. The SQL queries aggregate across sources — adding Google didn't change any existing agent logic.
+</p>
+
+<table>
+  <thead><tr><th>Connector</th><th>What it provides</th><th>Why it matters</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Shopify</strong></td><td>Orders, revenue, customers</td><td>The source of truth for revenue and attribution UTMs</td></tr>
+    <tr><td><strong>Meta Ads</strong></td><td>Spend, campaigns, adsets</td><td>Rishi's margin math, Meera's attribution</td></tr>
+    <tr><td><strong>Google Ads</strong></td><td>Same shape as Meta</td><td>Unlocks cross-channel: "which channel is more efficient per rupee for this SKU?"</td></tr>
+    <tr><td><strong>Shiprocket</strong></td><td>Shipments, RTO, NDR, courier</td><td>The join nobody does in Excel — fulfillment reality vs ad-level ROAS</td></tr>
+    <tr class="hi"><td><strong>CSV</strong></td><td>Founder-uploaded COGS per SKU</td><td>Proves the abstraction isn't just REST wrappers. Needed for true margin.</td></tr>
+  </tbody>
+</table>
+
+<p>
+  Every business row has a <strong>NOT NULL foreign key</strong> to the raw API payload it came from. Postgres rejects inserts without it — so citation isn't "we try", it's structurally enforced.
+</p>
+
+<!-- ── THE TRAP ── -->
+<h2 id="trap"><span class="no">3</span>The demo — Crimson Tee COD Push</h2>
+
+<p>
+  The demo merchant (Kindred Apparel) has a Meta adset that looks great on ROAS but actually loses money:
+</p>
+
+<div class="stat-row">
+  <div class="stat-inline"><div class="v red">85%</div><div class="l">Orders are COD</div></div>
+  <div class="stat-inline"><div class="v red">~46%</div><div class="l">RTO rate on those</div></div>
+  <div class="stat-inline"><div class="v red">–ve</div><div class="l">True margin</div></div>
+</div>
+
+<p>
+  All orders route to Patna pincodes via Bluedart — the <mark>degraded lane in the data</mark>. Revenue mostly never materializes. Once you net out RTO + shipping + COGS + ad spend, the margin flips negative.
+</p>
+
+<blockquote>
+  <strong>Rishi</strong> flags it from the margin side. <strong>Meera</strong> flags the same adset from the RTO-concentration side. Same target entity, different reasoning. The Chief of Staff surfaces this disagreement at the top of the brief. <em>That's the moment it feels like a real team.</em>
+</blockquote>
+
+<!-- ── CHOICES ── -->
+<h2 id="choices"><span class="no">4</span>Why each choice — memorise these</h2>
+
+<ol class="principles">
+  <li>
+    <h4>Morning brief, not a chat interface</h4>
+    <div class="rationale"><span class="hdr">Why</span> Founders don't bother asking cross-tool questions — they run on vibes. A chat interface requires knowing what to ask. The brief is pushed every morning with no input from them. Chat is only for follow-up.</div>
+    <div class="rationale"><span class="hdr">One-liner</span> Push beats pull.</div>
+  </li>
+  <li>
+    <h4>Deterministic SQL for decisions, LLM only for words</h4>
+    <div class="rationale"><span class="hdr">Why</span> Cost (10k merchants × chain-of-thought is expensive), auditability (same input → same output, always), and trust (LLM decisions can drift between runs). The LLM writes the explanation. SQL makes the flag.</div>
+    <div class="rationale"><span class="hdr">One-liner</span> LLM for narrative. SQL for decisions.</div>
+  </li>
+  <li>
+    <h4>Provenance as a database constraint, not a convention</h4>
+    <div class="rationale"><span class="hdr">Why</span> NOT NULL foreign key to raw_payloads on every row. Postgres enforces it. The Citation Inspector in the UI just surfaces what's already guaranteed at the schema level — you can click any number and trace it to the exact API payload.</div>
+  </li>
+  <li>
+    <h4>Five agents instead of one</h4>
+    <div class="rationale"><span class="hdr">Why</span> More than one agent produces genuine disagreement on the same target — more useful than one always-agreeable agent. Rishi and Meera flagging the same adset for different reasons is signal you can't get from a single agent.</div>
+  </li>
+  <li>
+    <h4>Google Ads as a 5th connector</h4>
+    <div class="rationale"><span class="hdr">Why</span> Not to hit a number — it unlocked a new question: "for the same SKU, which channel is more efficient per rupee?" On demo data, Google Search outperforms Meta lookalikes on Cobalt Tee. That question didn't exist before.</div>
+  </li>
+  <li>
+    <h4>hire() autonomous mode off by default</h4>
+    <div class="rationale"><span class="hdr">Why</span> Unbounded recursive agent spawning is how demos go wrong. Autonomous mode fires only when the same target is flagged 3+ consecutive runs, limited to 1 hire per run, never the same target twice, full audit trail. Safety constraints came before the feature.</div>
+  </li>
+  <li>
+    <h4>No multi-agent framework (no LangChain)</h4>
+    <div class="rationale"><span class="hdr">Why</span> Frameworks make it easy to chain LLM calls but don't give you citation enforcement, audit trails, or a deterministic decision core. The agents here don't need a framework — they need SQL and a contract.</div>
+  </li>
+</ol>
+
+<!-- ── LIMITS ── -->
+<h2 id="limits"><span class="no">5</span>Limitations — be upfront</h2>
+
+<ul class="limits">
+  <li>
+    <strong>INR only.</strong>
+    <div class="sub">Multi-currency merchants would silently misaggregate. V1 task.</div>
+  </li>
+  <li>
+    <strong>Last-click UTM attribution.</strong>
+    <div class="sub">iOS14 dark social, view-through, multi-touch all missed. Rishi declares this in every proposal.</div>
+  </li>
+  <li>
+    <strong>COGS defaults to 40% proxy.</strong>
+    <div class="sub">Unless the founder uploads a CSV. Every agent declares which mode it's running in.</div>
+  </li>
+  <li>
+    <strong>Partial returns not modeled.</strong>
+    <div class="sub">RTO yes. Shopify refunds outside the order flow, no. Aanya's margin is an approximation.</div>
+  </li>
+  <li>
+    <strong>Trust scorecard is replay-on-synthetic-data, not causal.</strong>
+    <div class="sub">Real grading needs counterfactual evaluation — what would have happened if the founder hadn't acted? That's an ML research problem, not a coding task.</div>
+  </li>
+  <li>
+    <strong>Cross-tenant isolation is session-bound merchant_id, not Postgres RLS.</strong>
+    <div class="sub">Fine for v0, needs hardening at scale.</div>
+  </li>
+  <li>
+    <strong>Citation escape hatch.</strong>
+    <div class="sub">If the model hedges ("approximately"), an uncited number can slip through the validator. V1 fix.</div>
+  </li>
+  <li>
+    <strong>hire() is parameterized, not free-form.</strong>
+    <div class="sub">Three template shapes. "Hire an analyst who reads ad creatives" is v1.</div>
+  </li>
+</ul>
+
+<!-- ── Q&A ── -->
+<h2 id="qa"><span class="no">6</span>Questions they'll ask</h2>
+
+<div class="qa-block">
+
+  <div class="q">Why a morning brief instead of just a chat interface?</div>
+  <div class="a">
+    Founders don't bother asking cross-tool questions — they run on vibes. A chat interface requires knowing what to ask, which founders don't. The brief is pushed every morning with no input from them. Chat is the follow-up surface for when they care about something specific.
+    <span class="punchline">→ Push beats pull.</span>
+  </div>
+
+  <div class="q">How does the citation contract actually work?</div>
+  <div class="a">
+    Three layers: (1) system prompt tells the model every numeric claim must end with <code>[cite:table:rowid]</code>. (2) A server-side validator re-fetches each cited row, checks it belongs to this merchant, and rejects the response if any number is uncited. (3) The schema enforces a NOT NULL foreign key to raw_payloads on every row — so citations always trace back to real data, they can't be invented.
+    <span class="punchline">→ Can't insert without provenance. It's enforced at the DB level.</span>
+  </div>
+
+  <div class="q">Why deterministic SQL decisions, not LLM reasoning?</div>
+  <div class="a">
+    Cost (10k merchants × chain-of-thought is expensive). Auditability (same input → same output, always). Trust (LLM decisions drift between runs; founders need a consistent track record). The LLM only writes the human-readable explanation. The actual flag logic is SQL with hand-written rules.
+    <span class="punchline">→ LLM for words. SQL for decisions.</span>
+  </div>
+
+  <div class="q">Why not use LangChain or a multi-agent framework?</div>
+  <div class="a">
+    Those frameworks make it easy to chain LLM calls, but they don't give you audit trails, citation enforcement, or a deterministic decision core. The agents here don't need a framework — they need SQL and a contract.
+  </div>
+
+  <div class="q">How would you scale this to 10,000 merchants?</div>
+  <div class="a">
+    I know three specific bottlenecks. <strong>Meta API rate limits</strong> — 200 calls/hr/account, needs per-account token rotation and queued async jobs. <strong>raw_payloads archive</strong> — ~5GB/day at sustained sync, needs cold storage to S3 + DuckDB. <strong>Webhook fan-in at peak</strong> — v0 polls, which doesn't scale, needs Kafka or similar. The agent runs themselves are cheap at ~6ms each, so 5 agents × 10k merchants daily is about 5 minutes of CPU.
+    <span class="punchline">→ Agent runs are cheap. Data infrastructure is the problem.</span>
+  </div>
+
+  <div class="q">Why RTO-focused instead of just revenue analytics?</div>
+  <div class="a">
+    Indian D2C has a 25–30% COD RTO problem that wipes out gross margin — and generic analytics tools miss it entirely. The founder's dashboard shows ROAS. It doesn't show "this adset is driving orders that mostly don't get delivered." That cross-tool join is what nobody does in Excel. <mark>Shiprocket owns that fulfillment data</mark> — which is exactly why this framing made sense for this company.
+  </div>
+
+  <div class="q">What would you do with another week?</div>
+  <div class="a">
+    Counterfactual evaluation — proving a proposal would have actually saved money if the founder had acted on it. Right now the trust scorecard replays synthetic data. Real grading needs a simulator that asks "what would have happened without this action?" That's an applied ML research problem, not a coding task. That's the most interesting unsolved thing.
+  </div>
+
+  <div class="q">Why five agents instead of one?</div>
+  <div class="a">
+    Once you have more than one agent, you get genuine disagreement on the same target — which is more useful than one always-agreeable agent. The Rishi-Meera disagreement on the Crimson Tee adset (different reasoning, same conclusion) is signal you can't get from a single agent.
+  </div>
+
+</div>
+
+<!-- ── 19 EVALS ── -->
+<h2 id="evals"><span class="no">7</span>The 19 evals — what each one checks</h2>
+
+<p>Four suites, run against the live Kindred Apparel demo merchant after seeding.</p>
+
+<h3>Suite 1 · Golden Q&amp;A (5 evals)</h3>
+<p>Real questions sent to the chat layer. Checks that the right tool was called, the right table was cited, and the answer contains expected content.</p>
+
+<table>
+  <thead><tr><th>Eval ID</th><th>Question</th><th>What it checks</th></tr></thead>
+  <tbody>
+    <tr><td><code>rto-worst-courier</code></td><td>"Which courier has the highest RTO rate?"</td><td>Bluedart appears in result, shipments table cited</td></tr>
+    <tr><td><code>trap-adset-margin</code></td><td>"Show me adsets by true margin worst to best."</td><td>Crimson Tee COD Push is worst, orders table cited</td></tr>
+    <tr><td><code>stockout-hoodies</code></td><td>"Which SKUs am I about to stock out of?"</td><td>HOOD-CHR-L appears, proposals table cited</td></tr>
+    <tr><td><code>rto-by-pincode</code></td><td>"What's RTO like on Patna pincodes?"</td><td>Pincode 800001 in result, shipments cited</td></tr>
+    <tr><td><code>disagreement-existence</code></td><td>"Are any of my agents disagreeing on something?"</td><td>as_crm_cod appears (both Rishi + Meera flagged it)</td></tr>
+  </tbody>
+</table>
+
+<h3>Suite 2 · Citation contract regression (5 evals)</h3>
+<p>Feeds crafted answer strings to the validator. Checks that bad citations are caught and good ones pass.</p>
+
+<table>
+  <thead><tr><th>Eval</th><th>Input</th><th>Expected</th></tr></thead>
+  <tbody>
+    <tr><td><code>valid-cited-number</code></td><td>"Bluedart RTO is 39% [cite:shipments:&lt;realId&gt;]"</td><td>PASS — real row, correct table</td></tr>
+    <tr><td><code>uncited-number-rejected</code></td><td>"Bluedart RTO is around 39%."</td><td>FAIL — number with no citation</td></tr>
+    <tr><td><code>fake-uuid-rejected</code></td><td>"Spend was ₹100 [cite:orders:00000-…-000]"</td><td>FAIL — row doesn't exist</td></tr>
+    <tr><td><code>wrong-table-rejected</code></td><td>"Spend was ₹100 [cite:bogus_table:&lt;realId&gt;]"</td><td>FAIL — table not in allowed list</td></tr>
+    <tr><td><code>no-numbers-no-citation-ok</code></td><td>"We have several adsets."</td><td>PASS — no numbers, no citation needed</td></tr>
+  </tbody>
+</table>
+
+<h3>Suite 3 · Agent decision regression (5 evals)</h3>
+<p>Checks that specific proposals exist in the DB after agents run. These are the canonical signals the demo is designed to produce.</p>
+
+<table>
+  <thead><tr><th>Eval</th><th>What it checks</th></tr></thead>
+  <tbody>
+    <tr><td><code>rishi-paused-trap-adset</code></td><td>Rishi proposed pause_ad_set on as_crm_cod (margin reason)</td></tr>
+    <tr><td><code>meera-paused-trap-adset</code></td><td>Meera proposed pause_ad_set on the SAME as_crm_cod (ops reason) — the disagreement</td></tr>
+    <tr><td><code>karan-reordered-hoodie-L</code></td><td>Karan proposed reorder_inventory for HOOD-CHR-L</td></tr>
+    <tr><td><code>aanya-cited-team</code></td><td>Aanya proposed cut_ad_spend (citing Rishi/Meera's pause proposals)</td></tr>
+    <tr><td><code>meera-flagged-degraded-lane</code></td><td>Meera proposed swap_courier_on_lane for Bluedart::800xxx (Patna)</td></tr>
+  </tbody>
+</table>
+
+<h3>Suite 4 · Autonomous hire bounds (4 evals)</h3>
+<p>Checks that the autonomous hire feature is safe — gated, consistent, and non-recursive.</p>
+
+<table>
+  <thead><tr><th>Eval</th><th>What it checks</th></tr></thead>
+  <tbody>
+    <tr><td><code>autohire:gated-by-env</code></td><td>AUTO_HIRE=1 env var must be set; feature never fires silently</td></tr>
+    <tr><td><code>autohire:persistent-targets-detected</code></td><td>SQL finds targets flagged ≥3 consecutive runs; returns 0 correctly on fresh seed</td></tr>
+    <tr><td><code>autohire:agent-and-proposal-consistent</code></td><td>agents table count == proposals table count (no orphaned records)</td></tr>
+    <tr><td><code>autohire:no-duplicate-watchers</code></td><td>No two Chief of Staff hires on the same target entity</td></tr>
+  </tbody>
+</table>
+
+<!-- ── AGENT STRUCTURE ── -->
+<h2 id="structure"><span class="no">8</span>How an agent is structured</h2>
+
+<p>Every agent is an <code>AgentSpec</code> object — a plain TypeScript object, not a class, not a framework. It has four things:</p>
+
+<div class="aside">
+  <div class="aside-label">AgentSpec shape</div>
+  <p style="margin:0; font-family: 'SF Mono', Menlo, monospace; font-size: 14px; line-height: 1.7;">
+    <strong>name / role</strong> — display identity ("Rishi", "Growth Lead")<br>
+    <strong>systemPrompt</strong> — personality string passed to the LLM <em>only for narration</em><br>
+    <strong>decide(ctx)</strong> — the deterministic function. Runs SQL, computes numbers, returns proposals. No LLM call here.<br>
+    <strong>declaredFailureModes</strong> — list of known limitations shown in the UI on every proposal
+  </p>
+</div>
+
+<p>The flow for one agent run:</p>
+
+<ol class="principles">
+  <li>
+    <h4>decide() runs SQL</h4>
+    <div class="rationale"><span class="hdr">What</span> Plain SQL via Drizzle ORM. Aggregates the normalized tables (orders, shipments, ad_spend_daily, products, ad_attributions). All the math happens here — no LLM.</div>
+  </li>
+  <li>
+    <h4>decide() returns ProposalInput[]</h4>
+    <div class="rationale"><span class="hdr">What</span> Structured objects with: action_type, target_entity_id, expected_savings_inr, confidence (0–1), caveats[], citation_row_ids[], prediction (metric, direction, window_days).</div>
+  </li>
+  <li>
+    <h4>narrate() writes the words</h4>
+    <div class="rationale"><span class="hdr">What</span> If ANTHROPIC_API_KEY is set, calls claude-haiku with the systemPrompt + the ProposalInput JSON. Told: "write 2-3 sentences in your voice. Do NOT invent any numbers — only restate what's in the input." Falls back to a deterministic template if the LLM call fails.</div>
+  </li>
+  <li>
+    <h4>Proposal saved to DB</h4>
+    <div class="rationale"><span class="hdr">What</span> Upserted into the proposals table with the agent_run_id, so autonomous-hire logic can check how many consecutive runs have flagged the same target. Status transitions: pending → superseded (not deleted) so history is preserved.</div>
+  </li>
+</ol>
+
+<blockquote>
+  The systemPrompt gives the agent its voice — "Hindi-English bilingual mindset, fulfillment-obsessed" (Meera), "no-nonsense, skeptical of ROAS-on-paper numbers" (Rishi). The decision is never touched by this prompt. Only the narrative explanation is.
+</blockquote>
+
+<!-- ── FORMULAS ── -->
+<h2 id="formulas"><span class="no">9</span>What each agent actually computes</h2>
+
+<table>
+  <thead><tr><th>Agent</th><th>What it calculates</th><th>Fires when</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><strong>Rishi</strong></td>
+      <td>Revenue from delivered orders only (RTOs don't count), minus COGS, shipping, and ad spend. That's the real margin — not ROAS.</td>
+      <td>Real margin goes negative and the adset has spent &gt;₹5k in 7 days. Also flags to scale if margin &gt; 50% of spend, or to shift budget if one channel is 2× more efficient per rupee on the same SKU.</td>
+    </tr>
+    <tr>
+      <td><strong>Meera</strong></td>
+      <td>What % of an adset's orders RTOed (last 30 days), and separately what % of shipments on each courier+pincode pair RTOed.</td>
+      <td>Adset: &gt;40% RTO with ≥15 orders → pause. Lane: &gt;30% RTO on a courier+pincode with ≥15 shipments → swap courier.</td>
+    </tr>
+    <tr>
+      <td><strong>Aanya</strong></td>
+      <td>30-day net revenue (excluding RTOs) minus COGS, shipping, and ad spend. Compares this month vs last month for both revenue and spend growth.</td>
+      <td>Any of: margin negative, spend growing 15pp faster than revenue, spend &gt;35% of revenue, or &gt;15% of spend going to adsets Rishi/Meera already flagged.</td>
+    </tr>
+    <tr>
+      <td><strong>Karan</strong></td>
+      <td>Units sold last 14 days ÷ 14 = daily velocity. Current inventory ÷ velocity = days until stockout. If Rishi's about to pause an adset that drives this SKU, the reorder quantity adjusts down proportionally.</td>
+      <td>Stockout date is within 21 days (the supplier lead time). Reorder quantity = velocity × (21 + 7 buffer days).</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ── SCALE TOOLS ── -->
+<h2 id="scale-tools"><span class="no">10</span>Scalability tools — what they are</h2>
+
+<p>Three tools mentioned in the README. Here's what each one actually does and why it solves the specific bottleneck.</p>
+
+<div class="qa-block">
+
+  <div class="q">Kafka — what is it and why do we need it?</div>
+  <div class="a">
+    <strong>What it is:</strong> a message queue. You publish events ("this order just arrived") to a topic, and multiple consumers can read them independently and at their own pace.<br><br>
+    <strong>The problem it solves:</strong> v0 polls the APIs on a cron — every connector calls Shopify/Meta/Shiprocket every N minutes. At 10k merchants, that's 10k × (polling interval) API calls hammering the same endpoints. With Kafka, each merchant's connector publishes events as they arrive (via webhooks), and the sync workers consume them from the queue. No polling, no rate-limit pile-up, and if a worker crashes it picks up where it left off (Kafka retains the message).
+    <span class="punchline">→ Polling doesn't scale. Kafka turns 10k simultaneous syncs into 10k events in a queue.</span>
+  </div>
+
+  <div class="q">S3 — what is it and why do we need it?</div>
+  <div class="a">
+    <strong>What it is:</strong> Amazon's object storage. Cheap, infinitely scalable storage for files/blobs. Postgres is not designed for storing huge volumes of raw JSON payloads long-term.<br><br>
+    <strong>The problem it solves:</strong> the raw_payloads table stores every raw API response — Shopify orders, Meta insights, Shiprocket shipments. At 10k merchants that's ~5GB/day. After 90 days that's 450GB in Postgres, which is slow and expensive. The plan: keep only the last 30 days of raw_payloads in Postgres (for citations). Archive older data to S3 as compressed JSON. The citation contract still works because recent data is in Postgres; historical data is queryable via DuckDB.
+    <span class="punchline">→ Postgres for hot data (citations). S3 for cold archive (history).</span>
+  </div>
+
+  <div class="q">DuckDB — what is it and why does it pair with S3?</div>
+  <div class="a">
+    <strong>What it is:</strong> an in-process analytical database — think SQLite but for analytics. It can query Parquet files on S3 directly without loading them into memory first. No separate server needed.<br><br>
+    <strong>The problem it solves:</strong> once raw_payloads are archived to S3, you still need to query them — for historical trend analysis, for counterfactual evaluation, for agent training data. DuckDB can <code>SELECT FROM 's3://bucket/payloads/*.parquet'</code> directly, and it's fast (columnar storage, vectorized execution). You run it as a library inside the agent process — no infra to manage.
+    <span class="punchline">→ DuckDB reads the S3 archive without needing a data warehouse.</span>
+  </div>
+
+  <div class="q">Token rotation — what is it?</div>
+  <div class="a">
+    <strong>The problem:</strong> Meta's API allows 200 calls/hr per OAuth token. At 10k merchants, if every merchant has a separate token, that's fine — but you can't make 10k API calls in the same hour from one token. Token rotation means: pool the tokens, distribute calls across them so no single token hits its rate limit. Each merchant has their own token; the sync scheduler ensures no token is called more than 200×/hr.
+    <span class="punchline">→ One token per merchant. Rate limit is per-token, not global.</span>
+  </div>
+
+</div>
+
+<!-- ── ASK THEM ── -->
+<h2 id="ask"><span class="no">11</span>Ask them</h2>
+
+<ol class="ask-list">
+  <li>
+    <div class="aq">How is the AI team structured — dedicated engineers or embedded in product squads?</div>
+    <div class="why">Tells you if this is a serious platform bet or a feature bolted onto an existing team.</div>
+  </li>
+  <li>
+    <div class="aq">Is this a standalone product or embedded in the existing merchant dashboard?</div>
+    <div class="why">Core bet vs side experiment — determines resourcing, deadlines, and whether you're shipping or researching.</div>
+  </li>
+  <li>
+    <div class="aq">What does Shiprocket's data infrastructure look like across the platform?</div>
+    <div class="why">Do you inherit a solid data layer, or do you need to build it first?</div>
+  </li>
+  <li>
+    <div class="aq">What's the bar for a proposal to move from "show the founder" to "execute automatically"?</div>
+    <div class="why">Shows you've thought about responsible deployment. Also tells you their risk tolerance.</div>
+  </li>
+  <li>
+    <div class="aq">Which D2C pain points are you still seeing that existing AI tools don't address?</div>
+    <div class="why">What they actually want built vs what's in the brief.</div>
+  </li>
+  <li>
+    <div class="aq">What does success look like in the first 90 days?</div>
+    <div class="why">Ship features, do research, or build infra? Concrete expectations matter.</div>
+  </li>
+  <li>
+    <div class="aq">How much autonomy do engineers have over design choices?</div>
+    <div class="why">Do the "whys" matter here, or just the delivery?</div>
+  </li>
+  <li>
+    <div class="aq">What's the biggest technical challenge you're anticipating as this scales?</div>
+    <div class="why">You already have an answer (Meta rate limits, storage, fan-in). See if your concerns match theirs.</div>
+  </li>
+</ol>
+
+<div class="footer">Shiprocket interview prep · Komal Mathur · May 2026</div>
+
+</main>
+</div>
+
+<div class="tip-box" id="tipBox"></div>
+
+<script>
+  // TOC active highlight
+  const allH2 = document.querySelectorAll('h2[id], .masthead[id]');
+  const links = document.querySelectorAll('nav.toc a');
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY + 100;
+    let activeId = 'top';
+    allH2.forEach(el => { if (el.offsetTop <= y) activeId = el.id; });
+    links.forEach(l => {
+      l.classList.toggle('active', l.getAttribute('href') === '#' + activeId);
+    });
+  });
+
+  // Glossary tooltips
+  const tip = document.getElementById('tipBox');
+  document.querySelectorAll('.gloss').forEach(el => {
+    el.addEventListener('mouseenter', e => {
+      tip.textContent = el.dataset.tip;
+      tip.classList.add('visible');
+      position(e);
+    });
+    el.addEventListener('mousemove', position);
+    el.addEventListener('mouseleave', () => tip.classList.remove('visible'));
+  });
+  function position(e) {
+    const pad = 14, tw = 280;
+    let x = e.clientX + pad;
+    let y = e.clientY + pad;
+    if (x + tw > window.innerWidth) x = e.clientX - tw - pad;
+    tip.style.left = x + 'px';
+    tip.style.top  = y + 'px';
+  }
+</script>
+
+</body>
+</html>

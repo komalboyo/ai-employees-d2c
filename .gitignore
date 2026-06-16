@@ -11,3 +11,65 @@ drizzle/meta
 .claude/
 the-build.docx
 tsconfig.tsbuildinfo
+.gstack/
+
+# --- managed by repo-setup ---
+# Dependencies
+node_modules/
+.pnp
+.venv/
+venv/
+env/
+ENV/
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+# Build / cache
+.next/
+dist/
+build/
+out/
+.turbo/
+.cache/
+.parcel-cache/
+target/
+.svelte-kit/
+.vercel/
+*.tsbuildinfo
+# Tooling / local state
+.claude/
+.conflux/
+.claw/
+.gstack/
+.context/
+# Secrets
+.env
+.env.*
+!.env.example
+!.env.sample
+*.pem
+*.key
+id_rsa
+*.p12
+*credentials*.json
+serviceAccount*.json
+# Large binaries / models / data dumps
+*.pt
+*.ckpt
+*.safetensors
+*.gguf
+*.h5
+*.onnx
+*.sqlite
+*.sqlite3
+*.db
+*.db-wal
+*.db-shm
+# OS
+.DS_Store
+Thumbs.db
+# Logs
+*.log
+# session histories are intentionally COMMITTED (in .claude-sessions/)

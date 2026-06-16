@@ -1,0 +1,544 @@
+{
+  "data": [
+    {
+      "ad_id": "ad_google_0_1",
+      "ad_group_id": "g_cob_kw_brand",
+      "campaign_id": "g_cob_search",
+      "date_start": "2026-04-17",
+      "spend": "1045.83",
+      "impressions": 2615,
+      "clicks": 136
+    },
+    {
+      "ad_id": "ad_google_1_1",
+      "ad_group_id": "g_hood_display",
+      "campaign_id": "g_display",
+      "date_start": "2026-04-17",
+      "spend": "910.68",
+      "impressions": 2277,
+      "clicks": 25
+    },
+    {
+      "ad_id": "ad_google_0_1",
+      "ad_group_id": "g_cob_kw_brand",
+      "campaign_id": "g_cob_search",
+      "date_start": "2026-04-18",
+      "spend": "1113.85",
+      "impressions": 2785,
+      "clicks": 145
+    },
+    {
+      "ad_id": "ad_google_1_1",
+      "ad_group_id": "g_hood_display",
+      "campaign_id": "g_display",
+      "date_start": "2026-04-18",
+      "spend": "979.72",
+      "impressions": 2449,
+      "clicks": 27
+    },
+    {
+      "ad_id": "ad_google_0_1",
+      "ad_group_id": "g_cob_kw_brand",
+      "campaign_id": "g_cob_search",
+      "date_start": "2026-04-19",
+      "spend": "1255.11",
+      "impressions": 3138,
+      "clicks": 163
+    },
+    {
+      "ad_id": "ad_google_1_1",
+      "ad_group_id": "g_hood_display",
+      "campaign_id": "g_display",
+      "date_start": "2026-04-19",
+      "spend": "1008.32",
+      "impressions": 2521,
+      "clicks": 28
+    },
+    {
+      "ad_id": "ad_google_0_1",
+      "ad_group_id": "g_cob_kw_brand",
+      "campaign_id": "g_cob_search",
+      "date_start": "2026-04-20",
+      "spend": "1345.19",
+      "impressions": 3363,
+      "clicks": 175
+    },
+    {
+      "ad_id": "ad_google_1_1",
+      "ad_group_id": "g_hood_display",
+      "campaign_id": "g_display",
+      "date_start": "2026-04-20",
+      "spend": "853.65",
+      "impressions": 2134,
+      "clicks": 23
+    },
+    {
+      "ad_id": "ad_google_0_1",
+      "ad_group_id": "g_cob_kw_brand",
+      "campaign_id": "g_cob_search",
+      "date_start": "2026-04-21",
+      "spend": "1068.50",
+      "impressions": 2671,
+      "clicks": 139
+    },
+    {
+      "ad_id": "ad_google_1_1",
+      "ad_group_id": "g_hood_display",
+      "campaign_id": "g_display",
+      "date_start": "2026-04-21",
+      "spend": "836.78",
+      "impressions": 2092,
+      "clicks": 23
+    },
+    {
+      "ad_id": "ad_google_0_1",
+      "ad_group_id": "g_cob_kw_brand",
+      "campaign_id": "g_cob_search",
+      "date_start": "2026-04-22",
+      "spend": "1269.38",
+      "impressions": 3173,
+      "clicks": 165
+    },
+    {
+      "ad_id": "ad_google_1_1",
+      "ad_group_id": "g_hood_display",
+      "campaign_id": "g_display",
+      "date_start": "2026-04-22",
+      "spend": "920.08",
+      "impressions": 2300,
+      "clicks": 25
+    },
+    {
+      "ad_id": "ad_google_0_1",
+      "ad_group_id": "g_cob_kw_brand",
+      "campaign_id": "g_cob_search",
+      "date_start": "2026-04-23",
+      "spend": "1290.66",
+      "impressions": 3227,
+      "clicks": 168
+    },
+    {
+      "ad_id": "ad_google_1_1",
+      "ad_group_id": "g_hood_display",
+      "campaign_id": "g_display",
+      "date_start": "2026-04-23",
+      "spend": "1003.64",
+      "impressions": 2509,
+      "clicks": 28
+    },
+    {
+      "ad_id": "ad_google_0_1",
+      "ad_group_id": "g_cob_kw_brand",
+      "campaign_id": "g_cob_search",
+      "date_start": "2026-04-24",
+      "spend": "1117.61",
+      "impressions": 2794,
+      "clicks": 145
+    },
+    {
+      "ad_id": "ad_google_1_1",
+      "ad_group_id": "g_hood_display",
+      "campaign_id": "g_display",
+      "date_start": "2026-04-24",
+      "spend": "961.28",
+      "impressions": 2403,
+      "clicks": 26
+    },
+    {
+      "ad_id": "ad_google_0_1",
+      "ad_group_id": "g_cob_kw_brand",
+      "campaign_id": "g_cob_search",
+      "date_start": "2026-04-25",
+      "spend": "1113.14",
+      "impressions": 2783,
+      "clicks": 145
+    },
+    {
+      "ad_id": "ad_google_1_1",
+      "ad_group_id": "g_hood_display",
+      "campaign_id": "g_display",
+      "date_start": "2026-04-25",
+      "spend": "986.40",
+      "impressions": 2466,
+      "clicks": 27
+    },
+    {
+      "ad_id": "ad_google_0_1",
+      "ad_group_id": "g_cob_kw_brand",
+      "campaign_id": "g_cob_search",
+      "date_start": "2026-04-26",
+      "spend": "1255.08",
+      "impressions": 3138,
+      "clicks": 163
+    },
+    {
+      "ad_id": "ad_google_1_1",
+      "ad_group_id": "g_hood_display",
+      "campaign_id": "g_display",
+      "date_start": "2026-04-26",
+      "spend": "948.25",
+      "impressions": 2371,
+      "clicks": 26
+    },
+    {
+      "ad_id": "ad_google_0_1",
+      "ad_group_id": "g_cob_kw_brand",
+      "campaign_id": "g_cob_search",
+      "date_start": "2026-04-27",
+      "spend": "1376.04",
+      "impressions": 3440,
+      "clicks": 179
+    },
+    {
+      "ad_id": "ad_google_1_1",
+      "ad_group_id": "g_hood_display",
+      "campaign_id": "g_display",
+      "date_start": "2026-04-27",
+      "spend": "900.51",
+      "impressions": 2251,
+      "clicks": 25
+    },
+    {
+      "ad_id": "ad_google_0_1",
+      "ad_group_id": "g_cob_kw_brand",
+      "campaign_id": "g_cob_search",
+      "date_start": "2026-04-28",
+      "spend": "1191.68",
+      "impressions": 2979,
+      "clicks": 155
+    },
+    {
+      "ad_id": "ad_google_1_1",
+      "ad_group_id": "g_hood_display",
+      "campaign_id": "g_display",
+      "date_start": "2026-04-28",
+      "spend": "917.37",
+      "impressions": 2293,
+      "clicks": 25
+    },
+    {
+      "ad_id": "ad_google_0_1",
+      "ad_group_id": "g_cob_kw_brand",
+      "campaign_id": "g_cob_search",
+      "date_start": "2026-04-29",
+      "spend": "1122.20",
+      "impressions": 2806,
+      "clicks": 146
+    },
+    {
+      "ad_id": "ad_google_1_1",
+      "ad_group_id": "g_hood_display",
+      "campaign_id": "g_display",
+      "date_start": "2026-04-29",
+      "spend": "906.97",
+      "impressions": 2267,
+      "clicks": 25
+    },
+    {
+      "ad_id": "ad_google_0_1",
+      "ad_group_id": "g_cob_kw_brand",
+      "campaign_id": "g_cob_search",
+      "date_start": "2026-04-30",
+      "spend": "1134.36",
+      "impressions": 2836,
+      "clicks": 147
+    },
+    {
+      "ad_id": "ad_google_1_1",
+      "ad_group_id": "g_hood_display",
+      "campaign_id": "g_display",
+      "date_start": "2026-04-30",
+      "spend": "859.91",
+      "impressions": 2150,
+      "clicks": 24
+    },
+    {
+      "ad_id": "ad_google_0_1",
+      "ad_group_id": "g_cob_kw_brand",
+      "campaign_id": "g_cob_search",
+      "date_start": "2026-05-01",
+      "spend": "1266.67",
+      "impressions": 3167,
+      "clicks": 165
+    },
+    {
+      "ad_id": "ad_google_1_1",
+      "ad_group_id": "g_hood_display",
+      "campaign_id": "g_display",
+      "date_start": "2026-05-01",
+      "spend": "923.36",
+      "impressions": 2308,
+      "clicks": 25
+    },
+    {
+      "ad_id": "ad_google_0_1",
+      "ad_group_id": "g_cob_kw_brand",
+      "campaign_id": "g_cob_search",
+      "date_start": "2026-05-02",
+      "spend": "1055.23",
+      "impressions": 2638,
+      "clicks": 137
+    },
+    {
+      "ad_id": "ad_google_1_1",
+      "ad_group_id": "g_hood_display",
+      "campaign_id": "g_display",
+      "date_start": "2026-05-02",
+      "spend": "828.47",
+      "impressions": 2071,
+      "clicks": 23
+    },
+    {
+      "ad_id": "ad_google_0_1",
+      "ad_group_id": "g_cob_kw_brand",
+      "campaign_id": "g_cob_search",
+      "date_start": "2026-05-03",
+      "spend": "1301.33",
+      "impressions": 3253,
+      "clicks": 169
+    },
+    {
+      "ad_id": "ad_google_1_1",
+      "ad_group_id": "g_hood_display",
+      "campaign_id": "g_display",
+      "date_start": "2026-05-03",
+      "spend": "964.70",
+      "impressions": 2412,
+      "clicks": 27
+    },
+    {
+      "ad_id": "ad_google_0_1",
+      "ad_group_id": "g_cob_kw_brand",
+      "campaign_id": "g_cob_search",
+      "date_start": "2026-05-04",
+      "spend": "1371.94",
+      "impressions": 3430,
+      "clicks": 178
+    },
+    {
+      "ad_id": "ad_google_1_1",
+      "ad_group_id": "g_hood_display",
+      "campaign_id": "g_display",
+      "date_start": "2026-05-04",
+      "spend": "805.69",
+      "impressions": 2014,
+      "clicks": 22
+    },
+    {
+      "ad_id": "ad_google_0_1",
+      "ad_group_id": "g_cob_kw_brand",
+      "campaign_id": "g_cob_search",
+      "date_start": "2026-05-05",
+      "spend": "1189.95",
+      "impressions": 2975,
+      "clicks": 155
+    },
+    {
+      "ad_id": "ad_google_1_1",
+      "ad_group_id": "g_hood_display",
+      "campaign_id": "g_display",
+      "date_start": "2026-05-05",
+      "spend": "957.70",
+      "impressions": 2394,
+      "clicks": 26
+    },
+    {
+      "ad_id": "ad_google_0_1",
+      "ad_group_id": "g_cob_kw_brand",
+      "campaign_id": "g_cob_search",
+      "date_start": "2026-05-06",
+      "spend": "1356.80",
+      "impressions": 3392,
+      "clicks": 176
+    },
+    {
+      "ad_id": "ad_google_1_1",
+      "ad_group_id": "g_hood_display",
+      "campaign_id": "g_display",
+      "date_start": "2026-05-06",
+      "spend": "959.86",
+      "impressions": 2400,
+      "clicks": 26
+    },
+    {
+      "ad_id": "ad_google_0_1",
+      "ad_group_id": "g_cob_kw_brand",
+      "campaign_id": "g_cob_search",
+      "date_start": "2026-05-07",
+      "spend": "1246.27",
+      "impressions": 3116,
+      "clicks": 162
+    },
+    {
+      "ad_id": "ad_google_1_1",
+      "ad_group_id": "g_hood_display",
+      "campaign_id": "g_display",
+      "date_start": "2026-05-07",
+      "spend": "810.73",
+      "impressions": 2027,
+      "clicks": 22
+    },
+    {
+      "ad_id": "ad_google_0_1",
+      "ad_group_id": "g_cob_kw_brand",
+      "campaign_id": "g_cob_search",
+      "date_start": "2026-05-08",
+      "spend": "1031.13",
+      "impressions": 2578,
+      "clicks": 134
+    },
+    {
+      "ad_id": "ad_google_1_1",
+      "ad_group_id": "g_hood_display",
+      "campaign_id": "g_display",
+      "date_start": "2026-05-08",
+      "spend": "795.77",
+      "impressions": 1989,
+      "clicks": 22
+    },
+    {
+      "ad_id": "ad_google_0_1",
+      "ad_group_id": "g_cob_kw_brand",
+      "campaign_id": "g_cob_search",
+      "date_start": "2026-05-09",
+      "spend": "1052.37",
+      "impressions": 2631,
+      "clicks": 137
+    },
+    {
+      "ad_id": "ad_google_1_1",
+      "ad_group_id": "g_hood_display",
+      "campaign_id": "g_display",
+      "date_start": "2026-05-09",
+      "spend": "997.60",
+      "impressions": 2494,
+      "clicks": 27
+    },
+    {
+      "ad_id": "ad_google_0_1",
+      "ad_group_id": "g_cob_kw_brand",
+      "campaign_id": "g_cob_search",
+      "date_start": "2026-05-10",
+      "spend": "1107.67",
+      "impressions": 2769,
+      "clicks": 144
+    },
+    {
+      "ad_id": "ad_google_1_1",
+      "ad_group_id": "g_hood_display",
+      "campaign_id": "g_display",
+      "date_start": "2026-05-10",
+      "spend": "848.74",
+      "impressions": 2122,
+      "clicks": 23
+    },
+    {
+      "ad_id": "ad_google_0_1",
+      "ad_group_id": "g_cob_kw_brand",
+      "campaign_id": "g_cob_search",
+      "date_start": "2026-05-11",
+      "spend": "1267.27",
+      "impressions": 3168,
+      "clicks": 165
+    },
+    {
+      "ad_id": "ad_google_1_1",
+      "ad_group_id": "g_hood_display",
+      "campaign_id": "g_display",
+      "date_start": "2026-05-11",
+      "spend": "934.51",
+      "impressions": 2336,
+      "clicks": 26
+    },
+    {
+      "ad_id": "ad_google_0_1",
+      "ad_group_id": "g_cob_kw_brand",
+      "campaign_id": "g_cob_search",
+      "date_start": "2026-05-12",
+      "spend": "1298.78",
+      "impressions": 3247,
+      "clicks": 169
+    },
+    {
+      "ad_id": "ad_google_1_1",
+      "ad_group_id": "g_hood_display",
+      "campaign_id": "g_display",
+      "date_start": "2026-05-12",
+      "spend": "997.91",
+      "impressions": 2495,
+      "clicks": 27
+    },
+    {
+      "ad_id": "ad_google_0_1",
+      "ad_group_id": "g_cob_kw_brand",
+      "campaign_id": "g_cob_search",
+      "date_start": "2026-05-13",
+      "spend": "1155.73",
+      "impressions": 2889,
+      "clicks": 150
+    },
+    {
+      "ad_id": "ad_google_1_1",
+      "ad_group_id": "g_hood_display",
+      "campaign_id": "g_display",
+      "date_start": "2026-05-13",
+      "spend": "943.06",
+      "impressions": 2358,
+      "clicks": 26
+    },
+    {
+      "ad_id": "ad_google_0_1",
+      "ad_group_id": "g_cob_kw_brand",
+      "campaign_id": "g_cob_search",
+      "date_start": "2026-05-14",
+      "spend": "1096.77",
+      "impressions": 2742,
+      "clicks": 143
+    },
+    {
+      "ad_id": "ad_google_1_1",
+      "ad_group_id": "g_hood_display",
+      "campaign_id": "g_display",
+      "date_start": "2026-05-14",
+      "spend": "841.26",
+      "impressions": 2103,
+      "clicks": 23
+    },
+    {
+      "ad_id": "ad_google_0_1",
+      "ad_group_id": "g_cob_kw_brand",
+      "campaign_id": "g_cob_search",
+      "date_start": "2026-05-15",
+      "spend": "1036.30",
+      "impressions": 2591,
+      "clicks": 135
+    },
+    {
+      "ad_id": "ad_google_1_1",
+      "ad_group_id": "g_hood_display",
+      "campaign_id": "g_display",
+      "date_start": "2026-05-15",
+      "spend": "943.17",
+      "impressions": 2358,
+      "clicks": 26
+    },
+    {
+      "ad_id": "ad_google_0_1",
+      "ad_group_id": "g_cob_kw_brand",
+      "campaign_id": "g_cob_search",
+      "date_start": "2026-05-16",
+      "spend": "1335.40",
+      "impressions": 3339,
+      "clicks": 174
+    },
+    {
+      "ad_id": "ad_google_1_1",
+      "ad_group_id": "g_hood_display",
+      "campaign_id": "g_display",
+      "date_start": "2026-05-16",
+      "spend": "957.59",
+      "impressions": 2394,
+      "clicks": 26
+    }
+  ]
+}
